@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* ===============================
+   Global Base Styles
+================================ */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+/* ===============================
+   Theme Variables
+================================ */
+
+.light {
+  --bg: #ffffff;
+  --text: #0f0c1c;
+}
+
+.dark {
+  --bg: #0f0c1c;
+  --text: #ffffff;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* ===============================
+   Utility: Hide Scrollbar (Reusable)
+================================ */
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE / Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+/* ==================================
+   GLOBAL SCROLLBAR HIDE
+================================== */
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* =================================================
+   SIDEBAR SCROLLBAR (ONLY .sidebar)
+   ✔ Hidden by default
+   ✔ Visible on hover
+   ✔ Rounded
+================================================== */
+
+.sidebar {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar initially */
+.sidebar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Remove arrows */
+.sidebar::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Expanded sidebar */
+.sidebar:not(.collapsed) {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Show scrollbar on hover */
+.sidebar:not(.collapsed):hover {
+  scrollbar-color: rgba(120, 120, 120, 0.45) transparent;
+}
+
+.sidebar:not(.collapsed):hover::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar:not(.collapsed)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar:not(.collapsed)::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 120, 0.45);
+  border-radius: 999px;
+  transition: background-color 0.25s ease;
+}
+
+.sidebar:not(.collapsed):hover::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 120, 0.65);
+}
+
+/* Sidebar Scrollbar – Dark Mode */
+.dark .sidebar:not(.collapsed)::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.dark .sidebar:not(.collapsed):hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+/* =================================================
+   DASHBOARD / RIGHT CONTENT SCROLL
+   ✔ Scroll allowed
+   ✔ Scrollbar COMPLETELY hidden
+================================================== */
+
+.dashboard-area {
+  height: 100%;
+  overflow-y: auto;
+
+  /* Hide scrollbar everywhere */
+  -ms-overflow-style: none; /* IE / Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.dashboard-area::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+/* ===============================
+   Autofill Fix (Inputs)
+================================ */
+
+/* Light mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: #0f0c1c !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Dark mode */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: #e5e7eb !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Calendar container */
+.react-datepicker {
+  border: none;
+  border-radius: 12px;
+  padding: 3px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+/* Header (January 2026 part) */
+.react-datepicker__header {
+  background: transparent;
+  border-bottom: none;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+/* Month title */
+.react-datepicker__current-month {
+  font-size: 15px;
+  font-weight: 500;
+  color: #202c4b;
+}
+
+/* Day names (Su Mo Tu) */
+.react-datepicker__day-name {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0.4rem;
+}
+
+/* Normal day */
+.react-datepicker__day {
+  width: 36px;
+  line-height: 36px;
+  margin: 0.2rem;
+  border-radius: 8px;
+  color: #374151;
+}
+
+/* Hover */
+.react-datepicker__day:hover {
+  background-color: #e5e7eb;
+}
+
+/* Selected day (blue box like image) */
+.react-datepicker__day--selected {
+  background-color: #3b5bfd;
+  color: white;
+}
+
+/* Today highlight (light gray) */
+.react-datepicker__day--today {
+  font-weight: 550;
+}
+
+/* Disabled days */
+.react-datepicker__day--outside-month {
+  color: #9ca3af;
+}
+
+/* Navigation arrows */
+.react-datepicker__navigation-icon::before {
+  border-color: #374151;
+}
+
+.react-datepicker {
+  font-size: 0.85rem;
+}
