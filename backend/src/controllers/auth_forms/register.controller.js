@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { createOtp } from "../../services/auth/otp.service.js";
 import { sendOtpEmail } from "../../services/auth/email.service.js";
 import { OTP_PURPOSE } from "../../constants/otpPurpose.js";
-import { checkBounceWithinTime } from "../../services/auth/bounce.service.js";
+// import { checkBounceWithinTime } from "../../services/auth/bounce.service.js";
 
 export const register = async (req, res) => {
   try {
@@ -59,26 +59,33 @@ export const register = async (req, res) => {
     try {
       await sendOtpEmail(user.email, otp);
 
-      // WAIT 30 sec & check bounce
-      /* const bounceResult = await checkBounceWithinTime(30000);*/
-      const bounceResult = await checkBounceWithinTime(user.email, 30000);
-
-      if (bounceResult.bounce) {
-        return res.status(400).json({
-          success: false,
-          field: "email",
-          message: "Invalid email address",
-          showOtpModal: false,
-        });
-      }
-
-      // NO BOUNCE → OPEN OTP
       return res.status(200).json({
         success: true,
         message: "OTP sent successfully",
         userId: user._id,
         showOtpModal: true,
       });
+
+      // WAIT 30 sec & check bounce
+      /* const bounceResult = await checkBounceWithinTime(30000);*/
+      // const bounceResult = await checkBounceWithinTime(user.email, 30000);
+
+      // if (bounceResult.bounce) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     field: "email",
+      //     message: "Invalid email address",
+      //     showOtpModal: false,
+      //   });
+      // }
+
+      // // NO BOUNCE → OPEN OTP
+      // return res.status(200).json({
+      //   success: true,
+      //   message: "OTP sent successfully",
+      //   userId: user._id,
+      //   showOtpModal: true,
+      // });
     } catch (error) {
       console.log("EMAIL FLOW ERROR:", error);
 
