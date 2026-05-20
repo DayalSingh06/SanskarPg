@@ -1,17 +1,16 @@
 import nodemailer from "nodemailer";
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
 const sendEmail = async ({ to, subject, html }) => {
   try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
     const info = await transporter.sendMail({
       from: `"Skool" <${process.env.EMAIL_USER}>`,
       to,
@@ -19,19 +18,13 @@ const sendEmail = async ({ to, subject, html }) => {
       html,
     });
 
-    console.log("✅ Email Sent");
+    console.log("✅ Email Sent:", info.response);
 
-    return {
-      success: true,
-      info,
-    };
+    return info;
   } catch (error) {
     console.log("EMAIL SEND ERROR:", error);
 
-    return {
-      success: false,
-      error: error.message,
-    };
+    throw error;
   }
 };
 

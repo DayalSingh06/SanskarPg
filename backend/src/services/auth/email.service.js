@@ -6,7 +6,7 @@ export const sendOtpEmail = async (
   subject = "Verify Your Email",
 ) => {
   try {
-    const result = await sendEmail({
+    await sendEmail({
       to: email,
       subject,
       html: `
@@ -42,17 +42,13 @@ export const sendOtpEmail = async (
       `,
     });
 
-    if (!result.success) {
-      throw {
-        field: "email",
-        message: "Invalid email address or email could not be delivered",
-      };
-    }
-
     return true;
   } catch (error) {
     console.log("OTP EMAIL ERROR :", error);
 
-    throw new Error("Invalid email address");
+    throw {
+      field: "email",
+      message: "Email could not be sent",
+    };
   }
 };
