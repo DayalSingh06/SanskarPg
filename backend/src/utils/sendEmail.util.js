@@ -1,44 +1,17 @@
 import nodemailer from "nodemailer";
-import dns from "dns";
 
-// FORCE IPV4
-dns.setDefaultResultOrder("ipv4first");
-
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.gmail.com",
-//   port: 587,
-//   secure: false,
-
-//   auth: {
-//     user: process.env.EMAIL_USER,
-//     pass: process.env.EMAIL_PASS,
-//   },
-
-//   family: 4, // IMPORTANT
-
-//   tls: {
-//     rejectUnauthorized: false,
-//   },
-// });
-
-const transporter = nodemailer.createTransport({
-
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
- 
 const sendEmail = async ({ to, subject, html }) => {
   try {
-    await transporter.verify();
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
 
-    console.log("SMTP READY");
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
     const info = await transporter.sendMail({
       from: `"Skool" <${process.env.EMAIL_USER}>`,
@@ -47,7 +20,7 @@ const sendEmail = async ({ to, subject, html }) => {
       html,
     });
 
-    console.log("✅ Email Sent:", info.response);
+    console.log("✅ Email Sent");
 
     return {
       success: true,
@@ -58,7 +31,7 @@ const sendEmail = async ({ to, subject, html }) => {
 
     return {
       success: false,
-      error,
+      error: error.message,
     };
   }
 };
