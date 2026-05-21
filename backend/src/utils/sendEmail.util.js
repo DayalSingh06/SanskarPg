@@ -1,81 +1,45 @@
-import nodemailer from "nodemailer";
-import dns from "dns";
-
-// ✅ Force IPv4 (IMPORTANT for Render / VPS)
-dns.setDefaultResultOrder("ipv4first");
+import axios from "axios";
 
 const sendEmail = async ({ to, subject, html }) => {
   try {
-    // ✅ Create transporter
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587, // ✅ better than 465 on cloud servers
-      secure: false, // ❗ must be false for 587
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+    const response = await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: {
+          name: "Sanskar Boys PG",
+          email: process.env.EMAIL_FROM,
+        },
+
+        to: [
+          {
+            email: to,
+          },
+        ],
+
+        subject: subject,
+
+        htmlContent: html,
       },
-      tls: {
-        rejectUnauthorized: false, // helps in production SSL issues
+      {
+        headers: {
+          accept: "application/json",
+          "api-key": process.env.BREVO_API_KEY,
+          "content-type": "application/json",
+        },
       },
-    });
+    );
 
-    // Optional: verify connection (good for debugging)
-    await transporter.verify();
+    console.log("✅ EMAIL SENT SUCCESSFULLY");
+    console.log(response.data);
 
-    // ✅ Send mail
-    const info = await transporter.sendMail({
-      from: `"Skool" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      html,
-    });
-
-    console.log("✅ EMAIL SENT SUCCESSFULLY:", info.messageId);
-
-    return info;
+    return response.data;
   } catch (error) {
-    console.error("❌ EMAIL SEND ERROR:");
-    console.error("Message:", error.message);
-    console.error("Code:", error.code);
+    console.log("❌ EMAIL ERROR");
 
-    throw new Error("Email could not be sent");
+    console.log(error.response?.data || error.message);
+
+    throw error;
   }
 };
 
 export default sendEmail;
-
-// import nodemailer from "nodemailer";
-// const sendEmail = async ({ to, subject, html }) => {
-//   try {
-//     const transporter = nodemailer.createTransport({
-//       host: "smtp.gmail.com",
-//       port: 465,
-//       secure: true, // SSL
-//       auth: {
-//         user: process.env.EMAIL_USER,
-//         pass: process.env.EMAIL_PASS,
-//       },
-//     });
-
-//     const info = await transporter.sendMail({
-//       from: `"Skool" <${process.env.EMAIL_USER}>`,
-//       to,
-//       subject,
-//       html,
-//     });
-
-//     console.log("✅ EMAIL SENT SUCCESSFULLY:");
-
-//     return info;
-//   } catch (error) {
-//     console.error("❌ EMAIL SEND ERROR:");
-//     console.error("Message:", error.message);
-//     console.error("Full Error:", error);
-
-//     // optional: rethrow so backend also knows it failed
-//     throw error;
-//   }
-// };
-
-// export default sendEmail;
