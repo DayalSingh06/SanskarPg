@@ -9,7 +9,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://sanskar-pg.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://sanskar-pg.vercel.app",
+      "https://sanskar-pg-git-main-dayalsingh06s-projects.vercel.app",
+      "https://sanskar-kygcex0xq-dayalsingh06s-projects.vercel.app",
+    ],
     credentials: true,
   }),
 );
