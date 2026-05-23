@@ -9,15 +9,11 @@ const PgCard = ({ pg }) => {
 
   const [livePg, setLivePg] = useState(pg);
 
+  console.log(getImageUrl(livePg?.mainImage));
+
   // AUTO UPDATE
   useEffect(() => {
     setLivePg(pg);
-
-    const interval = setInterval(() => {
-      setLivePg({ ...pg });
-    }, 5000);
-
-    return () => clearInterval(interval);
   }, [pg]);
 
   // LOWEST RENT

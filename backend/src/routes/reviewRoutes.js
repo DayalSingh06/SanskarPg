@@ -29,22 +29,4 @@ router.put("/verify/:id", verifyReview);
 
 router.delete("/delete/:id", deleteReview);
 
-router.get("/test-email", async (req, res) => {
-  try {
-    await sendOtpEmail("dayalsingh98191@gmail.com", "123456");
-
-    return res.json({
-      success: true,
-      message: "Email sent successfully",
-    });
-  } catch (error) {
-    console.log(error);
-
-    return res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
-});
-
 export default router;

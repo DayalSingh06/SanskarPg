@@ -14,4 +14,3 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-console.log("EMAIL_PASS:", process.env.BREVO_API_KEY);

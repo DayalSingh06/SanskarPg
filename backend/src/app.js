@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 
 import userRoutes from "./routes/userRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
@@ -22,7 +23,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/uploads", express.static("uploads"));
+// ✅ STATIC FILES FIX
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/api/users", userRoutes);
 app.use("/api/review", reviewRoutes);
