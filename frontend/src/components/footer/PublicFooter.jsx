@@ -17,8 +17,7 @@ const PublicFooter = () => {
       className={`
         w-full
         border-t
-        transition-all
-        duration-300
+        transition-all duration-300
         ${
           darkMode
             ? "bg-[#0f0c1c] text-gray-300 border-gray-800"
@@ -26,47 +25,59 @@ const PublicFooter = () => {
         }
       `}
     >
+      {/* MAIN FOOTER */}
       <div
         className="
           grid
           max-w-7xl
-          mx-auto px-4 py-10
+          mx-auto
+          px-5 py-12
+          gap-12
           text-center
-          gap-10
-          sm:px-6 sm:text-left
-          md:grid-cols-2 md:px-8 md:py-12
+          sm:px-8
+          md:grid-cols-2 md:text-left
           lg:grid-cols-3
         "
       >
         {/* ABOUT */}
-        <div>
+        <div
+          className="
+            flex flex-col
+            items-center
+            md:items-start
+          "
+        >
           <Logo redirectPath="/" />
+
           <p
             className="
-              max-w-sm
-              mt-4 mx-auto
-              text-sm leading-relaxed
-              sm:mx-0
+              max-w-xs
+              mt-5
+              text-sm leading-7
+              sm:text-[15px]
             "
           >
-            Providing affordable, safe & comfortable PG accommodation in Jaipur.
-            Perfect for students and working professionals.
+            Providing affordable, safe & comfortable PG accommodation in Jaipur
+            for students and working professionals ✨
           </p>
 
           {/* CTA BUTTONS */}
           <div
             className="
-              flex flex-wrap
+              flex flex-col
+              w-full max-w-xs
               mt-6
-              gap-3 justify-center
-              sm:justify-start
+              gap-3
+              sm:flex-row sm:w-auto
             "
           >
-            {/* Call Button */}
-            <ContactButton type="call" phone="916350028407" />
+            <div className="w-full sm:w-auto">
+              <ContactButton type="call" phone="916350028407" />
+            </div>
 
-            {/* WhatsApp Button */}
-            <ContactButton type="whatsapp" phone="916350028407" />
+            <div className="w-full sm:w-auto">
+              <ContactButton type="whatsapp" phone="916350028407" />
+            </div>
           </div>
         </div>
 
@@ -74,15 +85,16 @@ const PublicFooter = () => {
         <div>
           <h3
             className="
-              mb-4
-              text-lg font-semibold tracking-wide
+              mb-5
+              text-xl font-semibold
             "
           >
             Quick Links
           </h3>
+
           <ul
             className="
-              space-y-3
+              space-y-4
               text-sm
               sm:text-[15px]
             "
@@ -93,17 +105,20 @@ const PublicFooter = () => {
                   to={link.path}
                   className="
                     inline-block
-                    transition-all
-                    relative group duration-300 hover:text-blue-500
+                    relative group
+                    transition-all duration-300
+                    hover:text-blue-500
                   "
                 >
                   {link.label}
+
                   <span
                     className="
                       h-0.5 w-0
                       bg-blue-500
-                      transition-all
-                      absolute left-0 -bottom-1 duration-300 group-hover:w-full
+                      transition-all duration-300
+                      absolute left-0 -bottom-1
+                      group-hover:w-full
                     "
                   ></span>
                 </Link>
@@ -116,15 +131,16 @@ const PublicFooter = () => {
         <div>
           <h3
             className="
-              mb-4
-              text-lg font-semibold tracking-wide
+              mb-5
+              text-xl font-semibold
             "
           >
             Contact
           </h3>
+
           <ul
             className="
-              space-y-3
+              space-y-4
               text-sm
               sm:text-[15px]
             "
@@ -133,23 +149,26 @@ const PublicFooter = () => {
               <a
                 href="mailto:sanskarboyspg@gmail.com"
                 className="
-                  hover:text-blue-500 transition
+                  break-all
+                  transition hover:text-blue-500
                 "
               >
                 sanskarboyspg@gmail.com
               </a>
             </li>
+
             <li>
               <a
                 href="tel:+916350028407"
                 className="
-                  hover:text-blue-500 transition
+                  transition hover:text-blue-500
                 "
               >
                 +91 63500 28407
               </a>
             </li>
-            <li> Jaipur, Rajasthan</li>
+
+            <li>📍 Jaipur, Rajasthan</li>
           </ul>
         </div>
       </div>
@@ -157,11 +176,16 @@ const PublicFooter = () => {
       {/* BOTTOM */}
       <div
         className={`
-          py-4 px-4
-          text-center text-xs
+          py-5 px-4
+          text-center
+          text-xs
           border-t
           sm:text-sm
-          ${darkMode ? "border-gray-800 text-gray-500" : "border-gray-300 text-gray-500"}
+          ${
+            darkMode
+              ? "border-gray-800 text-gray-500"
+              : "border-gray-300 text-gray-500"
+          }
         `}
       >
         © {new Date().getFullYear()} Sanskar Boy's PG. All rights reserved.

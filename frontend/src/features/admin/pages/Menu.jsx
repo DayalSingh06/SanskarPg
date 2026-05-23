@@ -112,8 +112,8 @@ const Menu = () => {
   return (
     <div
       className={`
-        min-h-screen
-        px-4 py-8
+        min-h-[calc(100vh-64px)]
+        px-2 py-3
         transition-all
         duration-300
         ${
@@ -126,16 +126,17 @@ const Menu = () => {
       {/* HEADER */}
       <div
         className="
-          max-w-7xl
-          mx-auto mb-8
+          max-w-6xl
+          mx-auto mb-4
         "
       >
         <div
           className={`
-            p-6
+            p-4
             rounded-3xl border
             shadow-2xl
             backdrop-blur-xl
+            sm:p-5
             ${
               darkMode
                 ? "bg-white/5 border-white/10"
@@ -159,7 +160,8 @@ const Menu = () => {
             >
               <h1
                 className="
-                  text-4xl font-extrabold tracking-wide
+                  text-2xl font-extrabold tracking-wide
+                  sm:text-3xl
                 "
               >
                 🍽️ Weekly Menu
@@ -180,15 +182,16 @@ const Menu = () => {
             <div
               className="
                 flex flex-wrap
-                gap-3
+                justify-center gap-2
+                lg:justify-start
               "
             >
               {!editMode ? (
                 <button
                   onClick={() => setEditMode(true)}
                   className="
-                    px-6 py-3
-                    font-semibold text-white
+                    px-4 py-2.5
+                    text-sm font-semibold text-white
                     bg-linear-to-r from-yellow-400 to-orange-500
                     rounded-2xl
                     transition-all shadow-lg
@@ -203,8 +206,8 @@ const Menu = () => {
                     onClick={handleSave}
                     disabled={loading}
                     className="
-                      px-6 py-3
-                      font-semibold text-white
+                      px-4 py-2.5
+                      text-sm font-semibold text-white
                       bg-linear-to-r from-green-500 to-emerald-600
                       rounded-2xl
                       transition-all shadow-lg
@@ -217,8 +220,8 @@ const Menu = () => {
                   <button
                     onClick={handleCancel}
                     className="
-                      px-6 py-3
-                      font-semibold text-white
+                      px-4 py-2.5
+                      text-sm font-semibold text-white
                       bg-linear-to-r from-red-500 to-pink-600
                       rounded-2xl
                       transition-all shadow-lg
@@ -234,174 +237,261 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* TABLE */}
+      {/* MENU CONTENT */}
       <div
         className="
-          overflow-x-auto
-          max-w-7xl
+          max-w-6xl
           mx-auto
         "
       >
         <div
           className={`
             overflow-hidden
-            rounded-3xl border
-            shadow-2xl
-            backdrop-blur-xl
-            ${
-              darkMode
-                ? "bg-white/5 border-white/10"
-                : "bg-white/70 border-gray-200"
-            }
+            rounded-2xl border
+            shadow-xl
+            ${darkMode ? "bg-white/5 border-white/10" : "bg-white/80 border-gray-200"}
           `}
         >
-          <table
+          {/* DESKTOP TABLE */}
+          <div
             className="
-              w-full
+              hidden
+              md:block
             "
           >
-            <thead>
-              <tr
-                className={`
-                  text-center
-                  ${darkMode ? "bg-white/10" : "bg-slate-100"}
-                `}
-              >
-                <th
-                  className="
-                    p-5
-                    text-lg font-bold
-                  "
+            <table
+              className="
+                w-full
+              "
+            >
+              <thead>
+                <tr
+                  className={`
+                    text-center
+                    ${darkMode ? "bg-white/10" : "bg-slate-100"}
+                  `}
                 >
-                  📅 Days
-                </th>
-
-                <th
-                  className="
-                    p-5
-                  "
-                >
-                  <div
+                  <th
                     className="
-                      flex flex-col
-                      items-center
+                      px-3 py-3
+                      text-sm font-bold
                     "
                   >
-                    <span
+                    📅 Day
+                  </th>
+
+                  <th
+                    className="
+                      px-3 py-3
+                      text-sm font-bold
+                    "
+                  >
+                    🍞 Breakfast
+                  </th>
+
+                  <th
+                    className="
+                      px-3 py-3
+                      text-sm font-bold
+                    "
+                  >
+                    🍛 Lunch
+                  </th>
+
+                  <th
+                    className="
+                      px-3 py-3
+                      text-sm font-bold
+                    "
+                  >
+                    🍽️ Dinner
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {menuData.map((item, index) => (
+                  <tr
+                    key={index}
+                    className={`
+                      border-t
+                      ${
+                        darkMode
+                          ? "border-white/10 hover:bg-white/5"
+                          : "border-gray-200 hover:bg-slate-50"
+                      }
+                    `}
+                  >
+                    {/* DAY */}
+                    <td
                       className="
-                        text-lg font-bold
+                        px-3 py-3
+                        text-sm font-bold text-center whitespace-nowrap
+                      "
+                    >
+                      {item.day}
+                    </td>
+
+                    {/* BREAKFAST */}
+                    <td
+                      className="
+                        px-2 py-2
+                      "
+                    >
+                      <input
+                        type="text"
+                        disabled={!editMode}
+                        value={item.breakfast}
+                        onChange={(e) =>
+                          handleChange(index, "breakfast", e.target.value)
+                        }
+                        placeholder="Breakfast"
+                        className={`
+                          w-full
+                          px-3 py-2
+                          text-sm
+                          rounded-xl border
+                          transition-all
+                          outline-none
+                          ${
+                            darkMode
+                              ? "bg-slate-800 border-slate-700 text-white"
+                              : "bg-white border-slate-300 text-black"
+                          }
+                          ${
+                            editMode
+                              ? "focus:ring-2 focus:ring-blue-500"
+                              : "opacity-70 cursor-not-allowed"
+                          }
+                        `}
+                      />
+                    </td>
+
+                    {/* LUNCH */}
+                    <td
+                      className="
+                        px-2 py-2
+                      "
+                    >
+                      <input
+                        type="text"
+                        disabled={!editMode}
+                        value={item.lunch}
+                        onChange={(e) =>
+                          handleChange(index, "lunch", e.target.value)
+                        }
+                        placeholder="Lunch"
+                        className={`
+                          w-full
+                          px-3 py-2
+                          text-sm
+                          rounded-xl border
+                          transition-all
+                          outline-none
+                          ${
+                            darkMode
+                              ? "bg-slate-800 border-slate-700 text-white"
+                              : "bg-white border-slate-300 text-black"
+                          }
+                          ${
+                            editMode
+                              ? "focus:ring-2 focus:ring-blue-500"
+                              : "opacity-70 cursor-not-allowed"
+                          }
+                        `}
+                      />
+                    </td>
+
+                    {/* DINNER */}
+                    <td
+                      className="
+                        px-2 py-2
+                      "
+                    >
+                      <input
+                        type="text"
+                        disabled={!editMode}
+                        value={item.dinner}
+                        onChange={(e) =>
+                          handleChange(index, "dinner", e.target.value)
+                        }
+                        placeholder="Dinner"
+                        className={`
+                          w-full
+                          px-3 py-2
+                          text-sm
+                          rounded-xl border
+                          transition-all
+                          outline-none
+                          ${
+                            darkMode
+                              ? "bg-slate-800 border-slate-700 text-white"
+                              : "bg-white border-slate-300 text-black"
+                          }
+                          ${
+                            editMode
+                              ? "focus:ring-2 focus:ring-blue-500"
+                              : "opacity-70 cursor-not-allowed"
+                          }
+                        `}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* MOBILE CARDS */}
+          <div
+            className="
+              flex flex-col
+              p-3
+              gap-3
+              md:hidden
+            "
+          >
+            {menuData.map((item, index) => (
+              <div
+                key={index}
+                className={`
+                  p-3
+                  rounded-xl border
+                  ${
+                    darkMode
+                      ? "bg-white/5 border-white/10"
+                      : "bg-white border-gray-200"
+                  }
+                `}
+              >
+                {/* DAY */}
+                <h2
+                  className="
+                    mb-3
+                    text-base font-bold
+                  "
+                >
+                  📅 {item.day}
+                </h2>
+
+                {/* INPUTS */}
+                <div
+                  className="
+                    space-y-3
+                  "
+                >
+                  {/* BREAKFAST */}
+                  <div>
+                    <label
+                      className="
+                        block
+                        mb-1
+                        text-xs font-semibold
                       "
                     >
                       🍞 Breakfast
-                    </span>
+                    </label>
 
-                    <span
-                      className="
-                        mt-1
-                        text-xs
-                        opacity-70
-                      "
-                    >
-                      7:00 AM - 9:00 AM
-                    </span>
-                  </div>
-                </th>
-
-                <th
-                  className="
-                    p-5
-                  "
-                >
-                  <div
-                    className="
-                      flex flex-col
-                      items-center
-                    "
-                  >
-                    <span
-                      className="
-                        text-lg font-bold
-                      "
-                    >
-                      🍛 Lunch
-                    </span>
-
-                    <span
-                      className="
-                        mt-1
-                        text-xs
-                        opacity-70
-                      "
-                    >
-                      12:00 PM - 2:00 PM
-                    </span>
-                  </div>
-                </th>
-
-                <th
-                  className="
-                    p-5
-                  "
-                >
-                  <div
-                    className="
-                      flex flex-col
-                      items-center
-                    "
-                  >
-                    <span
-                      className="
-                        text-lg font-bold
-                      "
-                    >
-                      🍽️ Dinner
-                    </span>
-
-                    <span
-                      className="
-                        mt-1
-                        text-xs
-                        opacity-70
-                      "
-                    >
-                      7:30 PM - 9:30 PM
-                    </span>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {menuData.map((item, index) => (
-                <tr
-                  key={index}
-                  className={`
-                    border-t
-                    transition-all
-                    duration-300
-                    ${
-                      darkMode
-                        ? "hover:bg-white/5 border-white/10"
-                        : "hover:bg-slate-50 border-gray-200"
-                    }
-                  `}
-                >
-                  {/* DAY */}
-                  <td
-                    className="
-                      p-5
-                      text-center font-bold text-lg
-                    "
-                  >
-                    {item.day}
-                  </td>
-
-                  {/* BREAKFAST */}
-                  <td
-                    className="
-                      p-4
-                    "
-                  >
                     <input
                       type="text"
                       disabled={!editMode}
@@ -409,33 +499,34 @@ const Menu = () => {
                       onChange={(e) =>
                         handleChange(index, "breakfast", e.target.value)
                       }
-                      placeholder="Breakfast Menu"
+                      placeholder="Breakfast"
                       className={`
                         w-full
-                        px-4 py-3
-                        rounded-2xl border
-                        transition-all
-                        outline-none duration-300
+                        px-3 py-2
+                        text-sm
+                        rounded-xl border
+                        outline-none
                         ${
                           darkMode
-                            ? "bg-slate-800/80 border-slate-700 text-white"
+                            ? "bg-slate-800 border-slate-700 text-white"
                             : "bg-white border-slate-300 text-black"
-                        }
-                        ${
-                          editMode
-                            ? "focus:ring-2 focus:ring-blue-500"
-                            : "opacity-70 cursor-not-allowed"
                         }
                       `}
                     />
-                  </td>
+                  </div>
 
                   {/* LUNCH */}
-                  <td
-                    className="
-                      p-4
-                    "
-                  >
+                  <div>
+                    <label
+                      className="
+                        block
+                        mb-1
+                        text-xs font-semibold
+                      "
+                    >
+                      🍛 Lunch
+                    </label>
+
                     <input
                       type="text"
                       disabled={!editMode}
@@ -443,33 +534,34 @@ const Menu = () => {
                       onChange={(e) =>
                         handleChange(index, "lunch", e.target.value)
                       }
-                      placeholder="Lunch Menu"
+                      placeholder="Lunch"
                       className={`
                         w-full
-                        px-4 py-3
-                        rounded-2xl border
-                        transition-all
-                        outline-none duration-300
+                        px-3 py-2
+                        text-sm
+                        rounded-xl border
+                        outline-none
                         ${
                           darkMode
-                            ? "bg-slate-800/80 border-slate-700 text-white"
+                            ? "bg-slate-800 border-slate-700 text-white"
                             : "bg-white border-slate-300 text-black"
-                        }
-                        ${
-                          editMode
-                            ? "focus:ring-2 focus:ring-blue-500"
-                            : "opacity-70 cursor-not-allowed"
                         }
                       `}
                     />
-                  </td>
+                  </div>
 
                   {/* DINNER */}
-                  <td
-                    className="
-                      p-4
-                    "
-                  >
+                  <div>
+                    <label
+                      className="
+                        block
+                        mb-1
+                        text-xs font-semibold
+                      "
+                    >
+                      🍽️ Dinner
+                    </label>
+
                     <input
                       type="text"
                       disabled={!editMode}
@@ -477,30 +569,25 @@ const Menu = () => {
                       onChange={(e) =>
                         handleChange(index, "dinner", e.target.value)
                       }
-                      placeholder="Dinner Menu"
+                      placeholder="Dinner"
                       className={`
                         w-full
-                        px-4 py-3
-                        rounded-2xl border
-                        transition-all
-                        outline-none duration-300
+                        px-3 py-2
+                        text-sm
+                        rounded-xl border
+                        outline-none
                         ${
                           darkMode
-                            ? "bg-slate-800/80 border-slate-700 text-white"
+                            ? "bg-slate-800 border-slate-700 text-white"
                             : "bg-white border-slate-300 text-black"
-                        }
-                        ${
-                          editMode
-                            ? "focus:ring-2 focus:ring-blue-500"
-                            : "opacity-70 cursor-not-allowed"
                         }
                       `}
                     />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

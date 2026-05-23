@@ -93,285 +93,274 @@ const WeeklyMenu = () => {
         </div>
       </div>
 
-      {/* TABLE */}
+      {/* MENU CONTENT */}
       <div
         className="
-          overflow-x-auto
-          max-w-7xl
+          max-w-6xl
           mx-auto
         "
       >
         <div
           className={`
             overflow-hidden
-            rounded-3xl border
-            shadow-2xl
-            backdrop-blur-xl
-            ${
-              darkMode
-                ? "bg-white/5 border-white/10"
-                : "bg-white/70 border-gray-200"
-            }
+            rounded-2xl border
+            shadow-xl
+            ${darkMode ? "bg-white/5 border-white/10" : "bg-white/80 border-gray-200"}
           `}
         >
           {loading ? (
             <div
               className="
-                p-10
-                text-center text-lg font-semibold
+                py-10
+                text-center text-base font-semibold
               "
             >
               Loading Menu...
             </div>
           ) : (
-            <table
-              className="
-                w-full
-              "
-            >
-              <thead>
-                <tr
-                  className={`
-                    text-center
-                    ${darkMode ? "bg-white/10" : "bg-slate-100"}
-                  `}
+            <>
+              {/* DESKTOP TABLE */}
+              <div
+                className="
+                  hidden
+                  md:block
+                "
+              >
+                <table
+                  className="
+                    w-full
+                  "
                 >
-                  <th
-                    className="
-                      p-5
-                      text-lg font-bold
-                    "
-                  >
-                    📅 Day
-                  </th>
-
-                  <th
-                    className="
-                      p-5
-                    "
-                  >
-                    <div
-                      className="
-                        flex flex-col
-                        items-center
-                      "
+                  <thead>
+                    <tr
+                      className={`
+                        text-center
+                        ${darkMode ? "bg-white/10" : "bg-slate-100"}
+                      `}
                     >
-                      <span
+                      <th
                         className="
-                          text-lg font-bold
+                          px-3 py-3
+                          text-sm font-bold
                         "
                       >
-                        🍞 Breakfast
-                      </span>
+                        Day
+                      </th>
 
-                      <span
+                      <th
                         className="
-                          mt-1
-                          text-xs
-                          opacity-70
+                          px-3 py-3
+                          text-sm font-bold
                         "
                       >
-                        7:00 AM - 9:00 AM
-                      </span>
-                    </div>
-                  </th>
+                        Breakfast
+                      </th>
 
-                  <th
-                    className="
-                      p-5
-                    "
-                  >
-                    <div
-                      className="
-                        flex flex-col
-                        items-center
-                      "
-                    >
-                      <span
+                      <th
                         className="
-                          text-lg font-bold
+                          px-3 py-3
+                          text-sm font-bold
                         "
                       >
-                        🍛 Lunch
-                      </span>
+                        Lunch
+                      </th>
 
-                      <span
+                      <th
                         className="
-                          mt-1
-                          text-xs
-                          opacity-70
+                          px-3 py-3
+                          text-sm font-bold
                         "
                       >
-                        12:00 PM - 2:00 PM
-                      </span>
-                    </div>
-                  </th>
+                        Dinner
+                      </th>
+                    </tr>
+                  </thead>
 
-                  <th
-                    className="
-                      p-5
-                    "
-                  >
-                    <div
-                      className="
-                        flex flex-col
-                        items-center
-                      "
-                    >
-                      <span
-                        className="
-                          text-lg font-bold
-                        "
+                  <tbody>
+                    {menuData.map((item, index) => (
+                      <tr
+                        key={index}
+                        className={`
+                          text-center
+                          border-t
+                          ${
+                            item.day === "Sunday" || item.day === "Thursday"
+                              ? darkMode
+                                ? "bg-yellow-500/10 border-yellow-500/20"
+                                : "bg-yellow-50 border-yellow-200"
+                              : darkMode
+                                ? "border-white/10"
+                                : "border-gray-200"
+                          }
+                        `}
                       >
-                        🍽️ Dinner
-                      </span>
+                        <td
+                          className="
+                            px-3 py-3
+                            text-sm font-bold
+                          "
+                        >
+                          {item.day}
+                        </td>
 
-                      <span
-                        className="
-                          mt-1
-                          text-xs
-                          opacity-70
-                        "
-                      >
-                        7:30 PM - 9:30 PM
-                      </span>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
+                        <td
+                          className="
+                            px-3 py-3
+                            text-sm
+                          "
+                        >
+                          {item.breakfast}
+                        </td>
 
-              <tbody>
+                        <td
+                          className="
+                            px-3 py-3
+                            text-sm
+                          "
+                        >
+                          {item.lunch}
+                        </td>
+
+                        <td
+                          className="
+                            px-3 py-3
+                            text-sm font-medium
+                          "
+                        >
+                          {item.dinner}
+
+                          {(item.day === "Sunday" ||
+                            item.day === "Thursday") && (
+                            <p
+                              className="
+                                mt-1
+                                text-[10px] text-yellow-500 font-semibold
+                              "
+                            >
+                              ⭐ Special
+                            </p>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* MOBILE CARDS */}
+              <div
+                className="
+                  flex flex-col
+                  p-3
+                  gap-3
+                  md:hidden
+                "
+              >
                 {menuData.map((item, index) => (
-                  <tr
+                  <div
                     key={index}
                     className={`
-                      border-t
-                      transition-all
-                      duration-300
+                      p-3
+                      rounded-xl border
                       ${
                         item.day === "Sunday" || item.day === "Thursday"
                           ? darkMode
-                            ? "bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/30"
-                            : "bg-yellow-100 hover:bg-yellow-200 border-yellow-300"
+                            ? "bg-yellow-500/10 border-yellow-500/30"
+                            : "bg-yellow-50 border-yellow-300"
                           : darkMode
-                            ? "hover:bg-white/5 border-white/10"
-                            : "hover:bg-slate-50 border-gray-200"
+                            ? "bg-white/5 border-white/10"
+                            : "bg-white border-gray-200"
                       }
                     `}
                   >
                     {/* DAY */}
-                    <td
+                    <div
                       className="
-                        p-5
-                        text-center font-bold text-lg
+                        flex
+                        mb-3
+                        items-center justify-between
                       "
                     >
-                      {item.day}
-                    </td>
-
-                    {/* BREAKFAST */}
-                    <td
-                      className="
-                        p-5
-                      "
-                    >
-                      <div
-                        className={`
-                          p-4
-                          text-center font-medium
-                          rounded-2xl
-                          ${darkMode ? "bg-slate-800/70" : "bg-slate-100"}
-                        `}
+                      <h2
+                        className="
+                          text-base font-bold
+                        "
                       >
-                        {item.breakfast || "Not Updated"}
-                      </div>
-                    </td>
+                        📅 {item.day}
+                      </h2>
 
-                    {/* LUNCH */}
-                    <td
+                      {(item.day === "Sunday" || item.day === "Thursday") && (
+                        <span
+                          className="
+                            text-[10px] font-semibold text-yellow-500
+                          "
+                        >
+                          ⭐ Special
+                        </span>
+                      )}
+                    </div>
+
+                    {/* ITEMS */}
+                    <div
                       className="
-                        p-5
+                        space-y-2
+                        text-sm
                       "
                     >
-                      <div
-                        className={`
-                          p-4
-                          text-center font-medium
-                          rounded-2xl
-                          ${darkMode ? "bg-slate-800/70" : "bg-slate-100"}
-                        `}
-                      >
-                        {item.lunch || "Not Updated"}
+                      <div>
+                        <span
+                          className="
+                            font-semibold
+                          "
+                        >
+                          Breakfast:
+                        </span>{" "}
+                        {item.breakfast}
                       </div>
-                    </td>
 
-                    {/* DINNER */}
-                    <td
-                      className="
-                        p-5
-                      "
-                    >
-                      <div
-                        className={`
-                          p-4
-                          text-center font-medium
-                          rounded-2xl
-                          transition-all
-                          ${
-                            item.day === "Sunday" || item.day === "Thursday"
-                              ? darkMode
-                                ? "bg-yellow-500/20 border border-yellow-400 text-yellow-200"
-                                : "bg-yellow-200 border border-yellow-400 text-yellow-900"
-                              : darkMode
-                                ? "bg-slate-800/70"
-                                : "bg-slate-100"
-                          }
-                        `}
-                      >
-                        {item.dinner || "Not Updated"}
-
-                        {(item.day === "Sunday" || item.day === "Thursday") && (
-                          <p
-                            className="
-                              mt-2
-                              text-xs font-semibold
-                            "
-                          >
-                            ⭐ Special Dinner
-                          </p>
-                        )}
+                      <div>
+                        <span
+                          className="
+                            font-semibold
+                          "
+                        >
+                          Lunch:
+                        </span>{" "}
+                        {item.lunch}
                       </div>
-                    </td>
-                  </tr>
+
+                      <div>
+                        <span
+                          className="
+                            font-semibold
+                          "
+                        >
+                          Dinner:
+                        </span>{" "}
+                        {item.dinner}
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </>
           )}
         </div>
-        {/* SPECIAL NOTE */}
 
+        {/* NOTE */}
         <div
-          className="
-            max-w-7xl
-            mx-auto mt-6
-          "
+          className={`
+            mt-4 px-4 py-3
+            text-xs font-medium
+            rounded-xl border
+            ${
+              darkMode
+                ? "bg-yellow-500/10 border-yellow-500/30 text-yellow-200"
+                : "bg-yellow-100 border-yellow-300 text-yellow-900"
+            }
+          `}
         >
-          <div
-            className={`
-              px-5 py-4
-              text-sm font-medium
-              rounded-2xl border
-              shadow-lg
-              ${
-                darkMode
-                  ? "bg-yellow-500/10 border-yellow-500/30 text-yellow-200"
-                  : "bg-yellow-100 border-yellow-300 text-yellow-900"
-              }
-            `}
-          >
-            ⭐ Note: Sunday and Thursday dinners are special meals for all
-            students.
-          </div>
+          ⭐ Sunday & Thursday dinners are special meals.
         </div>
       </div>
     </div>

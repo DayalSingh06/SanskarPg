@@ -42,17 +42,50 @@ const NotVerifiedReviews = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {reviews.map((review) => (
-        <ReviewTable
-          key={review._id}
-          review={review}
-          onVerify={verifyReview}
-          onDelete={deleteReview}
-          showActions={true}
-        />
-      ))}
-    </div>
+    <>
+      {reviews.length === 0 ? (
+        <div
+          className="
+          flex flex-col
+          items-center justify-center
+          py-20 px-6
+          text-center
+        "
+        >
+          <h2
+            className="
+            text-3xl font-bold
+            text-gray-800 dark:text-white
+          "
+          >
+            No Reviews
+          </h2>
+
+          <p
+            className="
+            mt-3
+            max-w-md
+            text-sm leading-6
+            text-gray-500
+          "
+          >
+            reviews are not available right now.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {reviews.map((review) => (
+            <ReviewTable
+              key={review._id}
+              review={review}
+              onVerify={verifyReview}
+              onDelete={deleteReview}
+              showActions={true}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

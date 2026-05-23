@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { SunIcon, MoonIcon, MobileMenu } from "../common/icons/SvgIcons";
@@ -11,6 +11,9 @@ const PublicNavbar = () => {
   const { darkMode, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+
+  const menuRef = useRef(null);
+  const menuButtonRef = useRef(null);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -33,6 +36,25 @@ const PublicNavbar = () => {
 
     navigate("/");
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -176,43 +198,48 @@ const PublicNavbar = () => {
         {/* Right */}
         <div
           className="
-            flex
-            items-center gap-2
-            sm:gap-3
-          "
+    flex
+    items-center gap-2
+    sm:gap-3
+  "
         >
           {/* Dark Mode */}
           <button
             onClick={toggleTheme}
             className={`
-              flex
-              w-9 h-9
-              rounded-full
-              transition-all
-              items-center justify-center duration-300 hover:scale-105 active:scale-95
-              sm:w-10 sm:h-10
-              ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"}
-            `}
+      flex
+      w-9 h-9
+      rounded-full
+      transition-all
+      items-center justify-center duration-300 hover:scale-105 active:scale-95
+      sm:w-10 sm:h-10
+      ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"}
+    `}
           >
             {darkMode ? <SunIcon /> : <MoonIcon />}
           </button>
 
           {/* Buttons */}
           {user ? (
-            // Logout
+            /* Logout Button */
             <button
               onClick={handleLogout}
               className="
-                hidden
-                h-9
-                px-4
-                text-sm font-medium font-poppins text-white
-                bg-red-600
-                rounded-xl
-                shadow-md transition-all
-                items-center justify-center hover:bg-red-700 duration-300 hover:scale-[1.02] active:scale-95
-                sm:flex sm:h-10 sm:px-5
-              "
+      hidden
+      lg:flex
+      h-9
+      px-4
+      text-sm font-medium font-poppins text-white
+      bg-red-600
+      rounded-xl
+      shadow-md transition-all
+      items-center justify-center
+      hover:bg-red-700
+      duration-300
+      hover:scale-[1.02]
+      active:scale-95
+      sm:h-10
+    "
             >
               Logout
             </button>
@@ -222,20 +249,20 @@ const PublicNavbar = () => {
               <button
                 onClick={() => navigate("/login")}
                 className={`
-                  hidden
-                  h-9
-                  px-4
-                  text-sm font-medium font-poppins
-                  rounded-xl
-                  transition-all
-                  items-center justify-center duration-300 hover:scale-[1.02] active:scale-95
-                  sm:flex sm:h-10
-                  ${
-                    darkMode
-                      ? "text-white bg-gray-800 hover:bg-gray-700"
-                      : "text-[#0f0c1c] bg-gray-200 hover:bg-gray-300"
-                  }
-                `}
+        flex
+        h-9
+        px-3
+        text-xs font-medium font-poppins
+        rounded-lg
+        transition-all
+        items-center justify-center duration-300 hover:scale-[1.02] active:scale-95
+        sm:h-10 sm:px-4 sm:text-sm sm:rounded-xl
+        ${
+          darkMode
+            ? "text-white bg-gray-800 hover:bg-gray-700"
+            : "text-[#0f0c1c] bg-gray-200 hover:bg-gray-300"
+        }
+      `}
               >
                 Login
               </button>
@@ -244,16 +271,16 @@ const PublicNavbar = () => {
               <button
                 onClick={() => navigate("/register")}
                 className="
-                  hidden
-                  h-9
-                  px-4
-                  text-sm font-medium font-poppins text-white
-                  bg-indigo-600
-                  rounded-xl
-                  shadow-md transition-all
-                  items-center justify-center hover:bg-indigo-700 duration-300 hover:scale-[1.02] active:scale-95
-                  sm:flex sm:h-10 sm:px-5
-                "
+        flex
+        h-9
+        px-3
+        text-xs font-medium font-poppins text-white
+        bg-indigo-600
+        rounded-lg
+        shadow-md transition-all
+        items-center justify-center hover:bg-indigo-700 duration-300 hover:scale-[1.02] active:scale-95
+        sm:h-10 sm:px-5 sm:text-sm sm:rounded-xl
+      "
               >
                 Sign Up
               </button>
@@ -263,16 +290,17 @@ const PublicNavbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
+            ref={menuButtonRef}
             className={`
-              flex
-              w-9 h-9
-              rounded-lg
-              transition-all
-              items-center justify-center duration-300 hover:scale-105 active:scale-95
-              sm:w-10 sm:h-10
-              lg:hidden
-              ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"}
-            `}
+      flex
+      w-9 h-9
+      rounded-lg
+      transition-all
+      items-center justify-center duration-300 hover:scale-105 active:scale-95
+      sm:w-10 sm:h-10
+      lg:hidden
+      ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"}
+    `}
           >
             <MobileMenu />
           </button>
@@ -281,6 +309,7 @@ const PublicNavbar = () => {
 
       {menuOpen && (
         <div
+          ref={menuRef}
           className={`
             z-40
             w-full
@@ -381,47 +410,29 @@ const PublicNavbar = () => {
               className="
                 flex flex-col
                 w-full max-w-xs
-                mt-4
                 gap-3
               "
             >
-              {user ? (
-                <button
-                  onClick={handleLogout}
+              {/* Logout Button Only */}
+              {user && (
+                <div
                   className="
-                    w-full h-10
-                    text-white
-                    bg-red-600
-                    rounded-md
-                  "
+      flex
+      w-full max-w-xs
+    "
                 >
-                  Logout
-                </button>
-              ) : (
-                <>
                   <button
-                    onClick={() => navigate("/login")}
+                    onClick={handleLogout}
                     className="
-                      w-full h-10
-                      bg-gray-500
-                      rounded-md
-                    "
+        w-full h-10
+        text-white
+        bg-red-600
+        rounded-md
+      "
                   >
-                    Login
+                    Logout
                   </button>
-
-                  <button
-                    onClick={() => navigate("/register")}
-                    className="
-                      w-full h-10
-                      text-white
-                      bg-indigo-600
-                      rounded-md
-                    "
-                  >
-                    Sign Up
-                  </button>
-                </>
+                </div>
               )}
             </div>
           </div>

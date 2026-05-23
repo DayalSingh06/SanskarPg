@@ -89,8 +89,7 @@ const UpdatePgDetails = () => {
       formData.append("data", JSON.stringify(data));
 
       await updatePg(id, formData);
-
-      alert("PG Updated Successfully");
+      navigate("/admin/allpg");
     } catch (error) {
       console.log(error);
 
@@ -284,7 +283,7 @@ const UpdatePgDetails = () => {
                       src={
                         mainImage
                           ? URL.createObjectURL(mainImage)
-                          : getImageUrl(previewImage)
+                          : previewImage
                       }
                       alt="Preview"
                       className="

@@ -67,29 +67,35 @@ const Home = () => {
       {/* HERO SECTION */}
       <div
         className="
-          overflow-hidden
-          w-full h-screen
-          relative
-        "
+    overflow-hidden
+    w-full
+    h-[70vh]
+    relative
+    sm:h-[85vh]
+    md:h-screen
+  "
       >
         {/* SLIDER */}
         {images.map((img, index) => (
           <div
             key={index}
             className={`
-              transition-opacity
-              absolute inset-0 duration-1000
-              ${index === current ? "opacity-100 z-10" : "opacity-0"}
-            `}
+        transition-opacity
+        absolute inset-0 duration-1000
+        ${index === current ? "opacity-100 z-10" : "opacity-0"}
+      `}
           >
             <img
               src={img}
               alt="Hostel"
               className="
-                object-cover
-                w-full h-full
-                scale-105 blur-[2px]
-              "
+          object-cover object-center
+          w-full h-full
+          scale-100
+          sm:scale-105
+          blur-[1px]
+          sm:blur-[2px]
+        "
             />
           </div>
         ))}
@@ -97,88 +103,97 @@ const Home = () => {
         {/* OVERLAY */}
         <div
           className={`
-            z-20
-            absolute inset-0
-            ${darkMode ? "bg-black/60" : "bg-black/40"}
-          `}
+      z-20
+      absolute inset-0
+      ${darkMode ? "bg-black/65" : "bg-black/45"}
+    `}
         />
 
         {/* CONTENT */}
         <div
           className="
-            z-30 flex flex-col
-            w-full
-            px-4
-            text-center
-            absolute inset-0 items-center justify-center
-          "
+      z-30 flex flex-col
+      w-full h-full
+      px-5
+      text-center
+      absolute inset-0
+      items-center justify-center
+    "
         >
           <h1
             className={`
-              text-3xl font-bold
-              drop-shadow-[0_5px_20px_rgba(0,0,0,0.5)]
-              sm:text-5xl
-              md:text-6xl
-              ${darkMode ? "text-white" : "text-gray-900"}
-            `}
+        max-w-3xl
+        text-4xl font-extrabold leading-tight
+        drop-shadow-[0_5px_20px_rgba(0,0,0,0.5)]
+        sm:text-5xl
+        md:text-6xl
+        ${darkMode ? "text-white" : "text-white"}
+      `}
           >
             Best Boy's PG in Jaipur
           </h1>
 
           <p
             className={`
-              max-w-xl
-              mt-4
-              text-sm
-              sm:text-lg
-              md:text-xl
-              ${darkMode ? "text-gray-200" : "text-gray-900"}
-            `}
+        max-w-2xl
+        mt-5
+        text-base leading-relaxed
+        sm:text-lg
+        md:text-xl
+        ${darkMode ? "text-gray-200" : "text-gray-100"}
+      `}
           >
-            Affordable, safe & comfortable stay
+            Affordable, safe & comfortable stay with premium facilities for
+            students and working professionals ✨
           </p>
 
           <p
             className={`
-              mt-3
-              text-sm
-              sm:text-base
-              ${darkMode ? "text-gray-400" : "text-gray-900"}
-            `}
+        mt-3
+        text-sm font-medium
+        sm:text-base
+        ${darkMode ? "text-gray-300" : "text-gray-200"}
+      `}
           >
-            Booking ke liye Contact Us
+            Booking ke liye Contact Us 📞
           </p>
 
+          {/* BUTTONS */}
           <div
             className="
-              flex flex-wrap
-              mt-6
-              gap-4 justify-center
-            "
+        flex flex-col
+        w-full max-w-xs
+        mt-7
+        gap-4
+        sm:flex-row sm:max-w-none sm:w-auto
+        justify-center
+      "
           >
             {/* Call Button */}
-            <ContactButton type="call" phone="916350028407" />
+            <div className="w-full sm:w-auto">
+              <ContactButton type="call" phone="916350028407" />
+            </div>
 
             {/* WhatsApp Button */}
-            <ContactButton type="whatsapp" phone="916350028407" />
+            <div className="w-full sm:w-auto">
+              <ContactButton type="whatsapp" phone="916350028407" />
+            </div>
           </div>
         </div>
       </div>
 
+      {/* WELCOME BANNER */}
       {user && (
         <div
           className="
-            mt-10 px-1
-          "
+      px-2
+      mt-6
+      sm:mt-10
+    "
         >
-          {/* WELCOME BANNER */}
-          <div
-            className="
-              mb-10
-            "
-          >
+          <div className="mb-8 sm:mb-10">
             <WelcomeBanner />
-          </div>{" "}
+          </div>
         </div>
       )}
 

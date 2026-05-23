@@ -13,6 +13,43 @@ const ReviewTable = ({
 }) => {
   const { darkMode } = useTheme();
 
+  // EMPTY STATE
+  if (!review) {
+    return (
+      <div
+        className={`
+          flex flex-col
+          items-center justify-center
+          py-16 px-6
+          rounded-3xl border
+          mt-5
+          text-center
+          ${
+            darkMode
+              ? "bg-[#0f0c1c] border-[#2a2440] text-gray-400"
+              : "bg-white border-[#e4e7ec] text-gray-500"
+          }
+        `}
+      >
+        <div className="text-6xl mb-4">⭐</div>
+
+        <h2
+          className={`
+            text-2xl font-bold
+            ${darkMode ? "text-white" : "text-gray-800"}
+          `}
+        >
+          No Reviews Yet
+        </h2>
+
+        <p className="mt-2 text-sm max-w-md leading-6">
+          No user reviews are available right now. Once users submit reviews,
+          they will appear here beautifully.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`
@@ -158,7 +195,7 @@ const ReviewTable = ({
             >
               <Check size={20} />
             </button>
-            
+
             {/* DELETE */}
             <button
               onClick={() => onDelete(review._id)}
