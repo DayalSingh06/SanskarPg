@@ -40,42 +40,34 @@ router.put("/reject/:id", rejectUser);
 
 router.get("/dashboard-counts", getDashboardCounts);
 
+const pgUpload = upload.fields([
+  { name: "mainImage", maxCount: 1 },
+  { name: "outerLook", maxCount: 10 },
+  { name: "food", maxCount: 10 },
+  { name: "rooms", maxCount: 10 },
+  { name: "toiletBathroom", maxCount: 10 },
+  { name: "parking", maxCount: 10 },
+  { name: "extraFacilities", maxCount: 10 },
+]);
+
 router.post(
   "/create",
-  upload.fields([
-    {
-      name: "mainImage",
-      maxCount: 1,
-    },
+  (req, res, next) => {
+    pgUpload(req, res, (err) => {
+      if (err) {
+        console.error("PG_UPLOAD_ERROR:", err);
+        return res.status(500).json({
+          success: false,
+          message: "Upload failed",
+          error: err.message || err,
+        });
+      }
 
-    {
-      name: "Outer Look",
-    },
-
-    {
-      name: "Food",
-    },
-
-    {
-      name: "Rooms",
-    },
-
-    {
-      name: "Toilet & Bathroom",
-    },
-
-    {
-      name: "Parking",
-    },
-
-    {
-      name: "Extra Facilities",
-    },
-  ]),
-
+      next();
+    });
+  },
   createPg,
 );
-
 // GET ALL PGS
 router.get("/allpg", getAllPgs);
 
@@ -83,21 +75,20 @@ router.get("/singlepg/:id", getSinglePg);
 
 router.put(
   "/update/:id",
-  upload.fields([
-    { name: "mainImage", maxCount: 1 },
+  (req, res, next) => {
+    pgUpload(req, res, (err) => {
+      if (err) {
+        console.error("PG_UPLOAD_ERROR:", err);
+        return res.status(500).json({
+          success: false,
+          message: "Upload failed",
+          error: err.message || err,
+        });
+      }
 
-    { name: "Outer Look" },
-
-    { name: "Food" },
-
-    { name: "Rooms" },
-
-    { name: "Toilet & Bathroom" },
-
-    { name: "Parking" },
-
-    { name: "Extra Facilities" },
-  ]),
+      next();
+    });
+  },
   updatePg,
 );
 

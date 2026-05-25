@@ -4,7 +4,7 @@ import PublicFooter from "../components/footer/PublicFooter.jsx";
 
 const PublicLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <PublicNavbar />
       <main className="grow">
         <Outlet />

@@ -114,10 +114,7 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div
-        className={`
-          w-full max-w-sm p-6 rounded-lg
-          ${darkMode ? "bg-gray-900 text-white" : "bg-white text-[#0f0c1c]"}
-        `}
+        className={`w-full max-w-sm rounded-lg p-6 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-[#0f0c1c]"} `}
       >
         <h2 className="mb-4 text-lg font-semibold">Update Password</h2>
 
@@ -139,7 +136,7 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
           {/* Strength */}
           {formData.password && (
             <p
-              className={`text-xs mt-1 ${
+              className={`mt-1 text-xs ${
                 strength === "Weak"
                   ? "text-red-500"
                   : strength === "Medium"
@@ -166,23 +163,19 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
 
           {/* Server Error */}
           {serverError && (
-            <p className="text-red-500 text-sm mt-2">{serverError}</p>
+            <p className="mt-2 text-sm text-red-500">{serverError}</p>
           )}
 
           {/* Buttons */}
-          <div className="flex mt-4 gap-2">
+          <div className="mt-4 flex gap-2">
             <button
               type="submit"
               disabled={loading}
-              className={`
-                flex-1 py-2 text-white rounded
-                ${
-                  darkMode
-                    ? "bg-indigo-600 hover:bg-indigo-500"
-                    : "bg-indigo-600 hover:bg-indigo-700"
-                }
-                disabled:bg-indigo-300 disabled:cursor-not-allowed
-              `}
+              className={`flex-1 rounded py-2 text-white ${
+                darkMode
+                  ? "bg-indigo-600 hover:bg-indigo-500"
+                  : "bg-indigo-600 hover:bg-indigo-700"
+              } disabled:cursor-not-allowed disabled:bg-indigo-300`}
             >
               {loading ? "Updating..." : "Update"}
             </button>
@@ -190,14 +183,11 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
             <button
               type="button"
               onClick={onClose}
-              className={`
-                flex-1 py-2 border rounded
-                ${
-                  darkMode
-                    ? "border-gray-700 text-white hover:bg-gray-800"
-                    : "border-gray-300 text-[#0f0c1c] hover:bg-gray-100"
-                }
-              `}
+              className={`flex-1 rounded border py-2 ${
+                darkMode
+                  ? "border-gray-700 text-white hover:bg-gray-800"
+                  : "border-gray-300 text-[#0f0c1c] hover:bg-gray-100"
+              } `}
             >
               Cancel
             </button>

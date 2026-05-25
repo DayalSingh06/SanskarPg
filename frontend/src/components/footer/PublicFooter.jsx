@@ -14,63 +14,25 @@ const PublicFooter = () => {
 
   return (
     <footer
-      className={`
-        w-full
-        border-t
-        transition-all duration-300
-        ${
-          darkMode
-            ? "bg-[#0f0c1c] text-gray-300 border-gray-800"
-            : "bg-gray-100 text-gray-700 border-gray-300"
-        }
-      `}
+      className={`w-full border-t transition-all duration-300 ${
+        darkMode
+          ? "border-gray-800 bg-[#0f0c1c] text-gray-300"
+          : "border-gray-300 bg-gray-100 text-gray-700"
+      } `}
     >
       {/* MAIN FOOTER */}
-      <div
-        className="
-          grid
-          max-w-7xl
-          mx-auto
-          px-5 py-12
-          gap-12
-          text-center
-          sm:px-8
-          md:grid-cols-2 md:text-left
-          lg:grid-cols-3
-        "
-      >
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 text-center sm:px-8 md:grid-cols-2 md:text-left lg:grid-cols-3">
         {/* ABOUT */}
-        <div
-          className="
-            flex flex-col
-            items-center
-            md:items-start
-          "
-        >
+        <div className="flex flex-col items-center md:items-start">
           <Logo redirectPath="/" />
 
-          <p
-            className="
-              max-w-xs
-              mt-5
-              text-sm leading-7
-              sm:text-[15px]
-            "
-          >
+          <p className="mt-5 max-w-xs text-sm leading-7 sm:text-[15px]">
             Providing affordable, safe & comfortable PG accommodation in Jaipur
             for students and working professionals ✨
           </p>
 
           {/* CTA BUTTONS */}
-          <div
-            className="
-              flex flex-col
-              w-full max-w-xs
-              mt-6
-              gap-3
-              sm:flex-row sm:w-auto
-            "
-          >
+          <div className="mt-6 flex w-full max-w-xs flex-col gap-3 sm:w-auto sm:flex-row">
             <div className="w-full sm:w-auto">
               <ContactButton type="call" phone="916350028407" />
             </div>
@@ -83,44 +45,18 @@ const PublicFooter = () => {
 
         {/* QUICK LINKS */}
         <div>
-          <h3
-            className="
-              mb-5
-              text-xl font-semibold
-            "
-          >
-            Quick Links
-          </h3>
+          <h3 className="mb-5 text-xl font-semibold">Quick Links</h3>
 
-          <ul
-            className="
-              space-y-4
-              text-sm
-              sm:text-[15px]
-            "
-          >
+          <ul className="space-y-4 text-sm sm:text-[15px]">
             {quickLinks.map((link) => (
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  className="
-                    inline-block
-                    relative group
-                    transition-all duration-300
-                    hover:text-blue-500
-                  "
+                  className="group relative inline-block transition-all duration-300 hover:text-blue-500"
                 >
                   {link.label}
 
-                  <span
-                    className="
-                      h-0.5 w-0
-                      bg-blue-500
-                      transition-all duration-300
-                      absolute left-0 -bottom-1
-                      group-hover:w-full
-                    "
-                  ></span>
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </li>
             ))}
@@ -129,29 +65,13 @@ const PublicFooter = () => {
 
         {/* CONTACT */}
         <div>
-          <h3
-            className="
-              mb-5
-              text-xl font-semibold
-            "
-          >
-            Contact
-          </h3>
+          <h3 className="mb-5 text-xl font-semibold">Contact</h3>
 
-          <ul
-            className="
-              space-y-4
-              text-sm
-              sm:text-[15px]
-            "
-          >
+          <ul className="space-y-4 text-sm sm:text-[15px]">
             <li>
               <a
                 href="mailto:sanskarboyspg@gmail.com"
-                className="
-                  break-all
-                  transition hover:text-blue-500
-                "
+                className="break-all transition hover:text-blue-500"
               >
                 sanskarboyspg@gmail.com
               </a>
@@ -160,9 +80,7 @@ const PublicFooter = () => {
             <li>
               <a
                 href="tel:+916350028407"
-                className="
-                  transition hover:text-blue-500
-                "
+                className="transition hover:text-blue-500"
               >
                 +91 63500 28407
               </a>
@@ -175,18 +93,11 @@ const PublicFooter = () => {
 
       {/* BOTTOM */}
       <div
-        className={`
-          py-5 px-4
-          text-center
-          text-xs
-          border-t
-          sm:text-sm
-          ${
-            darkMode
-              ? "border-gray-800 text-gray-500"
-              : "border-gray-300 text-gray-500"
-          }
-        `}
+        className={`border-t px-4 py-5 text-center text-xs sm:text-sm ${
+          darkMode
+            ? "border-gray-800 text-gray-500"
+            : "border-gray-300 text-gray-500"
+        } `}
       >
         © {new Date().getFullYear()} Sanskar Boy's PG. All rights reserved.
       </div>

@@ -21,59 +21,26 @@ const PgCard = ({ pg }) => {
 
   return (
     <div
-      className={`
-        overflow-hidden
-        rounded-2xl
-        transition-all
-        group relative duration-300 hover:-translate-y-1
-        ${
-          darkMode
-            ? "bg-[#1a1625] border border-[#2a2438] shadow-lg shadow-black/30 hover:shadow-black/60"
-            : "bg-white border border-gray-200 shadow-md hover:shadow-xl"
-        }
-      `}
+      className={`group relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+        darkMode
+          ? "border border-[#2a2438] bg-[#1a1625] shadow-lg shadow-black/30 hover:shadow-black/60"
+          : "border border-gray-200 bg-white shadow-md hover:shadow-xl"
+      } `}
     >
       {/* IMAGE SECTION */}
-      <div
-        className="
-          overflow-hidden
-          relative
-        "
-      >
+      <div className="relative overflow-hidden">
         <img
           src={imageUrl}
           alt={pg?.name || "PG Image"}
           loading="lazy"
-          className="
-            object-cover
-            w-full h-48
-            transition-transform
-            duration-500 group-hover:scale-110
-            sm:h-52
-            md:h-56
-          "
+          className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110 sm:h-52 md:h-56"
         />
 
         {/* OVERLAY */}
-        <div
-          className="
-            bg-linear-to-t from-black/60 via-black/10 to-transparent
-            absolute inset-0
-          "
-        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
 
         {/* RENT BADGE */}
-        <div
-          className="
-            px-3 py-1.5
-            text-[11px] font-semibold text-white
-            bg-blue-600
-            rounded-full
-            shadow-md
-            absolute top-3 left-3 backdrop-blur-sm
-            sm:text-xs
-          "
-        >
+        <div className="absolute top-3 left-3 rounded-full bg-blue-600 px-3 py-1.5 text-[11px] font-semibold text-white shadow-md backdrop-blur-sm sm:text-xs">
           {lowestRent ? (
             <>₹{lowestRent.toLocaleString("en-IN")}/month</>
           ) : (
@@ -83,56 +50,30 @@ const PgCard = ({ pg }) => {
       </div>
 
       {/* CONTENT */}
-      <div
-        className="
-          p-4
-          sm:p-5
-        "
-      >
+      <div className="p-4 sm:p-5">
         {/* NAME */}
         <h2
-          className={`
-            text-lg font-bold
-            line-clamp-1
-            sm:text-xl
-            ${darkMode ? "text-white" : "text-gray-900"}
-          `}
+          className={`line-clamp-1 text-lg font-bold sm:text-xl ${darkMode ? "text-white" : "text-gray-900"} `}
         >
           {pg?.name || "Unnamed PG"}
         </h2>
 
         {/* LOCATION */}
         <p
-          className={`
-            flex
-            mt-2
-            text-sm
-            items-center gap-1 line-clamp-1
-            ${darkMode ? "text-gray-400" : "text-gray-600"}
-          `}
+          className={`mt-2 line-clamp-1 flex items-center gap-1 text-sm ${darkMode ? "text-gray-400" : "text-gray-600"} `}
         >
           📍 {pg?.location || "Location not available"}
         </p>
 
         {/* AVAILABLE ROOM COUNT */}
         <p
-          className={`
-            mt-3
-            text-sm font-medium
-            ${darkMode ? "text-green-400" : "text-green-600"}
-          `}
+          className={`mt-3 text-sm font-medium ${darkMode ? "text-green-400" : "text-green-600"} `}
         >
           {availableRooms.length} Room Types Available
         </p>
 
         {/* FOOTER */}
-        <div
-          className="
-            flex
-            mt-5
-            items-center justify-between
-          "
-        >
+        <div className="mt-5 flex items-center justify-between">
           {/* DETAILS BUTTON */}
           <button
             onClick={() => {
@@ -142,32 +83,18 @@ const PgCard = ({ pg }) => {
                 navigate("/login");
               }
             }}
-            className={`
-              inline-flex
-              px-4 py-2.5
-              text-sm font-medium
-              rounded-full
-              transition-all
-              items-center justify-center duration-300 hover:scale-105 active:scale-95
-              sm:px-5
-              ${
-                darkMode
-                  ? "bg-blue-500 text-white hover:bg-blue-600"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
-              }
-            `}
+            className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 sm:px-5 ${
+              darkMode
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+            } `}
           >
             View Details →
           </button>
         </div>
 
         {/* FLOAT BUTTONS */}
-        <div
-          className="
-            z-10 flex flex-col
-            absolute right-4 bottom-4 gap-2
-          "
-        >
+        <div className="absolute right-4 bottom-4 z-10 flex flex-col gap-2">
           <ContactButtonIcon type="call" phone={pg?.phone} />
 
           <ContactButtonIcon type="whatsapp" phone={pg?.phone} />

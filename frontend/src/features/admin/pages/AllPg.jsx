@@ -31,26 +31,14 @@ const AllPg = () => {
 
         <Link
           to="/admin/addpg"
-          className="
-            px-5 py-3
-            bg-blue-600 text-white
-            rounded-xl
-          "
+          className="rounded-xl bg-blue-600 px-5 py-3 text-white"
         >
           Add PG
         </Link>
       </div>
 
       {/* GRID */}
-      <div
-        className="
-          grid
-          mt-10
-          gap-6
-          sm:grid-cols-2
-          md:grid-cols-3
-        "
-      >
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {pgs.length > 0 ? (
           pgs.map((pg) => <PgCard key={pg._id} pg={pg} />)
         ) : (

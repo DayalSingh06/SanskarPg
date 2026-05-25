@@ -34,11 +34,9 @@ const UpdatePgDetails = () => {
     const loadPg = async () => {
       try {
         const res = await getSinglePg(id);
-
         if (!mounted) return;
 
         const pg = res.pg;
-
         setData({
           name: pg?.name || "",
           location: pg?.location || "",
@@ -48,22 +46,17 @@ const UpdatePgDetails = () => {
           gallery: pg?.gallery || [],
         });
 
-        setPreviewImage(
-          pg?.mainImage
-            ? `http://localhost:5000/${pg.mainImage.replace(/\\/g, "/")}`
-            : "",
-        );
+        // UPDATE THIS PART:
+        // Pura URL backend se mil raha hai, local path fix karne ki zaroorat nahi
+        setPreviewImage(pg?.mainImage || "");
       } catch (error) {
         console.log(error);
       } finally {
-        if (mounted) {
-          setLoading(false);
-        }
+        if (mounted) setLoading(false);
       }
     };
 
     loadPg();
-
     return () => {
       mounted = false;
     };
@@ -113,14 +106,7 @@ const UpdatePgDetails = () => {
   // LOADING
   if (loading) {
     return (
-      <div
-        className="
-          flex
-          h-screen
-          text-2xl font-bold
-          items-center justify-center
-        "
-      >
+      <div className="flex h-screen items-center justify-center text-2xl font-bold">
         Loading...
       </div>
     );
@@ -128,86 +114,40 @@ const UpdatePgDetails = () => {
 
   return (
     <div
-      className={`
-        min-h-screen
-        p-3
-        rounded-[25px]
-        transition-all
-        duration-500
-        sm:p-4
-        md:p-6 md:rounded-[40px]
-        ${
-          darkMode
-            ? "bg-linear-to-br from-[#0f172a] via-[#111827] to-[#1e293b]"
-            : "bg-linear-to-br from-slate-100 via-blue-50 to-indigo-100"
-        }
-      `}
+      className={`min-h-screen rounded-[25px] p-3 transition-all duration-500 sm:p-4 md:rounded-[40px] md:p-6 ${
+        darkMode
+          ? "bg-linear-to-br from-[#0f172a] via-[#111827] to-[#1e293b]"
+          : "bg-linear-to-br from-slate-100 via-blue-50 to-indigo-100"
+      } `}
     >
       <div
-        className={`
-          max-w-7xl
-          mx-auto
-          rounded-[40px] border
-          backdrop-blur-xl
-          ${
-            darkMode
-              ? "bg-white/5 border-white/10"
-              : "bg-white/70 border-white/30"
-          }
-        `}
+        className={`mx-auto max-w-7xl rounded-[40px] border backdrop-blur-xl ${
+          darkMode
+            ? "border-white/10 bg-white/5"
+            : "border-white/30 bg-white/70"
+        } `}
       >
         {/* HEADER */}
         <div
-          className={`
-            flex flex-col
-            px-6 py-8
-            rounded-t-[40px]
-            gap-5
-            md:flex-row md:items-center md:justify-between
-            ${
-              darkMode
-                ? "bg-linear-to-r from-[#111827] via-[#1e293b] to-[#312e81]"
-                : "bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600"
-            }
-          `}
+          className={`flex flex-col gap-5 rounded-t-[40px] px-6 py-8 md:flex-row md:items-center md:justify-between ${
+            darkMode
+              ? "bg-linear-to-r from-[#111827] via-[#1e293b] to-[#312e81]"
+              : "bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600"
+          } `}
         >
           <div>
-            <h1
-              className="
-                text-4xl font-black text-white
-              "
-            >
+            <h1 className="text-4xl font-black text-white">
               Update PG Details
             </h1>
 
-            <p
-              className="
-                mt-2
-                text-white/80
-              "
-            >
-              Edit and manage PG information
-            </p>
+            <p className="mt-2 text-white/80">Edit and manage PG information</p>
           </div>
 
           {/* TOP BUTTONS */}
-          <div
-            className="
-              flex
-              gap-4
-            "
-          >
+          <div className="flex gap-4">
             <button
               onClick={handleUpdate}
-              className="
-                flex
-                px-6 py-3
-                font-semibold text-white
-                bg-green-600
-                rounded-2xl
-                transition-all
-                duration-300 items-center gap-2 hover:scale-105 hover:bg-green-700
-              "
+              className="flex items-center gap-2 rounded-2xl bg-green-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700"
             >
               <RefreshCw size={18} />
               Update
@@ -215,15 +155,7 @@ const UpdatePgDetails = () => {
 
             <button
               onClick={() => setShowDeleteModal(true)}
-              className="
-                flex
-                px-6 py-3
-                font-semibold text-white
-                bg-red-600
-                rounded-2xl
-                transition-all
-                duration-300 items-center gap-2 hover:scale-105 hover:bg-red-700
-              "
+              className="flex items-center gap-2 rounded-2xl bg-red-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-red-700"
             >
               <Trash2 size={18} />
               Delete
@@ -232,50 +164,22 @@ const UpdatePgDetails = () => {
         </div>
 
         {/* FORM */}
-        <div
-          className="
-            p-4
-            sm:p-6
-            md:p-10
-          "
-        >
+        <div className="p-4 sm:p-6 md:p-10">
           {/* MAIN IMAGE */}
-          <div
-            className="
-              mb-10
-            "
-          >
+          <div className="mb-10">
             <label
-              className={`
-                block
-                mb-3
-                font-semibold
-                ${darkMode ? "text-white" : "text-gray-700"}
-              `}
+              className={`mb-3 block font-semibold ${darkMode ? "text-white" : "text-gray-700"} `}
             >
               Main Banner Image
             </label>
 
-            <div
-              className="
-                flex flex-col
-                gap-5
-                md:flex-row
-              "
-            >
+            <div className="flex flex-col gap-5 md:flex-row">
               <div
-                className={`
-                  overflow-hidden
-                  w-full h-64
-                  rounded-3xl border-2 border-dashed
-                  relative
-                  md:w-125
-                  ${
-                    darkMode
-                      ? "bg-white/5 border-white/10"
-                      : "bg-gray-100 border-gray-300"
-                  }
-                `}
+                className={`relative h-64 w-full overflow-hidden rounded-3xl border-2 border-dashed md:w-125 ${
+                  darkMode
+                    ? "border-white/10 bg-white/5"
+                    : "border-gray-300 bg-gray-100"
+                } `}
               >
                 {previewImage ? (
                   <>
@@ -286,10 +190,7 @@ const UpdatePgDetails = () => {
                           : previewImage
                       }
                       alt="Preview"
-                      className="
-                        object-cover
-                        w-full h-full
-                      "
+                      className="h-full w-full object-cover"
                     />
 
                     <button
@@ -303,38 +204,19 @@ const UpdatePgDetails = () => {
                           fileInputRef.current.value = "";
                         }
                       }}
-                      className="
-                        flex
-                        w-9 h-9
-                        text-white
-                        bg-red-500
-                        rounded-full
-                        absolute top-3 right-3 items-center justify-center
-                      "
+                      className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-red-500 text-white"
                     >
                       <X size={18} />
                     </button>
                   </>
                 ) : (
-                  <div
-                    className="
-                      flex
-                      w-full h-full
-                      text-gray-400
-                      items-center justify-center
-                    "
-                  >
+                  <div className="flex h-full w-full items-center justify-center text-gray-400">
                     No Image
                   </div>
                 )}
               </div>
 
-              <div
-                className="
-                  flex
-                  items-center
-                "
-              >
+              <div className="flex items-center">
                 <input
                   type="file"
                   hidden
@@ -347,14 +229,7 @@ const UpdatePgDetails = () => {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current.click()}
-                  className="
-                    px-8 py-4
-                    font-semibold text-white
-                    bg-linear-to-r from-blue-600 to-indigo-600
-                    rounded-2xl
-                    transition-all
-                    duration-300 hover:scale-105
-                  "
+                  className="rounded-2xl bg-linear-to-r from-blue-600 to-indigo-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:scale-105"
                 >
                   Upload New Image
                 </button>
@@ -363,21 +238,10 @@ const UpdatePgDetails = () => {
           </div>
 
           {/* BASIC INFO */}
-          <div
-            className="
-              grid
-              gap-6
-              md:grid-cols-2
-            "
-          >
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label
-                className={`
-                  block
-                  mb-2
-                  font-semibold
-                  ${darkMode ? "text-white" : "text-gray-700"}
-                `}
+                className={`mb-2 block font-semibold ${darkMode ? "text-white" : "text-gray-700"} `}
               >
                 PG Name
               </label>
@@ -391,28 +255,17 @@ const UpdatePgDetails = () => {
                     name: e.target.value,
                   })
                 }
-                className={`
-                  w-full
-                  px-5 py-4
-                  rounded-2xl border
-                  outline-none
-                  ${
-                    darkMode
-                      ? "bg-white/5 border-white/10 text-white"
-                      : "bg-white border-gray-200 text-gray-700"
-                  }
-                `}
+                className={`w-full rounded-2xl border px-5 py-4 outline-none ${
+                  darkMode
+                    ? "border-white/10 bg-white/5 text-white"
+                    : "border-gray-200 bg-white text-gray-700"
+                } `}
               />
             </div>
 
             <div>
               <label
-                className={`
-                  block
-                  mb-2
-                  font-semibold
-                  ${darkMode ? "text-white" : "text-gray-700"}
-                `}
+                className={`mb-2 block font-semibold ${darkMode ? "text-white" : "text-gray-700"} `}
               >
                 Phone Number
               </label>
@@ -426,34 +279,19 @@ const UpdatePgDetails = () => {
                     phone: e.target.value,
                   })
                 }
-                className={`
-                  w-full
-                  px-5 py-4
-                  rounded-2xl border
-                  outline-none
-                  ${
-                    darkMode
-                      ? "bg-white/5 border-white/10 text-white"
-                      : "bg-white border-gray-200 text-gray-700"
-                  }
-                `}
+                className={`w-full rounded-2xl border px-5 py-4 outline-none ${
+                  darkMode
+                    ? "border-white/10 bg-white/5 text-white"
+                    : "border-gray-200 bg-white text-gray-700"
+                } `}
               />
             </div>
           </div>
 
           {/* LOCATION */}
-          <div
-            className="
-              mt-6
-            "
-          >
+          <div className="mt-6">
             <label
-              className={`
-                block
-                mb-2
-                font-semibold
-                ${darkMode ? "text-white" : "text-gray-700"}
-              `}
+              className={`mb-2 block font-semibold ${darkMode ? "text-white" : "text-gray-700"} `}
             >
               Location
             </label>
@@ -467,33 +305,18 @@ const UpdatePgDetails = () => {
                   location: e.target.value,
                 })
               }
-              className={`
-                w-full
-                px-5 py-4
-                rounded-2xl border
-                outline-none
-                ${
-                  darkMode
-                    ? "bg-white/5 border-white/10 text-white"
-                    : "bg-white border-gray-200 text-gray-700"
-                }
-              `}
+              className={`w-full rounded-2xl border px-5 py-4 outline-none ${
+                darkMode
+                  ? "border-white/10 bg-white/5 text-white"
+                  : "border-gray-200 bg-white text-gray-700"
+              } `}
             />
           </div>
 
           {/* MAP */}
-          <div
-            className="
-              mt-6
-            "
-          >
+          <div className="mt-6">
             <label
-              className={`
-                block
-                mb-2
-                font-semibold
-                ${darkMode ? "text-white" : "text-gray-700"}
-              `}
+              className={`mb-2 block font-semibold ${darkMode ? "text-white" : "text-gray-700"} `}
             >
               Google Map Link
             </label>
@@ -507,17 +330,11 @@ const UpdatePgDetails = () => {
                   map: e.target.value,
                 })
               }
-              className={`
-                w-full
-                px-5 py-4
-                rounded-2xl border
-                outline-none
-                ${
-                  darkMode
-                    ? "bg-white/5 border-white/10 text-white"
-                    : "bg-white border-gray-200 text-gray-700"
-                }
-              `}
+              className={`w-full rounded-2xl border px-5 py-4 outline-none ${
+                darkMode
+                  ? "border-white/10 bg-white/5 text-white"
+                  : "border-gray-200 bg-white text-gray-700"
+              } `}
             />
           </div>
 
@@ -531,20 +348,11 @@ const UpdatePgDetails = () => {
 
           <button
             onClick={handleUpdate}
-            className={`
-              flex
-              w-full
-              py-5 mt-10
-              text-xl font-bold text-white
-              rounded-3xl
-              transition-all
-              duration-300 items-center justify-center gap-3 hover:scale-[1.02]
-              ${
-                darkMode
-                  ? "bg-linear-to-r from-indigo-700 via-purple-700 to-pink-700"
-                  : "bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600"
-              }
-            `}
+            className={`mt-10 flex w-full items-center justify-center gap-3 rounded-3xl py-5 text-xl font-bold text-white transition-all duration-300 hover:scale-[1.02] ${
+              darkMode
+                ? "bg-linear-to-r from-indigo-700 via-purple-700 to-pink-700"
+                : "bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600"
+            } `}
           >
             <Save size={22} />
             Save Changes
@@ -552,91 +360,42 @@ const UpdatePgDetails = () => {
         </div>
       </div>
       {showDeleteModal && (
-        <div
-          className="
-            z-99999 flex
-            bg-black/60
-            fixed inset-0 backdrop-blur-sm items-center justify-center
-          "
-        >
+        <div className="fixed inset-0 z-99999 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div
-            className={`
-              w-[90%] max-w-md
-              p-8
-              rounded-3xl
-              shadow-2xl animate-in
-              fade-in zoom-in-95 duration-300
-              ${darkMode ? "bg-[#151122] border border-white/10" : "bg-white"}
-            `}
+            className={`animate-in fade-in zoom-in-95 w-[90%] max-w-md rounded-3xl p-8 shadow-2xl duration-300 ${darkMode ? "border border-white/10 bg-[#151122]" : "bg-white"} `}
           >
             {/* ICON */}
 
-            <div
-              className="
-                flex
-                w-18 h-18
-                mx-auto
-                bg-red-500/15
-                rounded-full
-                items-center justify-center
-              "
-            >
-              <Trash2
-                size={34}
-                className="
-                  text-red-500
-                "
-              />
+            <div className="mx-auto flex h-18 w-18 items-center justify-center rounded-full bg-red-500/15">
+              <Trash2 size={34} className="text-red-500" />
             </div>
 
             {/* TEXT */}
 
             <h2
-              className={`
-                mt-6
-                text-2xl font-black text-center
-                ${darkMode ? "text-white" : "text-gray-800"}
-              `}
+              className={`mt-6 text-center text-2xl font-black ${darkMode ? "text-white" : "text-gray-800"} `}
             >
               Delete PG ?
             </h2>
 
             <p
-              className={`
-                mt-3
-                text-center leading-7
-                ${darkMode ? "text-gray-400" : "text-gray-600"}
-              `}
+              className={`mt-3 text-center leading-7 ${darkMode ? "text-gray-400" : "text-gray-600"} `}
             >
               Are you sure you want to permanently delete this PG?
             </p>
 
             {/* BUTTONS */}
 
-            <div
-              className="
-                flex
-                mt-8
-                gap-4
-              "
-            >
+            <div className="mt-8 flex gap-4">
               {/* CANCEL */}
 
               <button
                 onClick={() => setShowDeleteModal(false)}
-                className={`
-                  flex-1
-                  py-3
-                  font-semibold
-                  rounded-2xl
-                  transition-all
-                  duration-300 hover:scale-105
-                  ${
-                    darkMode
-                      ? "bg-white/10 text-white"
-                      : "bg-gray-100 text-gray-700"
-                  }
-                `}
+                className={`flex-1 rounded-2xl py-3 font-semibold transition-all duration-300 hover:scale-105 ${
+                  darkMode
+                    ? "bg-white/10 text-white"
+                    : "bg-gray-100 text-gray-700"
+                } `}
               >
                 No
               </button>
@@ -649,15 +408,7 @@ const UpdatePgDetails = () => {
 
                   await handleDelete();
                 }}
-                className="
-                  flex-1
-                  py-3
-                  font-semibold text-white
-                  bg-red-600
-                  rounded-2xl
-                  transition-all
-                  duration-300 hover:scale-105 hover:bg-red-700
-                "
+                className="flex-1 rounded-2xl bg-red-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-red-700"
               >
                 Yes Delete
               </button>

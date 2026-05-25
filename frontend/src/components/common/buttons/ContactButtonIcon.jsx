@@ -4,7 +4,7 @@ import { useTheme } from "../../../context/ThemeContext";
 
 const ContactButtonIcon = ({ type = "call", phone = "919999999999" }) => {
   const { darkMode } = useTheme();
-  
+
   const isCall = type === "call";
 
   const link = isCall ? `tel:+${phone}` : `https://wa.me/${phone}`;
@@ -25,24 +25,12 @@ const ContactButtonIcon = ({ type = "call", phone = "919999999999" }) => {
       target={!isCall ? "_blank" : undefined}
       rel={!isCall ? "noopener noreferrer" : undefined}
       aria-label={type}
-      className={`
-        flex
-        w-10 h-10
-        rounded-full
-        shadow-md transition-all
-        items-center justify-center hover:shadow-lg duration-300 hover:scale-110 active:scale-95 ${bgColor}
-        sm:w-11 sm:h-11
-        ${darkMode ? "ring-1 ring-white/10" : "ring-1 ring-black/5"}
-      `}
+      className={`flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg active:scale-95 ${bgColor} sm:h-11 sm:w-11 ${darkMode ? "ring-1 ring-white/10" : "ring-1 ring-black/5"} `}
     >
       <img
         src={icon}
         alt={type}
-        className="
-          object-contain
-          w-4 h-4
-          sm:w-5 sm:h-5
-        "
+        className="h-4 w-4 object-contain sm:h-5 sm:w-5"
       />
     </a>
   );

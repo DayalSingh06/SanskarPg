@@ -118,86 +118,39 @@ export default function Login() {
   return (
     <>
       <div
-        className={`
-        flex
-        min-h-screen
-        px-4 py-6
-        select-none
-        items-center justify-center
-        relative
-        ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f8fafc] text-[#0f0c1c]"}
-      `}
+        className={`relative flex min-h-screen items-center justify-center px-4 py-6 select-none ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f8fafc] text-[#0f0c1c]"} `}
       >
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className={`
-          flex
-          w-10 h-10
-          rounded-full
-          absolute right-4 top-4
-          items-center justify-center transition
-          ${
+          className={`absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full transition ${
             darkMode
               ? "bg-gray-800 hover:bg-gray-700"
               : "bg-gray-300 hover:bg-gray-400"
-          }
-        `}
+          } `}
         >
           {darkMode ? <SunIcon /> : <MoonIcon />}
         </button>
 
         {/* Login Card */}
         <div
-          className={`
-          flex flex-col
-          w-full max-w-md
-          p-5
-          rounded-2xl
-          shadow-xl
-          backdrop-blur-md
-          items-center
-          sm:p-6
-          ${
+          className={`flex w-full max-w-md flex-col items-center rounded-2xl p-5 shadow-xl backdrop-blur-md sm:p-6 ${
             darkMode
-              ? "bg-[#181525] border border-gray-800 text-gray-200"
-              : "bg-white border border-gray-200 text-[#0f0c1c]"
-          }
-        `}
+              ? "border border-gray-800 bg-[#181525] text-gray-200"
+              : "border border-gray-200 bg-white text-[#0f0c1c]"
+          } `}
         >
           <form
             onSubmit={handleSubmit}
-            className={`
-            w-full
-            mt-4
-            p-4
-            rounded-md
-            sm:p-5
-            md:p-6
-            ${
+            className={`mt-4 w-full rounded-md p-4 sm:p-5 md:p-6 ${
               darkMode
                 ? "border border-gray-800 text-gray-200"
                 : "border border-gray-200 text-[#0f0c1c]"
-            }
-          `}
+            } `}
           >
-            <h2
-              className="
-              mb-1
-              text-xl font-semibold
-              sm:text-2xl
-            "
-            >
-              Welcome
-            </h2>
+            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">Welcome</h2>
 
-            <p
-              className="
-              mb-4
-              text-xs
-              sm:mb-6 sm:text-sm
-            "
-            >
+            <p className="mb-4 text-xs sm:mb-6 sm:text-sm">
               Please enter your details to sign in
             </p>
 
@@ -230,20 +183,10 @@ export default function Login() {
             />
 
             {/* Forgot Password */}
-            <div
-              className="
-              flex
-              mt-3 mb-3
-              text-sm
-              justify-end
-            "
-            >
+            <div className="mt-3 mb-3 flex justify-end text-sm">
               <span
                 onClick={() => setShowForgot(true)}
-                className="
-                text-red-600
-                cursor-pointer
-              "
+                className="cursor-pointer text-red-600"
               >
                 Forgot Password?
               </span>
@@ -253,45 +196,17 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="
-              w-full
-              mt-4 py-2
-              text-white
-              bg-indigo-600
-              rounded-md
-              cursor-pointer
-              hover:bg-indigo-700 transition
-              disabled:bg-indigo-300
-              disabled:cursor-not-allowed
-            "
+              className="mt-4 w-full cursor-pointer rounded-md bg-indigo-600 py-2 text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>
 
             {/* Register */}
-            <p
-              className="
-              mt-6
-              text-md text-center
-            "
-            >
+            <p className="text-md mt-6 text-center">
               Don’t have an account?{" "}
               <Link
                 to="/register"
-                className="
-                text-[#3d5de0]
-                font-medium
-                relative
-                after:absolute
-                after:left-0
-                after:-bottom-1
-                after:h-0.5
-                after:w-0
-                after:bg-[#3d5de0]
-                after:transition-all
-                after:duration-300
-                hover:after:w-full
-              "
+                className="relative font-medium text-[#3d5de0] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#3d5de0] after:transition-all after:duration-300 hover:after:w-full"
               >
                 Create Account
               </Link>

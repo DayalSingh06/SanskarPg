@@ -35,37 +35,18 @@ const VerifiedReviews = () => {
   return (
     <>
       {reviews.length === 0 ? (
-        <div
-          className="
-          flex flex-col
-          items-center justify-center
-          py-20 px-6
-          text-center
-        "
-        >
-          <h2
-            className="
-            text-3xl font-bold
-            text-gray-800 dark:text-white
-          "
-          >
+        <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
             No Verified Reviews
           </h2>
 
-          <p
-            className="
-            mt-3
-            max-w-md
-            text-sm leading-6
-            text-gray-500
-          "
-          >
+          <p className="mt-3 max-w-md text-sm leading-6 text-gray-500">
             No verified reviews are available right now. Once reviews are
             verified, they will appear here.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {reviews.map((review) => (
             <ReviewTable
               key={review._id}

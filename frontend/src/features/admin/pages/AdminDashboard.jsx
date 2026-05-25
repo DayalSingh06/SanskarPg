@@ -98,12 +98,7 @@ export default function AdminDashboard() {
 
   return (
     <div
-      className={`
-        transition-colors duration-300
-        min-h-screen
-        px-2 sm:px-4
-        ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f5f7fb] text-[#0f0c1c]"}
-      `}
+      className={`min-h-screen px-2 transition-colors duration-300 sm:px-4 ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f5f7fb] text-[#0f0c1c]"} `}
     >
       {/* MAIN */}
       <main className="py-6">
@@ -113,7 +108,7 @@ export default function AdminDashboard() {
             <WelcomeBanner />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <TotalUsersCard
               title="Total Users"
               total={stats.totalUsers}

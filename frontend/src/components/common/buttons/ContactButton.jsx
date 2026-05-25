@@ -28,24 +28,12 @@ const ContactButton = ({ type = "call", phone = "919999999999" }) => {
       target={!isCall ? "_blank" : undefined}
       rel={!isCall ? "noopener noreferrer" : undefined}
       aria-label={text}
-      className={`
-        flex
-        px-4 py-2.5
-        text-sm font-medium text-white whitespace-nowrap
-        rounded-full
-        shadow-md transition-all
-        items-center justify-center gap-2 duration-300 active:scale-95 hover:scale-[1.02] ${bgColor}
-        sm:px-5 sm:py-3 sm:text-base
-      `}
+      className={`flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-white shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95 ${bgColor} sm:px-5 sm:py-3 sm:text-base`}
     >
       <img
         src={icon}
         alt={text}
-        className="
-          object-contain
-          w-5 h-5
-          sm:w-6 sm:h-6
-        "
+        className="h-5 w-5 object-contain sm:h-6 sm:w-6"
       />
       <span>{text}</span>
     </a>

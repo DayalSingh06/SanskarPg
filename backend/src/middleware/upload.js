@@ -1,109 +1,45 @@
+import dotenv from "dotenv";
+dotenv.config();
+import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
-import path from "path";
-import fs from "fs";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-// =========================
-// CREATE FOLDER
-// =========================
+console.log("Current Directory:", process.cwd());
+console.log("Checking API KEY:", process.env.CLOUDINARY_API_KEY);
 
-const createFolder = (folderPath) => {
-  if (!fs.existsSync(folderPath)) {
-    fs.mkdirSync(folderPath, { recursive: true });
-  }
-};
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-// =========================
-// GET NEXT PG FOLDER
-// =========================
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "sanskar-pg",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
 
-const getNextPgFolder = () => {
-  const mainPath = "uploads/main";
-
-  createFolder(mainPath);
-
-  const folders = fs
-    .readdirSync(mainPath)
-    .filter((folder) => folder.startsWith("pg"));
-
-  const numbers = folders.map((folder) => parseInt(folder.replace("pg", "")));
-
-  const nextNumber = numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
-
-  return `pg${nextNumber}`;
-};
-
-// =========================
-// STORAGE
-// =========================
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // CREATE PG FOLDER
-    if (!req.pgFolder) {
-      req.pgFolder = getNextPgFolder();
-    }
-
-    let uploadPath = "";
-
-    // MAIN IMAGE
-    if (file.fieldname === "mainImage") {
-      uploadPath = `uploads/main/${req.pgFolder}`;
-    }
-
-    // GALLERY IMAGE
-    else {
-      // SAFE FOLDER NAME
-      const sectionFolder = file.fieldname
-        .replace(/\s+/g, "-")
-        .replace(/&/g, "and");
-
-      uploadPath = `uploads/gallery/${req.pgFolder}/${sectionFolder}`;
-    }
-
-    // CREATE FOLDER
-    createFolder(uploadPath);
-
-    cb(null, uploadPath);
-  },
-
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      Date.now() +
-        "-" +
-        Math.round(Math.random() * 1e9) +
-        path.extname(file.originalname),
-    );
+    public_id: (req, file) => {
+      const ts = Date.now();
+      const rand = Math.round(Math.random() * 1e9);
+      return `${file.fieldname}-${ts}-${rand}`;
+    },
   },
 });
 
-// =========================
-// FILE FILTER
-// =========================
-
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpg|jpeg|png|webp/;
-
-  const extname = allowedTypes.test(
-    path.extname(file.originalname).toLowerCase(),
-  );
-
+  const allowed = /jpg|jpeg|png|webp/i.test(file.originalname);
   const mimetype = file.mimetype.startsWith("image/");
-
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb(new Error("Only Images Allowed"));
-  }
+  if (allowed && mimetype) return cb(null, true);
+  cb(new Error("Only Images Allowed"));
 };
 
-// =========================
-// MULTER
-// =========================
-
+// upload.js mein
 const upload = multer({
   storage,
   fileFilter,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB ki limit set kar di
 });
 
+export { cloudinary, upload };
 export default upload;

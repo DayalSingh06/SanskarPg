@@ -26,79 +26,34 @@ const PgCard = ({ pg }) => {
 
   return (
     <div
-      className={`
-        overflow-hidden
-        rounded-3xl
-        transition-all
-        group duration-500 hover:-translate-y-2
-        ${
-          darkMode
-            ? `
-              bg-[#151122]
-              border border-white/5
-              shadow-[0_10px_35px_rgba(0,0,0,0.45)]
-            `
-            : `
-              bg-white
-              border border-gray-200
-              shadow-lg
-            `
-        }
-      `}
+      className={`group overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
+        darkMode
+          ? `border border-white/5 bg-[#151122] shadow-[0_10px_35px_rgba(0,0,0,0.45)]`
+          : `border border-gray-200 bg-white shadow-lg`
+      } `}
     >
       {/* IMAGE */}
-      <div
-        className="
-          overflow-hidden
-          h-56
-          relative
-        "
-      >
+      <div className="relative h-56 overflow-hidden">
         <img
           src={getImageUrl(livePg?.mainImage)}
           alt={livePg?.name}
-          className="
-            object-cover
-            w-full h-full
-            transition duration-700 group-hover:scale-110
-          "
+          className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
         />
 
         {/* OVERLAY */}
-        <div
-          className="
-            bg-linear-to-t from-black/60 via-black/10 to-transparent
-            absolute inset-0
-          "
-        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
 
         {/* RENT */}
-        <div
-          className="
-            px-4 py-1.5
-            text-sm font-semibold text-white
-            bg-blue-600
-            rounded-full
-            absolute top-4 left-4
-          "
-        >
+        <div className="absolute top-4 left-4 rounded-full bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white">
           ₹{lowestRent.toLocaleString("en-IN")} / month
         </div>
       </div>
 
       {/* CONTENT */}
-      <div
-        className="
-          p-5
-        "
-      >
+      <div className="p-5">
         {/* NAME */}
         <h2
-          className={`
-            text-[21px] font-bold
-            line-clamp-1
-            ${darkMode ? "text-white" : "text-gray-900"}
-          `}
+          className={`line-clamp-1 text-[21px] font-bold ${darkMode ? "text-white" : "text-gray-900"} `}
         >
           {livePg?.name}
         </h2>
@@ -110,18 +65,11 @@ const PgCard = ({ pg }) => {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className={`
-            flex
-            mt-3
-            text-[15px] leading-7
-            transition-all
-            gap-2 line-clamp-2 duration-300 hover:text-blue-500
-            ${
-              darkMode
-                ? "text-gray-400 hover:text-blue-400"
-                : "text-gray-600 hover:text-blue-600"
-            }
-          `}
+          className={`mt-3 line-clamp-2 flex gap-2 text-[15px] leading-7 transition-all duration-300 hover:text-blue-500 ${
+            darkMode
+              ? "text-gray-400 hover:text-blue-400"
+              : "text-gray-600 hover:text-blue-600"
+          } `}
         >
           <span>📍</span>
 
@@ -129,29 +77,12 @@ const PgCard = ({ pg }) => {
         </a>
 
         {/* FOOTER */}
-        <div
-          className="
-            flex
-            mt-6
-            items-end justify-between
-          "
-        >
-          <div
-            className="
-              flex flex-col
-              gap-3
-            "
-          >
+        <div className="mt-6 flex items-end justify-between">
+          <div className="flex flex-col gap-3">
             {/* VIEW DETAILS */}
             <Link
               to={`/pg/${livePg?._id}`}
-              className="
-                px-6 py-3
-                text-center text-white
-                bg-linear-to-r from-blue-500 to-blue-600
-                rounded-full
-                transition hover:scale-105
-              "
+              className="rounded-full bg-linear-to-r from-blue-500 to-blue-600 px-6 py-3 text-center text-white transition hover:scale-105"
             >
               View Details →
             </Link>
@@ -159,42 +90,18 @@ const PgCard = ({ pg }) => {
             {/* UPDATE BUTTON */}
             <Link
               to={`/update/${livePg?._id}`}
-              className={`
-                flex
-                px-6 py-3
-                text-sm font-semibold
-                rounded-full
-                transition-all
-                items-center justify-center gap-2 duration-300 hover:scale-105 hover:shadow-lg active:scale-95
-                ${
-                  darkMode
-                    ? `
-          text-white
-          bg-linear-to-r
-          from-yellow-500
-          to-orange-500
-          shadow-yellow-500/20
-        `
-                    : `
-          text-white
-          bg-linear-to-r
-          from-yellow-500
-          to-orange-500
-        `
-                }
-              `}
+              className={`flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 ${
+                darkMode
+                  ? `bg-linear-to-r from-yellow-500 to-orange-500 text-white shadow-yellow-500/20`
+                  : `bg-linear-to-r from-yellow-500 to-orange-500 text-white`
+              } `}
             >
               Update PG
             </Link>
           </div>
 
           {/* CONTACT BUTTONS */}
-          <div
-            className="
-              flex flex-col
-              gap-3
-            "
-          >
+          <div className="flex flex-col gap-3">
             <ContactButtonIcon type="call" phone={livePg?.phone} />
 
             <ContactButtonIcon type="whatsapp" phone={livePg?.phone} />

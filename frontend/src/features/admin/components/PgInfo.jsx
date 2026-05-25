@@ -42,14 +42,7 @@ const PgInfo = () => {
   // LOADING
   if (loading) {
     return (
-      <div
-        className="
-          flex
-          h-screen
-          text-2xl font-semibold
-          items-center justify-center
-        "
-      >
+      <div className="flex h-screen items-center justify-center text-2xl font-semibold">
         Loading...
       </div>
     );
@@ -58,68 +51,34 @@ const PgInfo = () => {
   // NO PG
   if (!pg) {
     return (
-      <div
-        className="
-          flex
-          h-screen
-          text-2xl font-semibold text-red-500
-          items-center justify-center
-        "
-      >
+      <div className="flex h-screen items-center justify-center text-2xl font-semibold text-red-500">
         PG Not Found
       </div>
     );
   }
 
   return (
-    <div
-      className="
-        max-w-6xl
-        px-4 py-6 mx-auto
-      "
-    >
+    <div className="mx-auto max-w-6xl px-4 py-6">
       {/* FLOAT BUTTONS */}
-      <div
-        className="
-          z-50 flex flex-col
-          fixed right-5 bottom-5 gap-3
-        "
-      >
+      <div className="fixed right-5 bottom-5 z-50 flex flex-col gap-3">
         <ContactButtonIcon type="call" phone={pg?.phone} />
 
         <ContactButtonIcon type="whatsapp" phone={pg?.phone} />
       </div>
 
       {/* MAIN IMAGE */}
-      <div
-        className="
-          overflow-hidden
-          rounded-3xl
-        "
-      >
+      <div className="overflow-hidden rounded-3xl">
         <img
-          src={getImageUrl(livePg?.mainImage)}
+          src={getImageUrl(pg?.mainImage)}
           alt={pg?.name}
-          className="
-            object-cover
-            w-full h-65
-            sm:h-100
-            md:h-125
-          "
+          className="h-65 w-full object-cover sm:h-100 md:h-125"
         />
       </div>
 
       {/* DETAILS */}
-      <div
-        className="
-          mt-6
-        "
-      >
+      <div className="mt-6">
         <h1
-          className={`
-            text-3xl font-bold
-            ${darkMode ? "text-white" : "text-gray-900"}
-          `}
+          className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"} `}
         >
           {pg?.name}
         </h1>
@@ -130,18 +89,11 @@ const PgInfo = () => {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className={`
-            inline-flex
-            mt-3
-            text-lg leading-8
-            transition-all
-            items-center gap-2 duration-300 hover:text-blue-500
-            ${
-              darkMode
-                ? "text-gray-300 hover:text-blue-400"
-                : "text-gray-700 hover:text-blue-600"
-            }
-          `}
+          className={`mt-3 inline-flex items-center gap-2 text-lg leading-8 transition-all duration-300 hover:text-blue-500 ${
+            darkMode
+              ? "text-gray-300 hover:text-blue-400"
+              : "text-gray-700 hover:text-blue-600"
+          } `}
         >
           <span>📍</span>
 
@@ -150,65 +102,27 @@ const PgInfo = () => {
       </div>
 
       {/* FACILITIES */}
-      <div
-        className="
-          mt-12
-        "
-      >
+      <div className="mt-12">
         <h2
-          className={`
-            text-2xl font-bold
-            ${darkMode ? "text-white" : "text-black"}
-          `}
+          className={`text-2xl font-bold ${darkMode ? "text-white" : "text-black"} `}
         >
           What We Offer
         </h2>
 
-        <div
-          className="
-            grid
-            mt-6
-            gap-5
-            sm:grid-cols-2
-            md:grid-cols-3
-          "
-        >
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {facilities.map((item, i) => (
             <div
               key={i}
-              className={`
-                flex
-                p-5
-                rounded-2xl
-                transition-all
-                items-center gap-4 duration-300 hover:-translate-y-1
-                ${
-                  darkMode
-                    ? `
-                      bg-[#151122]
-                      border border-white/5
-                    `
-                    : `
-                      bg-white
-                      border border-gray-200
-                      shadow-sm
-                    `
-                }
-              `}
+              className={`flex items-center gap-4 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 ${
+                darkMode
+                  ? `border border-white/5 bg-[#151122]`
+                  : `border border-gray-200 bg-white shadow-sm`
+              } `}
             >
-              <div
-                className="
-                  text-3xl
-                "
-              >
-                {item.icon}
-              </div>
+              <div className="text-3xl">{item.icon}</div>
 
               <p
-                className={`
-                  text-base font-medium
-                  ${darkMode ? "text-gray-200" : "text-gray-700"}
-                `}
+                className={`text-base font-medium ${darkMode ? "text-gray-200" : "text-gray-700"} `}
               >
                 {item.title}
               </p>
@@ -218,76 +132,37 @@ const PgInfo = () => {
       </div>
 
       {/* ROOMS */}
-      <div
-        className="
-          mt-12
-        "
-      >
+      <div className="mt-12">
         <h2
-          className={`
-            text-2xl font-bold
-            ${darkMode ? "text-white" : "text-black"}
-          `}
+          className={`text-2xl font-bold ${darkMode ? "text-white" : "text-black"} `}
         >
           Room Availability
         </h2>
 
-        <div
-          className="
-            grid
-            mt-6
-            gap-5
-            sm:grid-cols-2
-            md:grid-cols-3
-          "
-        >
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {pg?.rooms?.map((room, i) => (
             <div
               key={i}
-              className={`
-                p-5
-                rounded-2xl
-                transition-all
-                duration-300
-                ${
-                  room.available
-                    ? `
-                      bg-green-500/10
-                      border border-green-500/20
-                    `
-                    : `
-                      bg-red-500/10
-                      border border-red-500/20
-                    `
-                }
-              `}
+              className={`rounded-2xl p-5 transition-all duration-300 ${
+                room.available
+                  ? `border border-green-500/20 bg-green-500/10`
+                  : `border border-red-500/20 bg-red-500/10`
+              } `}
             >
               <h3
-                className={`
-                  text-xl font-bold
-                  ${room.available ? "text-green-500" : "text-red-500"}
-                `}
+                className={`text-xl font-bold ${room.available ? "text-green-500" : "text-red-500"} `}
               >
                 {room.type}
               </h3>
 
               <p
-                className={`
-                  mt-2
-                  text-sm
-                  ${darkMode ? "text-gray-300" : "text-gray-700"}
-                `}
+                className={`mt-2 text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
               >
                 {room.available ? "Available" : "Not Available"}
               </p>
 
               {room.available && (
-                <p
-                  className="
-                    mt-4
-                    text-2xl font-bold text-blue-500
-                  "
-                >
+                <p className="mt-4 text-2xl font-bold text-blue-500">
                   ₹{room.price} / month
                 </p>
               )}
@@ -298,16 +173,9 @@ const PgInfo = () => {
 
       {/* MAP */}
       {pg?.map && (
-        <div
-          className="
-            mt-12
-          "
-        >
+        <div className="mt-12">
           <h2
-            className={`
-              text-2xl font-bold
-              ${darkMode ? "text-white" : "text-black"}
-            `}
+            className={`text-2xl font-bold ${darkMode ? "text-white" : "text-black"} `}
           >
             Location
           </h2>
@@ -317,22 +185,14 @@ const PgInfo = () => {
             src={pg?.map}
             loading="lazy"
             allowFullScreen
-            className="
-              w-full h-87.5
-              mt-5
-              rounded-2xl border-0
-            "
+            className="mt-5 h-87.5 w-full rounded-2xl border-0"
           />
         </div>
       )}
 
       {/* GALLERY */}
       {pg?.gallery?.length > 0 && (
-        <div
-          className="
-            mt-12
-          "
-        >
+        <div className="mt-12">
           <PgGallery sections={pg.gallery} />
         </div>
       )}

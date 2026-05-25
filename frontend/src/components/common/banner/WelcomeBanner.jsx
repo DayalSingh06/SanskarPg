@@ -28,110 +28,52 @@ const WelcomeBanner = () => {
 
   return (
     <div
-      className={`
-        overflow-hidden
-        w-full min-h-35
-        px-3 py-4
-        rounded-2xl
-        select-none transition-all
-        relative duration-300
-        sm:px-5
-        md:px-7 md:py-5
-        ${darkMode ? "bg-[#202c4a]" : "bg-white border border-gray-200 shadow-sm"}
-      `}
+      className={`relative min-h-35 w-full overflow-hidden rounded-2xl px-3 py-4 transition-all duration-300 select-none sm:px-5 md:px-7 md:py-5 ${darkMode ? "bg-[#202c4a]" : "border border-gray-200 bg-white shadow-sm"} `}
     >
       <img
         src="/assets/banner/shape-04.png"
         alt=""
-        className="
-          w-4
-          opacity-80 pointer-events-none
-          absolute top-0 left-[25%]
-          sm:w-5
-          md:w-6
-        "
+        className="pointer-events-none absolute top-0 left-[25%] w-4 opacity-80 sm:w-5 md:w-6"
       />
 
       <img
         src="/assets/banner/shape-01.png"
         alt=""
-        className="
-          w-14
-          opacity-70 pointer-events-none
-          absolute bottom-0 right-60
-          sm:w-16
-          md:w-20
-        "
+        className="pointer-events-none absolute right-60 bottom-0 w-14 opacity-70 sm:w-16 md:w-20"
       />
 
       <img
         src="/assets/banner/shape-02.png"
         alt=""
-        className="
-          w-7
-          opacity-70 pointer-events-none
-          absolute top-2 right-25
-          sm:w-8
-          md:w-10
-        "
+        className="pointer-events-none absolute top-2 right-25 w-7 opacity-70 sm:w-8 md:w-10"
       />
 
       <img
         src="/assets/banner/shape-03.png"
         alt=""
-        className="
-          w-14
-          opacity-70 pointer-events-none
-          absolute bottom-0 right-0
-          sm:w-16
-          md:w-20
-        "
+        className="pointer-events-none absolute right-0 bottom-0 w-14 opacity-70 sm:w-16 md:w-20"
       />
 
-      <div
-        className="
-          z-10 flex flex-col
-          relative gap-5
-          md:flex-row md:items-center md:justify-between
-        "
-      >
+      <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         {/* Left */}
         <div>
           <h1
-            className={`
-              flex flex-wrap
-              text-xl font-bold leading-snug
-              items-center gap-2
-              sm:text-2xl
-              md:text-3xl
-              ${darkMode ? "text-white" : "text-gray-900"}
-            `}
+            className={`flex flex-wrap items-center gap-2 text-xl leading-snug font-bold sm:text-2xl md:text-3xl ${darkMode ? "text-white" : "text-gray-900"} `}
           >
             Welcome Back, Mr. {firstName}
             <span
-              className={`
-                p-2
-                rounded-lg
-                cursor-pointer transition-all
-                duration-300
-                ${
-                  darkMode
-                    ? "bg-[#39435e] hover:bg-[#3d5de0]"
-                    : "bg-gray-200 hover:bg-blue-500 hover:text-white"
-                }
-              `}
+              className={`cursor-pointer rounded-lg p-2 transition-all duration-300 ${
+                darkMode
+                  ? "bg-[#39435e] hover:bg-[#3d5de0]"
+                  : "bg-gray-200 hover:bg-blue-500 hover:text-white"
+              } `}
             >
               <EditIcon />
             </span>
           </h1>
 
           <p
-            className={`
-              mt-2
-              text-sm
-              sm:text-base
-              ${darkMode ? "text-gray-200" : "text-gray-600"}
-            `}
+            className={`mt-2 text-sm sm:text-base ${darkMode ? "text-gray-200" : "text-gray-600"} `}
           >
             {getGreeting()}
           </p>
@@ -140,13 +82,7 @@ const WelcomeBanner = () => {
         {/* Right */}
         {lastSeen && (
           <div
-            className={`
-              flex
-              text-xs font-medium
-              items-center gap-2
-              sm:text-sm
-              ${darkMode ? "text-gray-200" : "text-gray-600"}
-            `}
+            className={`flex items-center gap-2 text-xs font-medium sm:text-sm ${darkMode ? "text-gray-200" : "text-gray-600"} `}
           >
             <RefreshIcon />
             Last Seen on {lastSeen}

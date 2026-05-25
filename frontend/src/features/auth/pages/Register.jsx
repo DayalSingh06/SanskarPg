@@ -157,93 +157,41 @@ export default function Register() {
   return (
     <>
       <div
-        className={`
-          flex
-          min-h-screen
-          px-4 py-6
-          select-none
-          items-center justify-center
-          ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f8fafc] text-[#0f0c1c]"}
-        `}
+        className={`flex min-h-screen items-center justify-center px-4 py-6 select-none ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f8fafc] text-[#0f0c1c]"} `}
       >
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className={`
-          flex
-          w-10 h-10
-          rounded-full
-          absolute right-4 top-4
-          items-center justify-center transition
-          ${
+          className={`absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full transition ${
             darkMode
               ? "bg-gray-800 hover:bg-gray-700"
               : "bg-gray-300 hover:bg-gray-400"
-          }
-        `}
+          } `}
         >
           {darkMode ? <SunIcon /> : <MoonIcon />}
         </button>
         <div
-          className={`
-            flex flex-col
-            w-full max-w-md
-            p-5
-            rounded-2xl
-            shadow-xl
-            backdrop-blur-md items-center
-            sm:p-6
-            ${
-              darkMode
-                ? "bg-[#181525] border border-gray-800 text-gray-200"
-                : "bg-white border border-gray-200 text-[#0f0c1c]"
-            }
-          `}
+          className={`flex w-full max-w-md flex-col items-center rounded-2xl p-5 shadow-xl backdrop-blur-md sm:p-6 ${
+            darkMode
+              ? "border border-gray-800 bg-[#181525] text-gray-200"
+              : "border border-gray-200 bg-white text-[#0f0c1c]"
+          } `}
         >
           <form
             onSubmit={handleSubmit}
-            className={`
-              w-full
-              mt-2 mb-3 p-4
-              rounded-md
-              sm:mt-3 sm:p-5
-              md:mt-4 md:p-6
-              ${
-                darkMode
-                  ? "border border-gray-800 text-gray-200"
-                  : "border border-gray-200 text-[#0f0c1c]"
-              }
-            `}
+            className={`mt-2 mb-3 w-full rounded-md p-4 sm:mt-3 sm:p-5 md:mt-4 md:p-6 ${
+              darkMode
+                ? "border border-gray-800 text-gray-200"
+                : "border border-gray-200 text-[#0f0c1c]"
+            } `}
           >
-            <h2
-              className="
-                mb-1
-                text-xl font-semibold
-                sm:text-2xl
-              "
-            >
-              Register
-            </h2>
+            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">Register</h2>
 
             {globalError && (
-              <p
-                className="
-                  mb-2
-                  text-red-500 text-xs
-                "
-              >
-                {globalError}
-              </p>
+              <p className="mb-2 text-xs text-red-500">{globalError}</p>
             )}
 
-            <p
-              className="
-                mb-4
-                text-xs
-                sm:mb-6 sm:text-sm
-                md:text-md
-              "
-            >
+            <p className="md:text-md mb-4 text-xs sm:mb-6 sm:text-sm">
               Please enter your details to sign up
             </p>
 
@@ -311,16 +259,13 @@ export default function Register() {
             {/* Password Strength */}
             {formData.password && (
               <p
-                className={`
-                  text-xs
-                  ${
-                    strength === "Weak"
-                      ? "text-red-500"
-                      : strength === "Medium"
-                        ? "text-yellow-500"
-                        : "text-green-500"
-                  }
-                `}
+                className={`text-xs ${
+                  strength === "Weak"
+                    ? "text-red-500"
+                    : strength === "Medium"
+                      ? "text-yellow-500"
+                      : "text-green-500"
+                } `}
               >
                 Strength: {strength}
               </p>
@@ -344,49 +289,23 @@ export default function Register() {
             <button
               type="submit"
               disabled={isRegistering}
-              className="
-                w-full
-                mt-4 py-2
-                text-white
-                bg-indigo-600
-                rounded-md
-                hover:bg-indigo-700 transition disabled:bg-indigo-300
-              "
+              className="mt-4 w-full rounded-md bg-indigo-600 py-2 text-white transition hover:bg-indigo-700 disabled:bg-indigo-300"
             >
               {isRegistering ? "Sending OTP..." : "Register"}
             </button>
 
-            <p
-              className="
-                mt-6
-                text-md text-center
-                cursor-pointer
-                sm:text-md
-              "
-            >
+            <p className="text-md sm:text-md mt-6 cursor-pointer text-center">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="
-                  text-[#3d5de0] font-medium
-                  relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3d5de0] after:transition-all after:duration-300 hover:after:w-full
-                "
+                className="relative font-medium text-[#3d5de0] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#3d5de0] after:transition-all after:duration-300 hover:after:w-full"
               >
                 Sign in
               </Link>
             </p>
           </form>
-          <footer
-            className="
-              mt-auto py-2
-              text-center
-            "
-          >
-            <span
-              className="
-                text-xs text-[#6b7387]
-              "
-            >
+          <footer className="mt-auto py-2 text-center">
+            <span className="text-xs text-[#6b7387]">
               © {new Date().getFullYear()} Sanskar Boy's PG. All rights
               reserved.{" "}
             </span>

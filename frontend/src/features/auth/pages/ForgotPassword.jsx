@@ -149,22 +149,19 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div
-        className={`
-          w-full max-w-md p-6 rounded-2xl shadow-2xl transition-all
-          ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-white text-gray-900"}
-        `}
+        className={`w-full max-w-md rounded-2xl p-6 shadow-2xl transition-all ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-white text-gray-900"} `}
       >
         {/* TITLE */}
-        <h2 className="text-xl font-semibold mb-1">Forgot Password</h2>
+        <h2 className="mb-1 text-xl font-semibold">Forgot Password</h2>
 
-        <p className="text-xs text-gray-500 mb-4">
+        <p className="mb-4 text-xs text-gray-500">
           {step === "EMAIL"
             ? "Enter your email to receive OTP"
             : "Enter OTP sent to your email"}
         </p>
 
         {/* STEP INDICATOR */}
-        <div className="flex gap-2 mb-4">
+        <div className="mb-4 flex gap-2">
           <div
             className={`h-1 flex-1 rounded ${step === "EMAIL" ? "bg-indigo-600" : "bg-green-500"}`}
           />
@@ -181,15 +178,11 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
           value={form.email}
           disabled={step === "OTP"}
           onChange={handleChange}
-          className={`
-            w-full px-4 py-2.5 mb-3 text-sm rounded-lg border outline-none
-            focus:ring-2 focus:ring-indigo-400
-            ${
-              darkMode
-                ? "bg-[#16132b] border-gray-700 text-white placeholder-gray-400"
-                : "bg-gray-50 border-gray-300 text-gray-900"
-            }
-          `}
+          className={`mb-3 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-400 ${
+            darkMode
+              ? "border-gray-700 bg-[#16132b] text-white placeholder-gray-400"
+              : "border-gray-300 bg-gray-50 text-gray-900"
+          } `}
         />
 
         {/* OTP */}
@@ -201,38 +194,33 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
             placeholder="Enter 6-digit OTP"
             value={form.otp}
             onChange={handleChange}
-            className={`
-              w-full px-4 py-2.5 text-center tracking-widest text-lg
-              rounded-lg border outline-none
-              focus:ring-2 focus:ring-indigo-400
-              ${
-                darkMode
-                  ? "bg-[#16132b] border-gray-700 text-white"
-                  : "bg-gray-50 border-gray-300 text-gray-900"
-              }
-            `}
+            className={`w-full rounded-lg border px-4 py-2.5 text-center text-lg tracking-widest outline-none focus:ring-2 focus:ring-indigo-400 ${
+              darkMode
+                ? "border-gray-700 bg-[#16132b] text-white"
+                : "border-gray-300 bg-gray-50 text-gray-900"
+            } `}
           />
         )}
 
         {/* ERROR / MESSAGE */}
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-        {message && <p className="text-green-500 text-sm mt-2">{message}</p>}
+        {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+        {message && <p className="mt-2 text-sm text-green-500">{message}</p>}
 
         {/* BUTTONS */}
-        <div className="flex flex-col gap-2 mt-5">
+        <div className="mt-5 flex flex-col gap-2">
           {step === "EMAIL" ? (
             <>
               <button
                 onClick={sendOtp}
                 disabled={loading}
-                className="w-full py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition disabled:bg-indigo-300"
+                className="w-full rounded-lg bg-indigo-600 py-2.5 text-white transition hover:bg-indigo-700 disabled:bg-indigo-300"
               >
                 {loading ? "Sending..." : "Get OTP"}
               </button>
 
               <button
                 onClick={handleCancel}
-                className="w-full py-2.5 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="w-full rounded-lg border py-2.5 hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 Cancel
               </button>
@@ -242,7 +230,7 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
               <button
                 onClick={verifyOtp}
                 disabled={loading}
-                className="w-full py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition disabled:bg-indigo-300"
+                className="w-full rounded-lg bg-indigo-600 py-2.5 text-white transition hover:bg-indigo-700 disabled:bg-indigo-300"
               >
                 {loading ? "Verifying..." : "Verify OTP"}
               </button>
@@ -250,14 +238,14 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
               <button
                 onClick={resendOtp}
                 disabled={loading || timer > 0}
-                className="w-full py-2.5 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="w-full rounded-lg border py-2.5 hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 {timer > 0 ? `Resend in ${timer}s` : "Resend OTP"}
               </button>
 
               <button
                 onClick={handleCancel}
-                className="w-full py-2.5 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="w-full rounded-lg border py-2.5 hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 Cancel
               </button>

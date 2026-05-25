@@ -50,39 +50,26 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
 
   return (
     <div
-      className={`
-        p-5 mb-8
-        rounded-2xl
-        shadow-lg transition-all
-        duration-300
-        ${
-          darkMode
-            ? "bg-gray-900 border border-gray-800"
-            : "bg-white border border-gray-200"
-        }
-      `}
+      className={`mb-8 rounded-2xl p-5 shadow-lg transition-all duration-300 ${
+        darkMode
+          ? "border border-gray-800 bg-gray-900"
+          : "border border-gray-200 bg-white"
+      } `}
     >
       {/* Heading */}
       <h2
-        className={`
-          mb-5
-          text-2xl font-bold text-center
-          ${darkMode ? "text-white" : "text-gray-800"}
-        `}
+        className={`mb-5 text-center text-2xl font-bold ${darkMode ? "text-white" : "text-gray-800"} `}
       >
         {title}
       </h2>
 
       {/* DESKTOP TABLE */}
-      <div className="hidden md:block overflow-x-auto rounded-t-xl">
+      <div className="hidden overflow-x-auto rounded-t-xl md:block">
         <table className="w-full border-collapse">
           {/* TABLE HEAD */}
           <thead>
             <tr
-              className={`
-          text-sm
-          ${darkMode ? "bg-gray-800 text-gray-200" : "bg-sky-100 text-sky-800"}
-        `}
+              className={`text-sm ${darkMode ? "bg-gray-800 text-gray-200" : "bg-sky-100 text-sky-800"} `}
             >
               <th className="p-3 text-center">#</th>
               <th className="p-3 text-center">Name</th>
@@ -108,15 +95,11 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
               return (
                 <tr
                   key={user._id}
-                  className={`
-              border-b transition-all duration-200
-              ${
-                darkMode
-                  ? "border-gray-700 hover:bg-gray-800"
-                  : "border-gray-200 hover:bg-sky-100/70"
-              }
-              ${rowBg}
-            `}
+                  className={`border-b transition-all duration-200 ${
+                    darkMode
+                      ? "border-gray-700 hover:bg-gray-800"
+                      : "border-gray-200 hover:bg-sky-100/70"
+                  } ${rowBg} `}
                 >
                   <td className="p-3 text-center">{index + 1}</td>
 
@@ -128,10 +111,7 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
 
                   <td className="p-3 text-center">
                     <span
-                      className={`
-                  inline-block px-3 py-1 text-xs
-                  rounded-full capitalize ${colors.state}
-                `}
+                      className={`inline-block rounded-full px-3 py-1 text-xs capitalize ${colors.state} `}
                     >
                       {user.state}
                     </span>
@@ -151,7 +131,7 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
                   </td>
 
                   <td className="p-3">
-                    <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <div className="flex flex-wrap items-center justify-center gap-2">
                       <ContactButtonIcon
                         type="call"
                         phone={`91${user.mobile}`}
@@ -166,20 +146,14 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
                         <>
                           <button
                             onClick={() => approveUser(user._id)}
-                            className="
-                        p-1.5 text-white bg-green-500
-                        rounded-md hover:bg-green-600
-                      "
+                            className="rounded-md bg-green-500 p-1.5 text-white hover:bg-green-600"
                           >
                             <Check size={15} />
                           </button>
 
                           <button
                             onClick={() => rejectUser(user._id)}
-                            className="
-                        p-1.5 text-white bg-red-500
-                        rounded-md hover:bg-red-600
-                      "
+                            className="rounded-md bg-red-500 p-1.5 text-white hover:bg-red-600"
                           >
                             <X size={15} />
                           </button>
@@ -199,26 +173,19 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
         {users?.map((user, index) => (
           <div
             key={user._id}
-            className={`
-        p-4 rounded-2xl border shadow-md
-        ${
-          darkMode
-            ? "bg-gray-800 border-gray-700"
-            : "bg-slate-50 border-gray-200"
-        }
-      `}
+            className={`rounded-2xl border p-4 shadow-md ${
+              darkMode
+                ? "border-gray-700 bg-gray-800"
+                : "border-gray-200 bg-slate-50"
+            } `}
           >
             <div className="flex items-center justify-between">
-              <h3 className="font-bold text-base">
+              <h3 className="text-base font-bold">
                 {index + 1}. {user.name}
               </h3>
 
               <span
-                className={`
-            px-2 py-1 text-[10px]
-            rounded-full capitalize
-            ${colors.state}
-          `}
+                className={`rounded-full px-2 py-1 text-[10px] capitalize ${colors.state} `}
               >
                 {user.state}
               </span>
@@ -248,57 +215,29 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
             </div>
 
             {/* ACTIONS */}
-            <div
-              className="
-    flex
-    items-center justify-between
-    mt-4
-  "
-            >
+            <div className="mt-4 flex items-center justify-between">
               {/* LEFT SIDE → CALL + WHATSAPP */}
-              <div
-                className="
-      flex items-center gap-2
-    "
-              >
+              <div className="flex items-center gap-2">
                 <ContactButtonIcon type="call" phone={`91${user.mobile}`} />
 
                 <ContactButtonIcon type="whatsapp" phone={`91${user.mobile}`} />
               </div>
 
               {/* RIGHT SIDE → ACTION BUTTONS */}
-              <div
-                className="
-      flex items-center gap-2
-    "
-              >
+              <div className="flex items-center gap-2">
                 {/* PENDING */}
                 {type === "pending" && (
                   <>
                     <button
                       onClick={() => approveUser(user._id)}
-                      className="
-            p-2
-            text-white
-            bg-green-500
-            rounded-lg
-            transition-all
-            hover:bg-green-600
-          "
+                      className="rounded-lg bg-green-500 p-2 text-white transition-all hover:bg-green-600"
                     >
                       <Check size={16} />
                     </button>
 
                     <button
                       onClick={() => rejectUser(user._id)}
-                      className="
-            p-2
-            text-white
-            bg-red-500
-            rounded-lg
-            transition-all
-            hover:bg-red-600
-          "
+                      className="rounded-lg bg-red-500 p-2 text-white transition-all hover:bg-red-600"
                     >
                       <X size={16} />
                     </button>
@@ -309,14 +248,7 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
                 {type === "registered" && (
                   <button
                     onClick={() => rejectUser(user._id)}
-                    className="
-          p-2
-          text-white
-          bg-red-500
-          rounded-lg
-          transition-all
-          hover:bg-red-600
-        "
+                    className="rounded-lg bg-red-500 p-2 text-white transition-all hover:bg-red-600"
                   >
                     <X size={16} />
                   </button>
@@ -326,14 +258,7 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
                 {type === "rejected" && (
                   <button
                     onClick={() => approveUser(user._id)}
-                    className="
-          p-2
-          text-white
-          bg-green-500
-          rounded-lg
-          transition-all
-          hover:bg-green-600
-        "
+                    className="rounded-lg bg-green-500 p-2 text-white transition-all hover:bg-green-600"
                   >
                     <Check size={16} />
                   </button>

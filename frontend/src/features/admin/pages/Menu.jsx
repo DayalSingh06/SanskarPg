@@ -111,92 +111,41 @@ const Menu = () => {
 
   return (
     <div
-      className={`
-        min-h-[calc(100vh-64px)]
-        px-2 py-3
-        transition-all
-        duration-300
-        ${
-          darkMode
-            ? "bg-linear-to-br from-[#020617] via-[#0f172a] to-[#1e293b] text-white"
-            : "bg-linear-to-br from-[#e2e8f0] via-[#f8fafc] to-[#cbd5e1] text-black"
-        }
-      `}
+      className={`min-h-[calc(100vh-64px)] px-2 py-3 transition-all duration-300 ${
+        darkMode
+          ? "bg-linear-to-br from-[#020617] via-[#0f172a] to-[#1e293b] text-white"
+          : "bg-linear-to-br from-[#e2e8f0] via-[#f8fafc] to-[#cbd5e1] text-black"
+      } `}
     >
       {/* HEADER */}
-      <div
-        className="
-          max-w-6xl
-          mx-auto mb-4
-        "
-      >
+      <div className="mx-auto mb-4 max-w-6xl">
         <div
-          className={`
-            p-4
-            rounded-3xl border
-            shadow-2xl
-            backdrop-blur-xl
-            sm:p-5
-            ${
-              darkMode
-                ? "bg-white/5 border-white/10"
-                : "bg-white/70 border-gray-200"
-            }
-          `}
+          className={`rounded-3xl border p-4 shadow-2xl backdrop-blur-xl sm:p-5 ${
+            darkMode
+              ? "border-white/10 bg-white/5"
+              : "border-gray-200 bg-white/70"
+          } `}
         >
-          <div
-            className="
-              flex flex-col
-              items-center justify-between gap-5
-              lg:flex-row
-            "
-          >
+          <div className="flex flex-col items-center justify-between gap-5 lg:flex-row">
             {/* TITLE */}
-            <div
-              className="
-                text-center
-                lg:text-left
-              "
-            >
-              <h1
-                className="
-                  text-2xl font-extrabold tracking-wide
-                  sm:text-3xl
-                "
-              >
+            <div className="text-center lg:text-left">
+              <h1 className="text-2xl font-extrabold tracking-wide sm:text-3xl">
                 🍽️ Weekly Menu
               </h1>
 
               <p
-                className={`
-                  mt-2
-                  text-sm
-                  ${darkMode ? "text-slate-300" : "text-slate-600"}
-                `}
+                className={`mt-2 text-sm ${darkMode ? "text-slate-300" : "text-slate-600"} `}
               >
                 Manage hostel food schedule beautifully
               </p>
             </div>
 
             {/* BUTTONS */}
-            <div
-              className="
-                flex flex-wrap
-                justify-center gap-2
-                lg:justify-start
-              "
-            >
+            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
               {!editMode ? (
                 <button
                   onClick={() => setEditMode(true)}
-                  className="
-                    px-4 py-2.5
-                    text-sm font-semibold text-white
-                    bg-linear-to-r from-yellow-400 to-orange-500
-                    rounded-2xl
-                    transition-all shadow-lg
-                    hover:scale-105 duration-300
-                  "
+                  className="rounded-2xl bg-linear-to-r from-yellow-400 to-orange-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Update
                 </button>
@@ -205,28 +154,14 @@ const Menu = () => {
                   <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="
-                      px-4 py-2.5
-                      text-sm font-semibold text-white
-                      bg-linear-to-r from-green-500 to-emerald-600
-                      rounded-2xl
-                      transition-all shadow-lg
-                      hover:scale-105 duration-300
-                    "
+                    className="rounded-2xl bg-linear-to-r from-green-500 to-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
                   >
                     {loading ? "Saving..." : " Save"}
                   </button>
 
                   <button
                     onClick={handleCancel}
-                    className="
-                      px-4 py-2.5
-                      text-sm font-semibold text-white
-                      bg-linear-to-r from-red-500 to-pink-600
-                      rounded-2xl
-                      transition-all shadow-lg
-                      hover:scale-105 duration-300
-                    "
+                    className="rounded-2xl bg-linear-to-r from-red-500 to-pink-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
                   >
                     Cancel
                   </button>
@@ -238,74 +173,24 @@ const Menu = () => {
       </div>
 
       {/* MENU CONTENT */}
-      <div
-        className="
-          max-w-6xl
-          mx-auto
-        "
-      >
+      <div className="mx-auto max-w-6xl">
         <div
-          className={`
-            overflow-hidden
-            rounded-2xl border
-            shadow-xl
-            ${darkMode ? "bg-white/5 border-white/10" : "bg-white/80 border-gray-200"}
-          `}
+          className={`overflow-hidden rounded-2xl border shadow-xl ${darkMode ? "border-white/10 bg-white/5" : "border-gray-200 bg-white/80"} `}
         >
           {/* DESKTOP TABLE */}
-          <div
-            className="
-              hidden
-              md:block
-            "
-          >
-            <table
-              className="
-                w-full
-              "
-            >
+          <div className="hidden md:block">
+            <table className="w-full">
               <thead>
                 <tr
-                  className={`
-                    text-center
-                    ${darkMode ? "bg-white/10" : "bg-slate-100"}
-                  `}
+                  className={`text-center ${darkMode ? "bg-white/10" : "bg-slate-100"} `}
                 >
-                  <th
-                    className="
-                      px-3 py-3
-                      text-sm font-bold
-                    "
-                  >
-                    📅 Day
-                  </th>
+                  <th className="px-3 py-3 text-sm font-bold">📅 Day</th>
 
-                  <th
-                    className="
-                      px-3 py-3
-                      text-sm font-bold
-                    "
-                  >
-                    🍞 Breakfast
-                  </th>
+                  <th className="px-3 py-3 text-sm font-bold">🍞 Breakfast</th>
 
-                  <th
-                    className="
-                      px-3 py-3
-                      text-sm font-bold
-                    "
-                  >
-                    🍛 Lunch
-                  </th>
+                  <th className="px-3 py-3 text-sm font-bold">🍛 Lunch</th>
 
-                  <th
-                    className="
-                      px-3 py-3
-                      text-sm font-bold
-                    "
-                  >
-                    🍽️ Dinner
-                  </th>
+                  <th className="px-3 py-3 text-sm font-bold">🍽️ Dinner</th>
                 </tr>
               </thead>
 
@@ -313,31 +198,19 @@ const Menu = () => {
                 {menuData.map((item, index) => (
                   <tr
                     key={index}
-                    className={`
-                      border-t
-                      ${
-                        darkMode
-                          ? "border-white/10 hover:bg-white/5"
-                          : "border-gray-200 hover:bg-slate-50"
-                      }
-                    `}
+                    className={`border-t ${
+                      darkMode
+                        ? "border-white/10 hover:bg-white/5"
+                        : "border-gray-200 hover:bg-slate-50"
+                    } `}
                   >
                     {/* DAY */}
-                    <td
-                      className="
-                        px-3 py-3
-                        text-sm font-bold text-center whitespace-nowrap
-                      "
-                    >
+                    <td className="px-3 py-3 text-center text-sm font-bold whitespace-nowrap">
                       {item.day}
                     </td>
 
                     {/* BREAKFAST */}
-                    <td
-                      className="
-                        px-2 py-2
-                      "
-                    >
+                    <td className="px-2 py-2">
                       <input
                         type="text"
                         disabled={!editMode}
@@ -346,33 +219,20 @@ const Menu = () => {
                           handleChange(index, "breakfast", e.target.value)
                         }
                         placeholder="Breakfast"
-                        className={`
-                          w-full
-                          px-3 py-2
-                          text-sm
-                          rounded-xl border
-                          transition-all
-                          outline-none
-                          ${
-                            darkMode
-                              ? "bg-slate-800 border-slate-700 text-white"
-                              : "bg-white border-slate-300 text-black"
-                          }
-                          ${
-                            editMode
-                              ? "focus:ring-2 focus:ring-blue-500"
-                              : "opacity-70 cursor-not-allowed"
-                          }
-                        `}
+                        className={`w-full rounded-xl border px-3 py-2 text-sm transition-all outline-none ${
+                          darkMode
+                            ? "border-slate-700 bg-slate-800 text-white"
+                            : "border-slate-300 bg-white text-black"
+                        } ${
+                          editMode
+                            ? "focus:ring-2 focus:ring-blue-500"
+                            : "cursor-not-allowed opacity-70"
+                        } `}
                       />
                     </td>
 
                     {/* LUNCH */}
-                    <td
-                      className="
-                        px-2 py-2
-                      "
-                    >
+                    <td className="px-2 py-2">
                       <input
                         type="text"
                         disabled={!editMode}
@@ -381,33 +241,20 @@ const Menu = () => {
                           handleChange(index, "lunch", e.target.value)
                         }
                         placeholder="Lunch"
-                        className={`
-                          w-full
-                          px-3 py-2
-                          text-sm
-                          rounded-xl border
-                          transition-all
-                          outline-none
-                          ${
-                            darkMode
-                              ? "bg-slate-800 border-slate-700 text-white"
-                              : "bg-white border-slate-300 text-black"
-                          }
-                          ${
-                            editMode
-                              ? "focus:ring-2 focus:ring-blue-500"
-                              : "opacity-70 cursor-not-allowed"
-                          }
-                        `}
+                        className={`w-full rounded-xl border px-3 py-2 text-sm transition-all outline-none ${
+                          darkMode
+                            ? "border-slate-700 bg-slate-800 text-white"
+                            : "border-slate-300 bg-white text-black"
+                        } ${
+                          editMode
+                            ? "focus:ring-2 focus:ring-blue-500"
+                            : "cursor-not-allowed opacity-70"
+                        } `}
                       />
                     </td>
 
                     {/* DINNER */}
-                    <td
-                      className="
-                        px-2 py-2
-                      "
-                    >
+                    <td className="px-2 py-2">
                       <input
                         type="text"
                         disabled={!editMode}
@@ -416,24 +263,15 @@ const Menu = () => {
                           handleChange(index, "dinner", e.target.value)
                         }
                         placeholder="Dinner"
-                        className={`
-                          w-full
-                          px-3 py-2
-                          text-sm
-                          rounded-xl border
-                          transition-all
-                          outline-none
-                          ${
-                            darkMode
-                              ? "bg-slate-800 border-slate-700 text-white"
-                              : "bg-white border-slate-300 text-black"
-                          }
-                          ${
-                            editMode
-                              ? "focus:ring-2 focus:ring-blue-500"
-                              : "opacity-70 cursor-not-allowed"
-                          }
-                        `}
+                        className={`w-full rounded-xl border px-3 py-2 text-sm transition-all outline-none ${
+                          darkMode
+                            ? "border-slate-700 bg-slate-800 text-white"
+                            : "border-slate-300 bg-white text-black"
+                        } ${
+                          editMode
+                            ? "focus:ring-2 focus:ring-blue-500"
+                            : "cursor-not-allowed opacity-70"
+                        } `}
                       />
                     </td>
                   </tr>
@@ -443,52 +281,24 @@ const Menu = () => {
           </div>
 
           {/* MOBILE CARDS */}
-          <div
-            className="
-              flex flex-col
-              p-3
-              gap-3
-              md:hidden
-            "
-          >
+          <div className="flex flex-col gap-3 p-3 md:hidden">
             {menuData.map((item, index) => (
               <div
                 key={index}
-                className={`
-                  p-3
-                  rounded-xl border
-                  ${
-                    darkMode
-                      ? "bg-white/5 border-white/10"
-                      : "bg-white border-gray-200"
-                  }
-                `}
+                className={`rounded-xl border p-3 ${
+                  darkMode
+                    ? "border-white/10 bg-white/5"
+                    : "border-gray-200 bg-white"
+                } `}
               >
                 {/* DAY */}
-                <h2
-                  className="
-                    mb-3
-                    text-base font-bold
-                  "
-                >
-                  📅 {item.day}
-                </h2>
+                <h2 className="mb-3 text-base font-bold">📅 {item.day}</h2>
 
                 {/* INPUTS */}
-                <div
-                  className="
-                    space-y-3
-                  "
-                >
+                <div className="space-y-3">
                   {/* BREAKFAST */}
                   <div>
-                    <label
-                      className="
-                        block
-                        mb-1
-                        text-xs font-semibold
-                      "
-                    >
+                    <label className="mb-1 block text-xs font-semibold">
                       🍞 Breakfast
                     </label>
 
@@ -500,30 +310,17 @@ const Menu = () => {
                         handleChange(index, "breakfast", e.target.value)
                       }
                       placeholder="Breakfast"
-                      className={`
-                        w-full
-                        px-3 py-2
-                        text-sm
-                        rounded-xl border
-                        outline-none
-                        ${
-                          darkMode
-                            ? "bg-slate-800 border-slate-700 text-white"
-                            : "bg-white border-slate-300 text-black"
-                        }
-                      `}
+                      className={`w-full rounded-xl border px-3 py-2 text-sm outline-none ${
+                        darkMode
+                          ? "border-slate-700 bg-slate-800 text-white"
+                          : "border-slate-300 bg-white text-black"
+                      } `}
                     />
                   </div>
 
                   {/* LUNCH */}
                   <div>
-                    <label
-                      className="
-                        block
-                        mb-1
-                        text-xs font-semibold
-                      "
-                    >
+                    <label className="mb-1 block text-xs font-semibold">
                       🍛 Lunch
                     </label>
 
@@ -535,30 +332,17 @@ const Menu = () => {
                         handleChange(index, "lunch", e.target.value)
                       }
                       placeholder="Lunch"
-                      className={`
-                        w-full
-                        px-3 py-2
-                        text-sm
-                        rounded-xl border
-                        outline-none
-                        ${
-                          darkMode
-                            ? "bg-slate-800 border-slate-700 text-white"
-                            : "bg-white border-slate-300 text-black"
-                        }
-                      `}
+                      className={`w-full rounded-xl border px-3 py-2 text-sm outline-none ${
+                        darkMode
+                          ? "border-slate-700 bg-slate-800 text-white"
+                          : "border-slate-300 bg-white text-black"
+                      } `}
                     />
                   </div>
 
                   {/* DINNER */}
                   <div>
-                    <label
-                      className="
-                        block
-                        mb-1
-                        text-xs font-semibold
-                      "
-                    >
+                    <label className="mb-1 block text-xs font-semibold">
                       🍽️ Dinner
                     </label>
 
@@ -570,18 +354,11 @@ const Menu = () => {
                         handleChange(index, "dinner", e.target.value)
                       }
                       placeholder="Dinner"
-                      className={`
-                        w-full
-                        px-3 py-2
-                        text-sm
-                        rounded-xl border
-                        outline-none
-                        ${
-                          darkMode
-                            ? "bg-slate-800 border-slate-700 text-white"
-                            : "bg-white border-slate-300 text-black"
-                        }
-                      `}
+                      className={`w-full rounded-xl border px-3 py-2 text-sm outline-none ${
+                        darkMode
+                          ? "border-slate-700 bg-slate-800 text-white"
+                          : "border-slate-300 bg-white text-black"
+                      } `}
                     />
                   </div>
                 </div>

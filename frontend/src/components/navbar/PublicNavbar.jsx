@@ -59,49 +59,22 @@ const PublicNavbar = () => {
   return (
     <>
       <nav
-        className={`
-          z-50 flex
-          h-14 w-full
-          px-3
-          border-b
-          select-none transition-all
-          fixed top-0 left-0 items-center justify-between backdrop-blur-md duration-300
-          sm:h-16 sm:px-4
-          md:px-5
-          lg:px-6
-          ${
-            darkMode
-              ? "bg-[#0f0c1c]/95 text-white border-gray-900"
-              : "bg-white/95 text-[#0f0c1c] border-gray-200"
-          }
-        `}
+        className={`fixed top-0 left-0 z-50 flex h-14 w-full items-center justify-between border-b px-3 backdrop-blur-md transition-all duration-300 select-none sm:h-16 sm:px-4 md:px-5 lg:px-6 ${
+          darkMode
+            ? "border-gray-900 bg-[#0f0c1c]/95 text-white"
+            : "border-gray-200 bg-white/95 text-[#0f0c1c]"
+        } `}
       >
         {/* Left */}
-        <div
-          className="
-            flex
-            items-center gap-3
-            sm:gap-5
-            lg:gap-6
-          "
-        >
+        <div className="flex items-center gap-3 sm:gap-5 lg:gap-6">
           <Logo redirectPath="/" />
 
-          <div
-            className="
-              hidden
-              ml-8
-              text-base
-              items-center gap-6
-              lg:flex
-              xl:ml-14 xl:text-lg xl:gap-10
-            "
-          >
+          <div className="ml-8 hidden items-center gap-6 text-base lg:flex xl:ml-14 xl:gap-10 xl:text-lg">
             {/* Home */}
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `relative group font-poppins font-medium transition-all duration-300 ${
+                `group font-poppins relative font-medium transition-all duration-300 ${
                   isActive
                     ? "text-blue-500"
                     : darkMode
@@ -111,21 +84,14 @@ const PublicNavbar = () => {
               }
             >
               Home
-              <span
-                className="
-                  h-0.5 w-0
-                  bg-indigo-500
-                  transition-all
-                  absolute left-0 -bottom-1 duration-300 group-hover:w-full
-                "
-              ></span>
+              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
             </NavLink>
 
             {/* Facilities */}
             <NavLink
               to="/facilities"
               className={({ isActive }) =>
-                `relative group font-poppins font-medium transition-all duration-300 ${
+                `group font-poppins relative font-medium transition-all duration-300 ${
                   isActive
                     ? "text-blue-500"
                     : darkMode
@@ -135,21 +101,14 @@ const PublicNavbar = () => {
               }
             >
               Facilities
-              <span
-                className="
-                  h-0.5 w-0
-                  bg-indigo-500
-                  transition-all
-                  absolute left-0 -bottom-1 duration-300 group-hover:w-full
-                "
-              ></span>
+              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
             </NavLink>
 
             {/*  Rules & Regulations */}
             <NavLink
               to="/rules"
               className={({ isActive }) =>
-                `relative group font-poppins font-medium transition-all duration-300 ${
+                `group font-poppins relative font-medium transition-all duration-300 ${
                   isActive
                     ? "text-blue-500"
                     : darkMode
@@ -159,21 +118,14 @@ const PublicNavbar = () => {
               }
             >
               Rules & Regulations
-              <span
-                className="
-                  h-0.5 w-0
-                  bg-indigo-500
-                  transition-all
-                  absolute left-0 -bottom-1 duration-300 group-hover:w-full
-                "
-              ></span>
+              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
             </NavLink>
 
             {/* Menu */}
             <NavLink
               to="/menu"
               className={({ isActive }) =>
-                `relative group font-poppins font-medium transition-all duration-300 ${
+                `group font-poppins relative font-medium transition-all duration-300 ${
                   isActive
                     ? "text-blue-500"
                     : darkMode
@@ -183,38 +135,17 @@ const PublicNavbar = () => {
               }
             >
               Menu
-              <span
-                className="
-                  h-0.5 w-0
-                  bg-indigo-500
-                  transition-all
-                  absolute left-0 -bottom-1 duration-300 group-hover:w-full
-                "
-              ></span>
+              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
             </NavLink>
           </div>
         </div>
 
         {/* Right */}
-        <div
-          className="
-    flex
-    items-center gap-2
-    sm:gap-3
-  "
-        >
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Dark Mode */}
           <button
             onClick={toggleTheme}
-            className={`
-      flex
-      w-9 h-9
-      rounded-full
-      transition-all
-      items-center justify-center duration-300 hover:scale-105 active:scale-95
-      sm:w-10 sm:h-10
-      ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"}
-    `}
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"} `}
           >
             {darkMode ? <SunIcon /> : <MoonIcon />}
           </button>
@@ -224,22 +155,7 @@ const PublicNavbar = () => {
             /* Logout Button */
             <button
               onClick={handleLogout}
-              className="
-      hidden
-      lg:flex
-      h-9
-      px-4
-      text-sm font-medium font-poppins text-white
-      bg-red-600
-      rounded-xl
-      shadow-md transition-all
-      items-center justify-center
-      hover:bg-red-700
-      duration-300
-      hover:scale-[1.02]
-      active:scale-95
-      sm:h-10
-    "
+              className="font-poppins hidden h-9 items-center justify-center rounded-xl bg-red-600 px-4 text-sm font-medium text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-red-700 active:scale-95 sm:h-10 lg:flex"
             >
               Logout
             </button>
@@ -248,21 +164,11 @@ const PublicNavbar = () => {
               {/* Login */}
               <button
                 onClick={() => navigate("/login")}
-                className={`
-        flex
-        h-9
-        px-3
-        text-xs font-medium font-poppins
-        rounded-lg
-        transition-all
-        items-center justify-center duration-300 hover:scale-[1.02] active:scale-95
-        sm:h-10 sm:px-4 sm:text-sm sm:rounded-xl
-        ${
-          darkMode
-            ? "text-white bg-gray-800 hover:bg-gray-700"
-            : "text-[#0f0c1c] bg-gray-200 hover:bg-gray-300"
-        }
-      `}
+                className={`font-poppins flex h-9 items-center justify-center rounded-lg px-3 text-xs font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95 sm:h-10 sm:rounded-xl sm:px-4 sm:text-sm ${
+                  darkMode
+                    ? "bg-gray-800 text-white hover:bg-gray-700"
+                    : "bg-gray-200 text-[#0f0c1c] hover:bg-gray-300"
+                } `}
               >
                 Login
               </button>
@@ -270,17 +176,7 @@ const PublicNavbar = () => {
               {/* Signup */}
               <button
                 onClick={() => navigate("/register")}
-                className="
-        flex
-        h-9
-        px-3
-        text-xs font-medium font-poppins text-white
-        bg-indigo-600
-        rounded-lg
-        shadow-md transition-all
-        items-center justify-center hover:bg-indigo-700 duration-300 hover:scale-[1.02] active:scale-95
-        sm:h-10 sm:px-5 sm:text-sm sm:rounded-xl
-      "
+                className="font-poppins flex h-9 items-center justify-center rounded-lg bg-indigo-600 px-3 text-xs font-medium text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-700 active:scale-95 sm:h-10 sm:rounded-xl sm:px-5 sm:text-sm"
               >
                 Sign Up
               </button>
@@ -291,16 +187,7 @@ const PublicNavbar = () => {
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
             ref={menuButtonRef}
-            className={`
-      flex
-      w-9 h-9
-      rounded-lg
-      transition-all
-      items-center justify-center duration-300 hover:scale-105 active:scale-95
-      sm:w-10 sm:h-10
-      lg:hidden
-      ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"}
-    `}
+            className={`flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 lg:hidden ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"} `}
           >
             <MobileMenu />
           </button>
@@ -310,29 +197,13 @@ const PublicNavbar = () => {
       {menuOpen && (
         <div
           ref={menuRef}
-          className={`
-            z-40
-            w-full
-            shadow-lg transition-all
-            fixed top-14 left-0 duration-300 backdrop-blur-md
-            sm:top-16
-            lg:hidden
-            ${
-              darkMode
-                ? "bg-[#0f0c1c]/95 text-white"
-                : "bg-white/95 text-gray-900 border-b border-gray-200"
-            }
-          `}
+          className={`fixed top-14 left-0 z-40 w-full shadow-lg backdrop-blur-md transition-all duration-300 sm:top-16 lg:hidden ${
+            darkMode
+              ? "bg-[#0f0c1c]/95 text-white"
+              : "border-b border-gray-200 bg-white/95 text-gray-900"
+          } `}
         >
-          <div
-            className="
-              flex flex-col
-              py-6 px-5
-              text-base
-              items-center gap-6
-              sm:text-lg
-            "
-          >
+          <div className="flex flex-col items-center gap-6 px-5 py-6 text-base sm:text-lg">
             {/* Home */}
             <NavLink
               to="/"
@@ -395,40 +266,17 @@ const PublicNavbar = () => {
               }
             >
               Menu
-              <span
-                className="
-                  h-0.5 w-0
-                  bg-indigo-500
-                  transition-all
-                  absolute left-0 -bottom-1 group-hover:w-full
-                "
-              ></span>
+              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all group-hover:w-full"></span>
             </NavLink>
 
             {/* Buttons */}
-            <div
-              className="
-                flex flex-col
-                w-full max-w-xs
-                gap-3
-              "
-            >
+            <div className="flex w-full max-w-xs flex-col gap-3">
               {/* Logout Button Only */}
               {user && (
-                <div
-                  className="
-      flex
-      w-full max-w-xs
-    "
-                >
+                <div className="flex w-full max-w-xs">
                   <button
                     onClick={handleLogout}
-                    className="
-        w-full h-10
-        text-white
-        bg-red-600
-        rounded-md
-      "
+                    className="h-10 w-full rounded-md bg-red-600 text-white"
                   >
                     Logout
                   </button>
@@ -439,12 +287,7 @@ const PublicNavbar = () => {
         </div>
       )}
 
-      <div
-        className="
-          h-14
-          sm:h-16
-        "
-      ></div>
+      <div className="h-14 sm:h-16"></div>
     </>
   );
 };

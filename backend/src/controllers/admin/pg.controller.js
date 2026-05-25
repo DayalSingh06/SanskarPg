@@ -1,43 +1,52 @@
 import Pg from "../../models/pg.model.js";
-import fs from "fs";
+import { cloudinary } from "../../middleware/upload.js";
 
-// ==============================
+// helper: array of file paths to cloudinary urls
+const mapFilesToUrls = (files = []) => files.map((f) => f.path); // path = delivery URL
+
+// helper: delete cloudinary by public_id array
+const deleteFromCloudinaryByPublicIds = async (publicIds = []) => {
+  if (!publicIds.length) return;
+  await Promise.all(
+    publicIds.map((public_id) =>
+      cloudinary.uploader
+        .destroy(public_id, { invalidate: true })
+        .catch(() => null),
+    ),
+  );
+};
+
 // CREATE PG
-// ==============================
-
 export const createPg = async (req, res) => {
   try {
-    // PARSE DATA
-    const parsedData = JSON.parse(req.body.data);
+    const parsedData = req.body.data ? JSON.parse(req.body.data) : {};
+    const files = req.files || {};
 
-    // MAIN IMAGE
-    const mainImage = req.files.mainImage?.[0]?.path.replace(/\\/g, "/") || "";
-    // GALLERY
+    // Note: parsedData.gallery titles should match the names in upload.fields route
     const gallery = parsedData.gallery.map((section) => {
-      const sectionImages = req.files[section.title] || [];
-
+      const sectionFiles = files[section.key] || [];
       return {
+        key: section.key,
         title: section.title,
-
-        images: sectionImages.map((img) => img.path.replace(/\\/g, "/")),
+        images: sectionFiles.map((f) => f.path),
+        public_ids: sectionFiles.map((f) => f.filename),
       };
     });
 
-    // CREATE PG
-    const newPg = new Pg({
+    const mainFiles = files.mainImage || [];
+    const mainImageUrl = mainFiles[0]?.path || "";
+    const mainImagePublicId = mainFiles[0]?.filename || "";
+
+    const newPg = await Pg.create({
       name: parsedData.name,
       location: parsedData.location,
       phone: parsedData.phone,
       map: parsedData.map,
-
       rooms: parsedData.rooms,
-
-      mainImage,
-
+      mainImage: mainImageUrl,
+      mainImagePublicId: mainImagePublicId, // Correctly stored
       gallery,
     });
-
-    await newPg.save();
 
     res.status(201).json({
       success: true,
@@ -45,202 +54,143 @@ export const createPg = async (req, res) => {
       pg: newPg,
     });
   } catch (error) {
-    console.log(error);
-
-    res.status(500).json({
+    console.error("CREATE_PG_ERROR_STACK:", error.stack);
+    return res.status(500).json({
       success: false,
       message: "Server Error",
+      error: error.message,
     });
   }
 };
 
-// ==============================
 // GET ALL PGS
-// ==============================
-
 export const getAllPgs = async (req, res) => {
   try {
     const pgs = await Pg.find().sort({ createdAt: -1 });
-
-    res.status(200).json({
-      success: true,
-      pgs,
-    });
+    res.status(200).json({ success: true, pgs });
   } catch (error) {
     console.log(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed To Fetch PGs",
-    });
+    res.status(500).json({ success: false, message: "Failed To Fetch PGs" });
   }
 };
 
-// ==============================
 // GET SINGLE PG
-// ==============================
-
 export const getSinglePg = async (req, res) => {
   try {
     const pg = await Pg.findById(req.params.id);
+    if (!pg)
+      return res.status(404).json({ success: false, message: "PG Not Found" });
 
-    if (!pg) {
-      return res.status(404).json({
-        success: false,
-        message: "PG Not Found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      pg,
-    });
+    res.status(200).json({ success: true, pg });
   } catch (error) {
     console.log(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed To Fetch PG",
-    });
+    res.status(500).json({ success: false, message: "Failed To Fetch PG" });
   }
 };
 
-// ==============================
 // UPDATE PG
-// ==============================
-
 export const updatePg = async (req, res) => {
   try {
     const { id } = req.params;
 
     const existingPg = await Pg.findById(id);
+    if (!existingPg)
+      return res.status(404).json({ success: false, message: "PG Not Found" });
 
-    if (!existingPg) {
-      return res.status(404).json({
-        success: false,
-        message: "PG Not Found",
-      });
-    }
-
-    // PARSE DATA
     const parsedData = JSON.parse(req.body.data);
 
-    // ==============================
-    // MAIN IMAGE
-    // ==============================
+    // MAIN IMAGE update (if new uploaded)
+    let mainImageUrl = existingPg.mainImage;
+    let mainImagePublicId = existingPg.mainImagePublicId;
 
-    let mainImage = existingPg.mainImage;
-
-    if (req.files?.mainImage?.[0]) {
-      // DELETE OLD IMAGE
-
-      if (existingPg.mainImage && fs.existsSync(existingPg.mainImage)) {
-        fs.unlinkSync(existingPg.mainImage);
+    const mainFiles = req.files?.mainImage || [];
+    if (mainFiles.length > 0) {
+      // delete old
+      if (existingPg.mainImagePublicId) {
+        await cloudinary.uploader
+          .destroy(existingPg.mainImagePublicId, { invalidate: true })
+          .catch(() => null);
       }
 
-      mainImage = req.files.mainImage[0].path.replace(/\\/g, "/");
+      mainImageUrl = mainFiles[0].path;
+      mainImagePublicId = mainFiles[0].filename;
     }
 
-    // ==============================
-    // GALLERY
-    // ==============================
-
+    // GALLERY update
     const gallery = parsedData.gallery.map((section) => {
-      const uploadedImages = req.files?.[section.title] || [];
-
-      // OLD SECTION
+      const newFiles = req.files?.[section.key] || [];
       const oldSection = existingPg.gallery.find(
         (g) => g.title === section.title,
       );
 
+      if (newFiles.length > 0) {
+        // delete old section images from cloudinary
+        const oldPublicIds = oldSection?.public_ids || [];
+        deleteFromCloudinaryByPublicIds(oldPublicIds);
+
+        return {
+          title: section.title,
+          images: newFiles.map((f) => f.path),
+          public_ids: newFiles.map((f) => f.filename),
+        };
+      }
+
       return {
         title: section.title,
-
-        images:
-          uploadedImages.length > 0
-            ? uploadedImages.map((img) => img.path.replace(/\\/g, "/"))
-            : oldSection?.images || [],
+        images: oldSection?.images || [],
+        public_ids: oldSection?.public_ids || [],
       };
     });
 
-    // ==============================
-    // UPDATE
-    // ==============================
-
-    const updatedPg = await Pg.findByIdAndUpdate(
+    const updated = await Pg.findByIdAndUpdate(
       id,
       {
         name: parsedData.name,
         location: parsedData.location,
         phone: parsedData.phone,
         map: parsedData.map,
-
         rooms: parsedData.rooms,
-
-        mainImage,
-
+        mainImage: mainImageUrl,
+        mainImagePublicId,
         gallery,
       },
-      {
-        new: true,
-      },
+      { new: true },
     );
 
     res.status(200).json({
       success: true,
       message: "PG Updated Successfully",
-      pg: updatedPg,
+      pg: updated,
     });
   } catch (error) {
     console.log(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Update Failed",
-    });
+    res.status(500).json({ success: false, message: "Update Failed" });
   }
 };
 
-// ==============================
 // DELETE PG
-// ==============================
-
 export const deletePg = async (req, res) => {
   try {
     const { id } = req.params;
 
     const pg = await Pg.findById(id);
+    if (!pg)
+      return res.status(404).json({ success: false, message: "PG Not Found" });
 
-    if (!pg) {
-      return res.status(404).json({
-        success: false,
-        message: "PG Not Found",
-      });
+    // delete main
+    if (pg.mainImagePublicId) {
+      await cloudinary.uploader
+        .destroy(pg.mainImagePublicId, { invalidate: true })
+        .catch(() => null);
     }
 
-    // ==============================
-    // DELETE MAIN IMAGE
-    // ==============================
-
-    if (pg.mainImage && fs.existsSync(pg.mainImage)) {
-      fs.unlinkSync(pg.mainImage);
-    }
-
-    // ==============================
-    // DELETE GALLERY IMAGES
-    // ==============================
-
+    // delete gallery
+    const allPublicIds = [];
     pg.gallery.forEach((section) => {
-      section.images.forEach((img) => {
-        if (fs.existsSync(img)) {
-          fs.unlinkSync(img);
-        }
-      });
+      (section.public_ids || []).forEach((pid) => allPublicIds.push(pid));
     });
 
-    // ==============================
-    // DELETE FROM DB
-    // ==============================
+    await deleteFromCloudinaryByPublicIds(allPublicIds);
 
     await Pg.findByIdAndDelete(id);
 
@@ -250,10 +200,6 @@ export const deletePg = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Delete Failed",
-    });
+    res.status(500).json({ success: false, message: "Delete Failed" });
   }
 };

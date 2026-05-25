@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-
 dotenv.config();
 
 import app from "./app.js";
@@ -13,4 +12,3 @@ connectDB();
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-

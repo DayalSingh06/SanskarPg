@@ -97,9 +97,9 @@ const Rules = () => {
         darkMode ? "bg-[#0f0f1a] text-white" : "bg-gray-50 text-gray-800"
       }`}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-4xl">
         {/* HEADING */}
-        <h1 className="text-3xl font-bold text-center mb-8">
+        <h1 className="mb-8 text-center text-3xl font-bold">
           Rules & Regulations
         </h1>
 
@@ -108,22 +108,22 @@ const Rules = () => {
           {rulesData.map((rule, index) => (
             <div
               key={index}
-              className={`p-4 rounded-xl border ${
+              className={`rounded-xl border p-4 ${
                 darkMode
-                  ? "bg-[#1a1625] border-gray-700"
-                  : "bg-white border-gray-200"
-              } shadow-sm hover:shadow-md transition`}
+                  ? "border-gray-700 bg-[#1a1625]"
+                  : "border-gray-200 bg-white"
+              } shadow-sm transition hover:shadow-md`}
             >
               <p className="font-medium">
                 {index + 1}. {rule.en}
               </p>
-              <p className="text-sm mt-1 opacity-80">{rule.hi}</p>
+              <p className="mt-1 text-sm opacity-80">{rule.hi}</p>
             </div>
           ))}
         </div>
 
         {/* FOOT NOTE */}
-        <div className="mt-10 text-sm opacity-70 text-center">
+        <div className="mt-10 text-center text-sm opacity-70">
           <p>
             By staying in the hostel, you agree to follow all the above rules.
           </p>

@@ -29,12 +29,11 @@ const sendEmail = async ({ to, subject, html }) => {
       },
     );
 
-    console.log("✅ EMAIL SENT SUCCESSFULLY");
-    console.log(response.data);
+    console.log("EMAIL SENT SUCCESSFULLY");
 
     return response.data;
   } catch (error) {
-    console.log("❌ EMAIL ERROR");
+    console.log("EMAIL ERROR");
 
     console.log(error.response?.data || error.message);
 

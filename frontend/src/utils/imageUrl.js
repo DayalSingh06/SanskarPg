@@ -1,11 +1,7 @@
-const BASE_URL = import.meta.env.VITE_API_URL;
-
 export const getImageUrl = (img) => {
-  if (!img) {
+  if (!img || typeof img !== "string") {
     return "https://via.placeholder.com/400x300?text=No+Image";
   }
 
-  const cleanPath = img.replace(/\\/g, "/");
-
-  return `${BASE_URL}/${cleanPath}`;
+  return img;
 };
