@@ -22,7 +22,6 @@ export const createPg = async (req, res) => {
     const parsedData = req.body.data ? JSON.parse(req.body.data) : {};
     const files = req.files || {};
 
-    // Note: parsedData.gallery titles should match the names in upload.fields route
     const gallery = parsedData.gallery.map((section) => {
       const sectionFiles = files[section.key] || [];
       return {
@@ -44,7 +43,7 @@ export const createPg = async (req, res) => {
       map: parsedData.map,
       rooms: parsedData.rooms,
       mainImage: mainImageUrl,
-      mainImagePublicId: mainImagePublicId, // Correctly stored
+      mainImagePublicId: mainImagePublicId,
       gallery,
     });
 

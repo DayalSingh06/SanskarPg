@@ -20,9 +20,9 @@ const Facilities = () => {
         <p
           className={`text-sm leading-relaxed sm:text-base ${darkMode ? "text-gray-400" : "text-gray-600"} `}
         >
-          Hum sirf PG nahi dete, balki ek comfortable, safe aur premium living
-          experience provide karte hain — jahan aap bina kisi tension ke reh
-          sakte hain 😊
+          Hum sirf PG nahi dete, balki ek comfortable, safe aur
+          premium living experience provide karte hain — jahan aap
+          bina kisi tension ke reh sakte hain 😊
         </p>
       </div>
 
@@ -34,14 +34,15 @@ const Facilities = () => {
           </h2>
 
           <p className="mb-4 text-sm leading-relaxed sm:text-base">
-            Hamare PG ki sabse badi khasiyat hai hamara khana 🍛 — jo taste,
-            quality aur hygiene ke mamle me dusre PG se kaafi better hai. Aap
-            khud aake khana taste karke check kar sakte ho 👍
+            Hamare PG ki sabse badi khasiyat hai hamara khana 🍛 — jo
+            taste, quality aur hygiene ke mamle me dusre PG se kaafi
+            better hai. Aap khud aake khana taste karke check kar
+            sakte ho 👍
           </p>
 
           <p className="mb-4 text-sm leading-relaxed sm:text-base">
-            Jahan baaki PG sirf week me 1 baar special khana dete hain, hum
-            aapko{" "}
+            Jahan baaki PG sirf week me 1 baar special khana dete
+            hain, hum aapko{" "}
             <span className="font-semibold text-green-400">
               week me 2 din (Thursday & Sunday)
             </span>{" "}
@@ -50,17 +51,23 @@ const Facilities = () => {
 
           <div className="grid gap-4 text-sm sm:grid-cols-2 sm:gap-5 sm:text-base">
             <div>
-              <h3 className="mb-2 font-semibold text-blue-400">🍳 Morning</h3>
+              <h3 className="mb-2 font-semibold text-blue-400">
+                🍳 Morning
+              </h3>
               <p>Breakfast + Tea ☕</p>
             </div>
 
             <div>
-              <h3 className="mb-2 font-semibold text-green-400">🍱 Lunch</h3>
+              <h3 className="mb-2 font-semibold text-green-400">
+                🍱 Lunch
+              </h3>
               <p>2 Sabji (1 sabji + 1 dal) + Rice + Chach 🥛</p>
             </div>
 
             <div>
-              <h3 className="mb-2 font-semibold text-purple-400">🍽️ Dinner</h3>
+              <h3 className="mb-2 font-semibold text-purple-400">
+                🍽️ Dinner
+              </h3>
               <p>1 Sabji + Dal / Chutney + Roti</p>
             </div>
 
@@ -82,9 +89,10 @@ const Facilities = () => {
             🛏️ Room & Furniture
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Single, Double aur Triple sharing rooms available hain. Har room me
-            comfortable bed, study table, chair, cupboard aur fan/cooler diya
-            jata hai taki aap comfortable feel karein.
+            Single, Double aur Triple sharing rooms available hain.
+            Har room me comfortable bed, study table, chair, cupboard
+            aur fan/cooler diya jata hai taki aap comfortable feel
+            karein.
           </p>
         </div>
 
@@ -94,9 +102,9 @@ const Facilities = () => {
             🚿 Bathroom & Water
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Attached ya common bathroom options available hain. 24x7 pani aur
-            geyser facility ke saath clean aur maintained washrooms provide kiye
-            jate hain.
+            Attached ya common bathroom options available hain. 24x7
+            pani aur geyser facility ke saath clean aur maintained
+            washrooms provide kiye jate hain.
           </p>
         </div>
 
@@ -106,8 +114,9 @@ const Facilities = () => {
             🌐 Internet & Electricity
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            High-speed WiFi aur 24/7 electricity available hai taki aap study,
-            work aur entertainment bina interruption ke kar sakein ⚡
+            High-speed WiFi aur 24/7 electricity available hai taki
+            aap study, work aur entertainment bina interruption ke kar
+            sakein ⚡
           </p>
         </div>
 
@@ -117,9 +126,9 @@ const Facilities = () => {
             🧹 Cleaning & Maintenance
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Regular housekeeping, room cleaning, washroom cleaning aur garbage
-            collection — hamesha clean aur hygienic environment maintain kiya
-            jata hai ✨
+            Regular housekeeping, room cleaning, washroom cleaning aur
+            garbage collection — hamesha clean aur hygienic
+            environment maintain kiya jata hai ✨
           </p>
         </div>
 
@@ -129,8 +138,8 @@ const Facilities = () => {
             👕 Laundry Service
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Laundry service available hai (paid) — aapko kapde dhone ki tension
-            lene ki zarurat nahi 👍
+            Laundry service available hai (paid) — aapko kapde dhone
+            ki tension lene ki zarurat nahi 👍
           </p>
         </div>
 
@@ -140,8 +149,8 @@ const Facilities = () => {
             🔐 Security
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            CCTV cameras aur safe environment — aapki safety hamari priority hai
-            🛡️
+            CCTV cameras aur safe environment — aapki safety hamari
+            priority hai 🛡️
           </p>
         </div>
 
@@ -151,8 +160,9 @@ const Facilities = () => {
             🛋️ Common Area
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Dining hall, refrigerator aur basic facilities available hain jahan
-            aap relax kar sakte hain aur meals enjoy kar sakte hain 😊
+            Dining hall, refrigerator aur basic facilities available
+            hain jahan aap relax kar sakte hain aur meals enjoy kar
+            sakte hain 😊
           </p>
         </div>
 
@@ -162,8 +172,8 @@ const Facilities = () => {
             🚗 Parking Area
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Safe aur spacious parking available hai — bike aur car dono ke liye
-            suitable 🚘
+            Safe aur spacious parking available hai — bike aur car
+            dono ke liye suitable 🚘
           </p>
         </div>
 
@@ -173,9 +183,10 @@ const Facilities = () => {
             📍 Location & Nearby
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Hamara PG prime location par hai jahan market, D-Mart, Super Mart
-            aur local shops easily available hain 🛒. Transport bhi easily mil
-            jata hai, isliye aapko daily travel me koi problem nahi hogi 🚶‍♂️
+            Hamara PG prime location par hai jahan market, D-Mart,
+            Super Mart aur local shops easily available hain 🛒.
+            Transport bhi easily mil jata hai, isliye aapko daily
+            travel me koi problem nahi hogi 🚶‍♂️
           </p>
         </div>
       </div>

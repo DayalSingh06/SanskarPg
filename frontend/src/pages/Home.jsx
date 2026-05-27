@@ -96,8 +96,8 @@ const Home = () => {
           <p
             className={`mt-5 max-w-2xl text-base leading-relaxed sm:text-lg md:text-xl ${darkMode ? "text-gray-200" : "text-gray-100"} `}
           >
-            Affordable, safe & comfortable stay with premium facilities for
-            students and working professionals ✨
+            Affordable, safe & comfortable stay with premium
+            facilities for students and working professionals ✨
           </p>
 
           <p
@@ -147,8 +147,8 @@ const Home = () => {
         <p
           className={`mx-auto mb-12 max-w-2xl text-center text-sm sm:text-base ${darkMode ? "text-gray-400" : "text-gray-600"} `}
         >
-          Hum aapko sirf room nahi, ek comfortable & premium living experience
-          provide karte hain 🚀
+          Hum aapko sirf room nahi, ek comfortable & premium living
+          experience provide karte hain 🚀
         </p>
 
         {/* FEATURES GRID */}
@@ -161,8 +161,9 @@ const Home = () => {
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
             >
-              Ghar jaisa swadisht aur hygienic khana 🍛. Har week 2 din special
-              meals jaise paneer, sweets ya special dishes serve ki jati hain.
+              Ghar jaisa swadisht aur hygienic khana 🍛. Har week 2
+              din special meals jaise paneer, sweets ya special dishes
+              serve ki jati hain.
             </p>
           </div>
 
@@ -174,8 +175,8 @@ const Home = () => {
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
             >
-              Fast & reliable internet for study, work aur entertainment — bina
-              interruption ke 🚀
+              Fast & reliable internet for study, work aur
+              entertainment — bina interruption ke 🚀
             </p>
           </div>
 
@@ -187,8 +188,8 @@ const Home = () => {
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
             >
-              Rozana room cleaning aur regular washroom cleaning — hamesha clean
-              & fresh environment ✨
+              Rozana room cleaning aur regular washroom cleaning —
+              hamesha clean & fresh environment ✨
             </p>
           </div>
 
@@ -200,8 +201,8 @@ const Home = () => {
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
             >
-              Convenient laundry service available (paid) — aapko tension lene
-              ki zarurat nahi 👍
+              Convenient laundry service available (paid) — aapko
+              tension lene ki zarurat nahi 👍
             </p>
           </div>
 
@@ -213,8 +214,8 @@ const Home = () => {
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
             >
-              24/7 CCTV surveillance aur safe environment — aapki safety hamari
-              priority hai 🛡️
+              24/7 CCTV surveillance aur safe environment — aapki
+              safety hamari priority hai 🛡️
             </p>
           </div>
 
@@ -226,8 +227,8 @@ const Home = () => {
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
             >
-              Spacious aur secure parking facility — Only for bike ke liye
-              available
+              Spacious aur secure parking facility — Only for bike ke
+              liye available
             </p>
           </div>
         </div>
@@ -235,10 +236,14 @@ const Home = () => {
 
       {/* OUR PG SECTION (NOW CORRECT PLACE) */}
       <div
-        className={`px-6 py-16 transition-colors duration-300 ${darkMode ? "bg-[#0f0c1c]" : "bg-gray-100"} `}
+        className={`px-6 py-16 transition-colors duration-300 ${
+          darkMode ? "bg-[#0f0c1c]" : "bg-gray-100"
+        } `}
       >
         <h2
-          className={`mb-10 text-center text-2xl font-bold sm:text-3xl ${darkMode ? "text-white" : "text-gray-900"} `}
+          className={`mb-10 text-center text-2xl font-bold sm:text-3xl ${
+            darkMode ? "text-white" : "text-gray-900"
+          } `}
         >
           Our PG's
         </h2>
@@ -259,7 +264,9 @@ const Home = () => {
       </div>
 
       {/* REVIEW SECTION */}
-      <div className={`px-4 py-16 ${darkMode ? "bg-[#141124]" : "bg-white"} `}>
+      <div
+        className={`px-4 py-16 ${darkMode ? "bg-[#141124]" : "bg-white"} `}
+      >
         <div className="mx-auto max-w-7xl">
           <h2
             className={`mb-14 text-center text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"} `}

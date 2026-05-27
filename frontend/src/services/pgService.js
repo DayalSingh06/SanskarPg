@@ -23,7 +23,10 @@ export const getSinglePg = async (id) => {
 };
 
 export const updatePg = async (id, formData) => {
-  const response = await axios.put(`/api/admin/update/${id}`, formData);
+  const response = await axios.put(
+    `/api/admin/update/${id}`,
+    formData,
+  );
 
   return response.data;
 };

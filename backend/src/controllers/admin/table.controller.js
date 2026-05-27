@@ -1,7 +1,6 @@
 import Users from "../../models/user.model.js";
 
 // GET PENDING USERS
-
 export const getPendingUsers = async (req, res) => {
   try {
     const users = await Users.find({
@@ -19,7 +18,6 @@ export const getPendingUsers = async (req, res) => {
 };
 
 // GET ADMITED USERS
-
 export const getRegisteredUsers = async (req, res) => {
   try {
     const users = await Users.find({
@@ -37,7 +35,6 @@ export const getRegisteredUsers = async (req, res) => {
 };
 
 // GET REJECTED USERS
-
 export const getRejectedUsers = async (req, res) => {
   try {
     const users = await Users.find({
@@ -55,9 +52,6 @@ export const getRejectedUsers = async (req, res) => {
 };
 
 // APPROVE USER
-// pending -> admited
-// rejected -> admited
-
 export const approveUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -103,9 +97,6 @@ export const approveUser = async (req, res) => {
 };
 
 // REJECT USER
-// pending -> rejected
-// admited -> rejected
-
 export const rejectUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -149,8 +140,6 @@ export const rejectUser = async (req, res) => {
 };
 
 // DASHBOARD COUNTS
-// =========================================
-
 export const getDashboardCounts = async (req, res) => {
   try {
     const totalUsers = await Users.countDocuments({

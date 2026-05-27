@@ -97,7 +97,10 @@ export default function Register() {
 
       const { confirmPassword, ...payload } = formData;
 
-      const response = await axios.post("/api/users/register", payload);
+      const response = await axios.post(
+        "/api/users/register",
+        payload,
+      );
 
       if (response?.data?.success && response?.data?.showOtpModal) {
         setOtpState({
@@ -144,7 +147,8 @@ export default function Register() {
 
       navigate("/login");
     } catch (err) {
-      const msg = err.response?.data?.message || "OTP verification failed";
+      const msg =
+        err.response?.data?.message || "OTP verification failed";
       setOtpState((prev) => ({
         ...prev,
         error: msg,
@@ -185,10 +189,14 @@ export default function Register() {
                 : "border border-gray-200 text-[#0f0c1c]"
             } `}
           >
-            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">Register</h2>
+            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">
+              Register
+            </h2>
 
             {globalError && (
-              <p className="mb-2 text-xs text-red-500">{globalError}</p>
+              <p className="mb-2 text-xs text-red-500">
+                {globalError}
+              </p>
             )}
 
             <p className="md:text-md mb-4 text-xs sm:mb-6 sm:text-sm">
@@ -306,8 +314,8 @@ export default function Register() {
           </form>
           <footer className="mt-auto py-2 text-center">
             <span className="text-xs text-[#6b7387]">
-              © {new Date().getFullYear()} Sanskar Boy's PG. All rights
-              reserved.{" "}
+              © {new Date().getFullYear()} Sanskar Boy's PG. All
+              rights reserved.{" "}
             </span>
           </footer>
         </div>

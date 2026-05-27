@@ -49,7 +49,9 @@ export default function FormField({
       </div>
 
       {/* Error */}
-      {touched && error && <p className="text-xs text-red-500">{error}</p>}
+      {touched && error && (
+        <p className="text-xs text-red-500">{error}</p>
+      )}
     </>
   );
 }

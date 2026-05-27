@@ -29,12 +29,18 @@ const TotalUsersCard = ({
           <div
             className={`rounded-2xl p-3 ${darkMode ? "bg-[#1b1630]" : "bg-white shadow-sm"} `}
           >
-            <img src={image} alt="icon" className="h-14 w-14 object-contain" />
+            <img
+              src={image}
+              alt="icon"
+              className="h-14 w-14 object-contain"
+            />
           </div>
 
           {/* TEXT */}
           <div>
-            <h2 className="text-4xl font-bold tracking-tight">{total}</h2>
+            <h2 className="text-4xl font-bold tracking-tight">
+              {total}
+            </h2>
 
             <p
               className={`mt-1 text-lg font-medium ${darkMode ? "text-gray-400" : "text-gray-500"} `}
@@ -89,7 +95,9 @@ const TotalUsersCard = ({
             Rejected
           </p>
 
-          <h3 className="mt-1 text-2xl font-bold text-red-500">{rejected}</h3>
+          <h3 className="mt-1 text-2xl font-bold text-red-500">
+            {rejected}
+          </h3>
         </div>
       </div>
     </div>

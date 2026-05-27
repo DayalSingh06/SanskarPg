@@ -3,7 +3,13 @@ import { Check, X } from "lucide-react";
 import ContactButtonIcon from "../../../components/common/buttons/ContactButtonIcon";
 import { useTheme } from "../../../context/ThemeContext";
 
-const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
+const UserTable = ({
+  title,
+  users,
+  type,
+  approveUser,
+  rejectUser,
+}) => {
   const { darkMode } = useTheme();
 
   // STATE + DATE COLORS
@@ -12,11 +18,13 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
     if (type === "pending") {
       return darkMode
         ? {
-            state: "bg-orange-900/30 text-orange-300 border border-orange-700",
+            state:
+              "bg-orange-900/30 text-orange-300 border border-orange-700",
             date: "text-orange-300",
           }
         : {
-            state: "bg-orange-100 text-orange-700 border border-orange-200",
+            state:
+              "bg-orange-100 text-orange-700 border border-orange-200",
             date: "text-orange-600",
           };
     }
@@ -25,11 +33,13 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
     if (type === "registered") {
       return darkMode
         ? {
-            state: "bg-green-900/30 text-green-300 border border-green-700",
+            state:
+              "bg-green-900/30 text-green-300 border border-green-700",
             date: "text-green-300",
           }
         : {
-            state: "bg-green-100 text-green-700 border border-green-200",
+            state:
+              "bg-green-100 text-green-700 border border-green-200",
             date: "text-green-600",
           };
     }
@@ -103,7 +113,9 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
                 >
                   <td className="p-3 text-center">{index + 1}</td>
 
-                  <td className="p-3 text-center font-medium">{user.name}</td>
+                  <td className="p-3 text-center font-medium">
+                    {user.name}
+                  </td>
 
                   <td className="p-3 text-center">{user.email}</td>
 
@@ -117,7 +129,9 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
                     </span>
                   </td>
 
-                  <td className={`p-3 text-center text-sm ${colors.date}`}>
+                  <td
+                    className={`p-3 text-center text-sm ${colors.date}`}
+                  >
                     {type === "pending" &&
                       new Date(user.createdAt).toLocaleString()}
 
@@ -193,11 +207,13 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
 
             <div className="mt-3 space-y-2 text-sm">
               <p>
-                <span className="font-semibold">Email:</span> {user.email}
+                <span className="font-semibold">Email:</span>{" "}
+                {user.email}
               </p>
 
               <p>
-                <span className="font-semibold">Mobile:</span> {user.mobile}
+                <span className="font-semibold">Mobile:</span>{" "}
+                {user.mobile}
               </p>
 
               <p className={colors.date}>
@@ -218,9 +234,15 @@ const UserTable = ({ title, users, type, approveUser, rejectUser }) => {
             <div className="mt-4 flex items-center justify-between">
               {/* LEFT SIDE → CALL + WHATSAPP */}
               <div className="flex items-center gap-2">
-                <ContactButtonIcon type="call" phone={`91${user.mobile}`} />
+                <ContactButtonIcon
+                  type="call"
+                  phone={`91${user.mobile}`}
+                />
 
-                <ContactButtonIcon type="whatsapp" phone={`91${user.mobile}`} />
+                <ContactButtonIcon
+                  type="whatsapp"
+                  phone={`91${user.mobile}`}
+                />
               </div>
 
               {/* RIGHT SIDE → ACTION BUTTONS */}

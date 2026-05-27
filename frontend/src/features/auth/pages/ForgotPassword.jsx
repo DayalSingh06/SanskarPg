@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { emailRegex } from "../../../utils/validation.js";
 import axios from "../../../utils/axios.js";
 
-export default function ForgotPassword({ isOpen, onClose, darkMode }) {
+export default function ForgotPassword({
+  isOpen,
+  onClose,
+  darkMode,
+}) {
   const [step, setStep] = useState("EMAIL");
 
   const [form, setForm] = useState({
@@ -61,9 +65,12 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
     try {
       setLoading(true);
 
-      const { data } = await axios.post("/api/users/forgot-password/send-otp", {
-        email,
-      });
+      const { data } = await axios.post(
+        "/api/users/forgot-password/send-otp",
+        {
+          email,
+        },
+      );
 
       setUserId(data.userId);
       setStep("OTP");
@@ -152,7 +159,9 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
         className={`w-full max-w-md rounded-2xl p-6 shadow-2xl transition-all ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-white text-gray-900"} `}
       >
         {/* TITLE */}
-        <h2 className="mb-1 text-xl font-semibold">Forgot Password</h2>
+        <h2 className="mb-1 text-xl font-semibold">
+          Forgot Password
+        </h2>
 
         <p className="mb-4 text-xs text-gray-500">
           {step === "EMAIL"
@@ -203,8 +212,12 @@ export default function ForgotPassword({ isOpen, onClose, darkMode }) {
         )}
 
         {/* ERROR / MESSAGE */}
-        {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
-        {message && <p className="mt-2 text-sm text-green-500">{message}</p>}
+        {error && (
+          <p className="mt-2 text-sm text-red-500">{error}</p>
+        )}
+        {message && (
+          <p className="mt-2 text-sm text-green-500">{message}</p>
+        )}
 
         {/* BUTTONS */}
         <div className="mt-5 flex flex-col gap-2">

@@ -54,7 +54,9 @@ export default function PasswordField({
       </div>
 
       {/* Error */}
-      {touched && error && <p className="text-xs text-red-500">{error}</p>}
+      {touched && error && (
+        <p className="text-xs text-red-500">{error}</p>
+      )}
     </>
   );
 }

@@ -32,8 +32,8 @@ const ReviewTable = ({
         </h2>
 
         <p className="mt-2 max-w-md text-sm leading-6">
-          No user reviews are available right now. Once users submit reviews,
-          they will appear here beautifully.
+          No user reviews are available right now. Once users submit
+          reviews, they will appear here beautifully.
         </p>
       </div>
     );
@@ -42,7 +42,9 @@ const ReviewTable = ({
   return (
     <div
       className={`mt-5 rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-        darkMode ? "border-[#2a2440] bg-[#0f0c1c]" : "border-[#e4e7ec] bg-white"
+        darkMode
+          ? "border-[#2a2440] bg-[#0f0c1c]"
+          : "border-[#e4e7ec] bg-white"
       } `}
     >
       {/* TOP */}
@@ -71,14 +73,20 @@ const ReviewTable = ({
       {/* STARS */}
       <div className="mt-4 flex items-center gap-1">
         {[...Array(review.rating)].map((_, i) => (
-          <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
+          <Star
+            key={i}
+            size={18}
+            className="fill-yellow-400 text-yellow-400"
+          />
         ))}
       </div>
 
       {/* REVIEW */}
       <div
         className={`mt-5 rounded-2xl p-4 leading-7 ${
-          darkMode ? "bg-[#1b1630] text-gray-300" : "bg-[#f5f7fb] text-gray-700"
+          darkMode
+            ? "bg-[#1b1630] text-gray-300"
+            : "bg-[#f5f7fb] text-gray-700"
         } `}
       >
         {review.review}

@@ -39,7 +39,9 @@ const TotalReviewsCard = ({
 
           {/* TEXT */}
           <div>
-            <h2 className="text-4xl font-bold tracking-tight">{total}</h2>
+            <h2 className="text-4xl font-bold tracking-tight">
+              {total}
+            </h2>
 
             <p
               className={`mt-1 text-lg font-medium ${darkMode ? "text-gray-400" : "text-gray-500"} `}
@@ -73,7 +75,9 @@ const TotalReviewsCard = ({
             Verified
           </p>
 
-          <h3 className="mt-1 text-2xl font-bold text-green-500">{verified}</h3>
+          <h3 className="mt-1 text-2xl font-bold text-green-500">
+            {verified}
+          </h3>
         </div>
 
         {/* CENTER LINE */}

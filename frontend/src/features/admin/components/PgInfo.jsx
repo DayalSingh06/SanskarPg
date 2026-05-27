@@ -65,7 +65,6 @@ const PgInfo = () => {
 
         <ContactButtonIcon type="whatsapp" phone={pg?.phone} />
       </div>
-
       {/* MAIN IMAGE */}
       <div className="overflow-hidden rounded-3xl">
         <img
@@ -74,7 +73,6 @@ const PgInfo = () => {
           className="h-65 w-full object-cover sm:h-100 md:h-125"
         />
       </div>
-
       {/* DETAILS */}
       <div className="mt-6">
         <h1
@@ -100,7 +98,6 @@ const PgInfo = () => {
           {pg?.location}
         </a>
       </div>
-
       {/* FACILITIES */}
       <div className="mt-12">
         <h2
@@ -130,7 +127,6 @@ const PgInfo = () => {
           ))}
         </div>
       </div>
-
       {/* ROOMS */}
       <div className="mt-12">
         <h2
@@ -170,26 +166,36 @@ const PgInfo = () => {
           ))}
         </div>
       </div>
-
       {/* MAP */}
-      {pg?.map && (
-        <div className="mt-12">
-          <h2
-            className={`text-2xl font-bold ${darkMode ? "text-white" : "text-black"} `}
-          >
-            Location
-          </h2>
+      <div className="mt-12">
+        <h2
+          className={`text-2xl font-bold ${
+            darkMode ? "text-white" : "text-black"
+          }`}
+        >
+          Location
+        </h2>
 
+        {pg?.map ? (
           <iframe
             title="PG Location"
-            src={pg?.map}
+            src={pg.map}
             loading="lazy"
             allowFullScreen
             className="mt-5 h-87.5 w-full rounded-2xl border-0"
           />
-        </div>
-      )}
-
+        ) : (
+          <div
+            className={`mt-5 rounded-2xl border p-6 text-center text-base font-medium ${
+              darkMode
+                ? "border-white/10 bg-white/5 text-gray-300"
+                : "border-gray-200 bg-gray-50 text-gray-600"
+            }`}
+          >
+            Location not found
+          </div>
+        )}
+      </div>
       {/* GALLERY */}
       {pg?.gallery?.length > 0 && (
         <div className="mt-12">

@@ -77,13 +77,21 @@ const WeeklyMenu = () => {
                     <tr
                       className={`text-center ${darkMode ? "bg-white/10" : "bg-slate-100"} `}
                     >
-                      <th className="px-3 py-3 text-sm font-bold">Day</th>
+                      <th className="px-3 py-3 text-sm font-bold">
+                        Day
+                      </th>
 
-                      <th className="px-3 py-3 text-sm font-bold">Breakfast</th>
+                      <th className="px-3 py-3 text-sm font-bold">
+                        Breakfast
+                      </th>
 
-                      <th className="px-3 py-3 text-sm font-bold">Lunch</th>
+                      <th className="px-3 py-3 text-sm font-bold">
+                        Lunch
+                      </th>
 
-                      <th className="px-3 py-3 text-sm font-bold">Dinner</th>
+                      <th className="px-3 py-3 text-sm font-bold">
+                        Dinner
+                      </th>
                     </tr>
                   </thead>
 
@@ -92,7 +100,8 @@ const WeeklyMenu = () => {
                       <tr
                         key={index}
                         className={`border-t text-center ${
-                          item.day === "Sunday" || item.day === "Thursday"
+                          item.day === "Sunday" ||
+                          item.day === "Thursday"
                             ? darkMode
                               ? "border-yellow-500/20 bg-yellow-500/10"
                               : "border-yellow-200 bg-yellow-50"
@@ -105,9 +114,13 @@ const WeeklyMenu = () => {
                           {item.day}
                         </td>
 
-                        <td className="px-3 py-3 text-sm">{item.breakfast}</td>
+                        <td className="px-3 py-3 text-sm">
+                          {item.breakfast}
+                        </td>
 
-                        <td className="px-3 py-3 text-sm">{item.lunch}</td>
+                        <td className="px-3 py-3 text-sm">
+                          {item.lunch}
+                        </td>
 
                         <td className="px-3 py-3 text-sm font-medium">
                           {item.dinner}
@@ -142,9 +155,12 @@ const WeeklyMenu = () => {
                   >
                     {/* DAY */}
                     <div className="mb-3 flex items-center justify-between">
-                      <h2 className="text-base font-bold">📅 {item.day}</h2>
+                      <h2 className="text-base font-bold">
+                        📅 {item.day}
+                      </h2>
 
-                      {(item.day === "Sunday" || item.day === "Thursday") && (
+                      {(item.day === "Sunday" ||
+                        item.day === "Thursday") && (
                         <span className="text-[10px] font-semibold text-yellow-500">
                           ⭐ Special
                         </span>
@@ -154,7 +170,9 @@ const WeeklyMenu = () => {
                     {/* ITEMS */}
                     <div className="space-y-2 text-sm">
                       <div>
-                        <span className="font-semibold">Breakfast:</span>{" "}
+                        <span className="font-semibold">
+                          Breakfast:
+                        </span>{" "}
                         {item.breakfast}
                       </div>
 

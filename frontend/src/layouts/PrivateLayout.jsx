@@ -10,7 +10,9 @@ const PrivateLayout = () => {
     <PrivateRoute roles={["admin"]}>
       <div
         className={`flex min-h-screen w-full flex-col transition-colors duration-300 ${
-          darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f5f7fb] text-[#0f0c1c]"
+          darkMode
+            ? "bg-[#0f0c1c] text-white"
+            : "bg-[#f5f7fb] text-[#0f0c1c]"
         } `}
       >
         {/* Navbar */}

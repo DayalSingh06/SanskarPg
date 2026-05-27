@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import RoomSection from "./RoomSection";
@@ -12,105 +12,108 @@ const AddPg = () => {
   const { darkMode } = useTheme();
   const navigate = useNavigate();
 
-  const [data, setData] = useState({
+  const initialData = {
     name: "",
     location: "",
     phone: "",
     map: "",
 
     rooms: [
-      {
-        type: "Single",
-        available: false,
-        price: "",
-      },
-
-      {
-        type: "Double",
-        available: false,
-        price: "",
-      },
-
-      {
-        type: "Triple",
-        available: false,
-        price: "",
-      },
-
-      {
-        type: "Four Seater",
-        available: false,
-        price: "",
-      },
+      { type: "Single", available: false, price: "" },
+      { type: "Double", available: false, price: "" },
+      { type: "Triple", available: false, price: "" },
+      { type: "Four Seater", available: false, price: "" },
     ],
 
     gallery: [
-      {
-        key: "outerLook",
-        title: "Outer Look",
-        images: [],
-      },
-
-      {
-        key: "food",
-        title: "Food",
-        images: [],
-      },
-
-      {
-        key: "rooms",
-        title: "Rooms",
-        images: [],
-      },
-
+      { key: "outerLook", title: "Outer Look", images: [] },
+      { key: "food", title: "Food", images: [] },
+      { key: "rooms", title: "Rooms", images: [] },
       {
         key: "toiletBathroom",
         title: "Toilet & Bathroom",
         images: [],
       },
-
-      {
-        key: "parking",
-        title: "Parking",
-        images: [],
-      },
-
+      { key: "parking", title: "Parking", images: [] },
       {
         key: "extraFacilities",
         title: "Extra Facilities",
         images: [],
       },
     ],
-  });
+  };
+
+  const [data, setData] = useState(initialData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [mainImagePreview, setMainImagePreview] = useState("");
+
+  const handleMainImageChange = (e) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    setMainImage(file);
+    setMainImagePreview(URL.createObjectURL(file));
+  };
+
+  const removeMainImage = () => {
+    if (mainImagePreview) {
+      URL.revokeObjectURL(mainImagePreview);
+    }
+
+    setMainImage(null);
+    setMainImagePreview("");
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (mainImagePreview) {
+        URL.revokeObjectURL(mainImagePreview);
+      }
+    };
+  }, [mainImagePreview]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
+    if (
+      !data.name.trim() ||
+      !data.location.trim() ||
+      !data.phone.trim()
+    ) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     try {
+      setIsSubmitting(true);
+
       const formData = new FormData();
 
-      // MAIN IMAGE
-      // 1. Append Main Image
       if (mainImage) {
         formData.append("mainImage", mainImage);
       }
-      // GALLERY IMAGES
+
       data.gallery.forEach((section) => {
         section.images.forEach((img) => {
-          // Sirf wahi images bhein jo nayi select hui hain (Files)
           if (img instanceof File) {
             formData.append(section.key, img);
           }
         });
       });
 
-      // OTHER DATA
       const dataToSend = {
         ...data,
         gallery: data.gallery.map((item) => ({
           key: item.key,
           title: item.title,
-          // images array ko khali bhejein, backend handle karega
           images: [],
         })),
       };
@@ -119,83 +122,16 @@ const AddPg = () => {
 
       await createPg(formData);
 
-      // RESET ALL DATA
-      setMainImage(null);
-
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
-
-      setData({
-        name: "",
-        location: "",
-        phone: "",
-        map: "",
-
-        rooms: [
-          {
-            type: "Single",
-            available: false,
-            price: "",
-          },
-
-          {
-            type: "Double",
-            available: false,
-            price: "",
-          },
-
-          {
-            type: "Triple",
-            available: false,
-            price: "",
-          },
-
-          {
-            type: "Four Seater",
-            available: false,
-            price: "",
-          },
-        ],
-
-        gallery: [
-          {
-            title: "Outer Look",
-            images: [],
-          },
-
-          {
-            title: "Food",
-            images: [],
-          },
-
-          {
-            title: "Rooms",
-            images: [],
-          },
-
-          {
-            title: "Toilet & Bathroom",
-            images: [],
-          },
-
-          {
-            title: "Parking",
-            images: [],
-          },
-
-          {
-            title: "Extra Facilities",
-            images: [],
-          },
-        ],
-      });
+      removeMainImage();
+      setData(initialData);
 
       alert("PG Added Successfully");
       navigate("/admin/allpg");
     } catch (error) {
       console.log(error);
       alert("Something went wrong");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -258,7 +194,7 @@ const AddPg = () => {
                     <>
                       {/* IMAGE */}
                       <img
-                        src={URL.createObjectURL(mainImage)}
+                        src={mainImagePreview}
                         alt="Preview"
                         className="h-full w-full object-cover"
                       />
@@ -266,14 +202,8 @@ const AddPg = () => {
                       {/* REMOVE BUTTON */}
                       <button
                         type="button"
-                        onClick={() => {
-                          setMainImage(null);
-
-                          // RESET INPUT
-                          if (fileInputRef.current) {
-                            fileInputRef.current.value = "";
-                          }
-                        }}
+                        onClick={removeMainImage}
+                        aria-label="Remove main image"
                         className="absolute top-3 right-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-red-500/90 text-white opacity-100 backdrop-blur-md transition-all duration-300 hover:scale-110 md:opacity-0 md:group-hover:opacity-100"
                       >
                         <X size={16} />
@@ -300,7 +230,8 @@ const AddPg = () => {
                     type="file"
                     ref={fileInputRef}
                     hidden
-                    onChange={(e) => setMainImage(e.target.files[0])}
+                    accept="image/*"
+                    onChange={handleMainImageChange}
                   />
 
                   {/* BUTTON */}
@@ -435,13 +366,14 @@ const AddPg = () => {
             {/* BUTTON */}
             <button
               type="submit"
-              className={`relative mt-8 w-full overflow-hidden rounded-3xl py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-[1.02] sm:mt-12 sm:py-5 sm:text-xl ${
+              disabled={isSubmitting}
+              className={`relative mt-8 w-full overflow-hidden rounded-3xl py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 sm:mt-12 sm:py-5 sm:text-xl ${
                 darkMode
                   ? `bg-linear-to-r from-indigo-700 via-purple-700 to-pink-700 shadow-[0_15px_40px_rgba(139,92,246,0.35)]`
                   : `bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-[0_15px_40px_rgba(79,70,229,0.4)]`
-              } `}
+              }`}
             >
-              Add PG
+              {isSubmitting ? "Adding PG..." : "Add PG"}
             </button>
           </form>
         </div>

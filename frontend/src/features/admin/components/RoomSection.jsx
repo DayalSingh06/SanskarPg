@@ -61,7 +61,10 @@ const RoomSection = ({ data, setData }) => {
                     : "bg-blue-100 text-blue-600"
                 } `}
               >
-                <BedDouble size={22} className="sm:h-6 sm:w-6 md:h-7 md:w-7" />
+                <BedDouble
+                  size={22}
+                  className="sm:h-6 sm:w-6 md:h-7 md:w-7"
+                />
               </div>
 
               <div>
@@ -98,7 +101,9 @@ const RoomSection = ({ data, setData }) => {
                   type="text"
                   placeholder="Enter room price"
                   value={room.price}
-                  onChange={(e) => handleChange(index, "price", e.target.value)}
+                  onChange={(e) =>
+                    handleChange(index, "price", e.target.value)
+                  }
                   className={`w-full rounded-2xl border py-3 pr-4 pl-10 transition-all duration-300 outline-none sm:py-4 sm:pr-5 sm:pl-12 ${
                     darkMode
                       ? `border-white/10 bg-white/5 text-white placeholder:text-gray-500 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20`

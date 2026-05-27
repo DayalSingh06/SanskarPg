@@ -45,7 +45,10 @@ function App() {
         </Route>
 
         <Route element={<PrivateLayout />}>
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route
+            path="/admin/dashboard"
+            element={<AdminDashboard />}
+          />
           <Route path="/admin/menu" element={<Menu />} />
           <Route path="/admin/allpg" element={<AllPg />} />
           <Route path="/admin/addPg" element={<AddPg />} />
@@ -60,7 +63,10 @@ function App() {
             path="/admin/rejected-users"
             element={<RejectedUsersTable />}
           />
-          <Route path="/admin/verified-reviews" element={<VerifiedReviews />} />
+          <Route
+            path="/admin/verified-reviews"
+            element={<VerifiedReviews />}
+          />
 
           <Route
             path="/admin/not-verified-reviews"

@@ -148,7 +148,9 @@ export default function Login() {
                 : "border border-gray-200 text-[#0f0c1c]"
             } `}
           >
-            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">Welcome</h2>
+            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">
+              Welcome
+            </h2>
 
             <p className="mb-4 text-xs sm:mb-6 sm:text-sm">
               Please enter your details to sign in
@@ -216,8 +218,8 @@ export default function Login() {
           {/* Footer */}
           <footer className="mt-4 text-center">
             <span className="text-xs text-[#6b7387]">
-              © {new Date().getFullYear()} Sanskar Boy's PG. All rights
-              reserved.
+              © {new Date().getFullYear()} Sanskar Boy's PG. All
+              rights reserved.
             </span>
           </footer>
         </div>

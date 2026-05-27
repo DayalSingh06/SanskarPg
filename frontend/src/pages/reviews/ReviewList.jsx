@@ -27,7 +27,9 @@ const ReviewList = () => {
   return (
     <div
       className={`h-125 w-full overflow-hidden rounded-2xl border shadow-xl transition-all duration-300 sm:h-135 sm:rounded-3xl ${
-        darkMode ? "border-[#2d2a45] bg-[#1b1830]" : "border-gray-200 bg-white"
+        darkMode
+          ? "border-[#2d2a45] bg-[#1b1830]"
+          : "border-gray-200 bg-white"
       } `}
     >
       {/* Header */}
@@ -82,7 +84,10 @@ const ReviewList = () => {
                 {/* Rating */}
                 <div className="flex flex-wrap items-center gap-0.5 sm:gap-1">
                   {[...Array(item.rating)].map((_, index) => (
-                    <span key={index} className="text-lg text-yellow-400">
+                    <span
+                      key={index}
+                      className="text-lg text-yellow-400"
+                    >
                       ⭐
                     </span>
                   ))}

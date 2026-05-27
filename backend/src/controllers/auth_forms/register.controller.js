@@ -52,7 +52,6 @@ export const register = async (req, res) => {
       });
     }
 
-    // OTP generate
     const otp = await createOtp(user._id, OTP_PURPOSE.REGISTER);
 
     // SEND EMAIL

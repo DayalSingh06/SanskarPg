@@ -4,7 +4,11 @@ import { X, Trash2, Save, RefreshCw } from "lucide-react";
 import RoomSection from "./RoomSection";
 import GallerySection from "./GallerySection";
 import { useTheme } from "../../../context/ThemeContext";
-import { getSinglePg, updatePg, deletePg } from "../../../services/pgService";
+import {
+  getSinglePg,
+  updatePg,
+  deletePg,
+} from "../../../services/pgService";
 import { getImageUrl } from "../../../utils/imageUrl";
 
 const UpdatePgDetails = () => {
@@ -140,7 +144,9 @@ const UpdatePgDetails = () => {
               Update PG Details
             </h1>
 
-            <p className="mt-2 text-white/80">Edit and manage PG information</p>
+            <p className="mt-2 text-white/80">
+              Edit and manage PG information
+            </p>
           </div>
 
           {/* TOP BUTTONS */}

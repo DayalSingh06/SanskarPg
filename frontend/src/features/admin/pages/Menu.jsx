@@ -184,13 +184,21 @@ const Menu = () => {
                 <tr
                   className={`text-center ${darkMode ? "bg-white/10" : "bg-slate-100"} `}
                 >
-                  <th className="px-3 py-3 text-sm font-bold">📅 Day</th>
+                  <th className="px-3 py-3 text-sm font-bold">
+                    📅 Day
+                  </th>
 
-                  <th className="px-3 py-3 text-sm font-bold">🍞 Breakfast</th>
+                  <th className="px-3 py-3 text-sm font-bold">
+                    🍞 Breakfast
+                  </th>
 
-                  <th className="px-3 py-3 text-sm font-bold">🍛 Lunch</th>
+                  <th className="px-3 py-3 text-sm font-bold">
+                    🍛 Lunch
+                  </th>
 
-                  <th className="px-3 py-3 text-sm font-bold">🍽️ Dinner</th>
+                  <th className="px-3 py-3 text-sm font-bold">
+                    🍽️ Dinner
+                  </th>
                 </tr>
               </thead>
 
@@ -216,7 +224,11 @@ const Menu = () => {
                         disabled={!editMode}
                         value={item.breakfast}
                         onChange={(e) =>
-                          handleChange(index, "breakfast", e.target.value)
+                          handleChange(
+                            index,
+                            "breakfast",
+                            e.target.value,
+                          )
                         }
                         placeholder="Breakfast"
                         className={`w-full rounded-xl border px-3 py-2 text-sm transition-all outline-none ${
@@ -260,7 +272,11 @@ const Menu = () => {
                         disabled={!editMode}
                         value={item.dinner}
                         onChange={(e) =>
-                          handleChange(index, "dinner", e.target.value)
+                          handleChange(
+                            index,
+                            "dinner",
+                            e.target.value,
+                          )
                         }
                         placeholder="Dinner"
                         className={`w-full rounded-xl border px-3 py-2 text-sm transition-all outline-none ${
@@ -292,7 +308,9 @@ const Menu = () => {
                 } `}
               >
                 {/* DAY */}
-                <h2 className="mb-3 text-base font-bold">📅 {item.day}</h2>
+                <h2 className="mb-3 text-base font-bold">
+                  📅 {item.day}
+                </h2>
 
                 {/* INPUTS */}
                 <div className="space-y-3">
@@ -307,7 +325,11 @@ const Menu = () => {
                       disabled={!editMode}
                       value={item.breakfast}
                       onChange={(e) =>
-                        handleChange(index, "breakfast", e.target.value)
+                        handleChange(
+                          index,
+                          "breakfast",
+                          e.target.value,
+                        )
                       }
                       placeholder="Breakfast"
                       className={`w-full rounded-xl border px-3 py-2 text-sm outline-none ${

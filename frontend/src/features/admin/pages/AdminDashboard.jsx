@@ -79,7 +79,9 @@ export default function AdminDashboard() {
   const getRegisteredPercentage = () => {
     if (stats.totalUsers === 0) return 0;
 
-    return ((stats.registeredUsers / stats.totalUsers) * 100).toFixed(1);
+    return ((stats.registeredUsers / stats.totalUsers) * 100).toFixed(
+      1,
+    );
   };
 
   const getReviewStats = async () => {

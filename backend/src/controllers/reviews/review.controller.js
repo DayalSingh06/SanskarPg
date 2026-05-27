@@ -97,7 +97,6 @@ export const getReviewStats = async (req, res) => {
   }
 };
 
-// GET VERIFIED REVIEWS
 export const getVerifiedReviews = async (req, res) => {
   try {
     const reviews = await Review.find({
@@ -118,7 +117,6 @@ export const getVerifiedReviews = async (req, res) => {
   }
 };
 
-// GET NOT VERIFIED REVIEWS
 export const getNotVerifiedReviews = async (req, res) => {
   try {
     const reviews = await Review.find({
@@ -163,7 +161,6 @@ export const unverifyReview = async (req, res) => {
   }
 };
 
-// VERIFY REVIEW
 export const verifyReview = async (req, res) => {
   try {
     const review = await Review.findByIdAndUpdate(
@@ -188,7 +185,6 @@ export const verifyReview = async (req, res) => {
   }
 };
 
-// DELETE REVIEW
 export const deleteReview = async (req, res) => {
   try {
     await Review.findByIdAndDelete(req.params.id);

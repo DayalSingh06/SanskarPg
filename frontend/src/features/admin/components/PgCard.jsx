@@ -104,7 +104,10 @@ const PgCard = ({ pg }) => {
           <div className="flex flex-col gap-3">
             <ContactButtonIcon type="call" phone={livePg?.phone} />
 
-            <ContactButtonIcon type="whatsapp" phone={livePg?.phone} />
+            <ContactButtonIcon
+              type="whatsapp"
+              phone={livePg?.phone}
+            />
           </div>
         </div>
       </div>

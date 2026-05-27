@@ -94,7 +94,9 @@ const Rules = () => {
   return (
     <div
       className={`min-h-screen p-6 ${
-        darkMode ? "bg-[#0f0f1a] text-white" : "bg-gray-50 text-gray-800"
+        darkMode
+          ? "bg-[#0f0f1a] text-white"
+          : "bg-gray-50 text-gray-800"
       }`}
     >
       <div className="mx-auto max-w-4xl">
@@ -125,10 +127,12 @@ const Rules = () => {
         {/* FOOT NOTE */}
         <div className="mt-10 text-center text-sm opacity-70">
           <p>
-            By staying in the hostel, you agree to follow all the above rules.
+            By staying in the hostel, you agree to follow all the
+            above rules.
           </p>
           <p className="mt-1">
-            हॉस्टल में रहने पर उपरोक्त सभी नियमों का पालन करना अनिवार्य होगा।
+            हॉस्टल में रहने पर उपरोक्त सभी नियमों का पालन करना
+            अनिवार्य होगा।
           </p>
         </div>
       </div>

@@ -68,7 +68,11 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
     setServerError("");
 
     const newErrors = {
-      password: validateField("password", formData.password, formData),
+      password: validateField(
+        "password",
+        formData.password,
+        formData,
+      ),
       confirmPassword: validateField(
         "confirmPassword",
         formData.confirmPassword,
@@ -116,7 +120,9 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
       <div
         className={`w-full max-w-sm rounded-lg p-6 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-[#0f0c1c]"} `}
       >
-        <h2 className="mb-4 text-lg font-semibold">Update Password</h2>
+        <h2 className="mb-4 text-lg font-semibold">
+          Update Password
+        </h2>
 
         {/* FORM */}
         <form onSubmit={handleSubmit}>

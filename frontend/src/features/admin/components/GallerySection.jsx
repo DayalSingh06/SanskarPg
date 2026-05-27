@@ -101,7 +101,9 @@ const GallerySection = ({ data, setData }) => {
                   multiple
                   hidden
                   ref={(el) => (fileInputRefs.current[index] = el)}
-                  onChange={(e) => handleGalleryImages(index, e.target.files)}
+                  onChange={(e) =>
+                    handleGalleryImages(index, e.target.files)
+                  }
                 />
 
                 {/* BUTTON */}
@@ -115,7 +117,10 @@ const GallerySection = ({ data, setData }) => {
                       : `bg-linear-to-r from-blue-600 to-indigo-600`
                   } `}
                 >
-                  <ImagePlus size={16} className="sm:h-4.5 sm:w-4.5" />
+                  <ImagePlus
+                    size={16}
+                    className="sm:h-4.5 sm:w-4.5"
+                  />
                   Upload
                 </button>
               </div>

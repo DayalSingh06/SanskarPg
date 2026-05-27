@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
-import { SunIcon, MoonIcon, MobileMenu } from "../common/icons/SvgIcons";
+import {
+  SunIcon,
+  MoonIcon,
+  MobileMenu,
+} from "../common/icons/SvgIcons";
 import Logo from "../common/logos/Logo";
+
+const navLinks = [
+  { to: "/admin/dashboard", label: "Home" },
+  { to: "/admin/menu", label: "Menu" },
+  { to: "/admin/allpg", label: "All PG" },
+];
 
 const PrivateNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const { darkMode, toggleTheme } = useTheme();
 
   const [user, setUser] = useState(null);
@@ -18,10 +27,11 @@ const PrivateNavbar = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    try {
+      const storedUser = localStorage.getItem("user");
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    } catch {
+      setUser(null);
     }
   }, [location.pathname]);
 
@@ -31,9 +41,26 @@ const PrivateNavbar = () => {
     localStorage.removeItem("role");
 
     setUser(null);
-
     navigate("/");
   };
+
+  const getDesktopLinkClass = ({ isActive }) =>
+    `group font-poppins relative font-medium transition-all duration-300 ${
+      isActive
+        ? "text-blue-500"
+        : darkMode
+          ? "text-white"
+          : "text-[#0f0c1c]"
+    } hover:text-blue-400`;
+
+  const getMobileLinkClass = ({ isActive }) =>
+    `font-poppins font-medium transition-colors duration-200 ${
+      isActive
+        ? "text-blue-500"
+        : darkMode
+          ? "text-white"
+          : "text-gray-900"
+    } hover:text-blue-400`;
 
   return (
     <>
@@ -42,82 +69,44 @@ const PrivateNavbar = () => {
           darkMode
             ? "border-gray-900 bg-[#0f0c1c]/95 text-white"
             : "border-gray-200 bg-white/95 text-[#0f0c1c]"
-        } `}
+        }`}
       >
-        {/* Left */}
         <div className="flex items-center gap-3 sm:gap-5 lg:gap-6">
           <Logo redirectPath="/admin/dashboard" />
 
-          {/* Links */}
-
           <div className="ml-8 hidden items-center gap-6 text-base lg:flex xl:ml-14 xl:gap-10 xl:text-lg">
-            {/* Home */}
-            <NavLink
-              to="/admin/dashboard"
-              className={({ isActive }) =>
-                `group font-poppins relative font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-blue-500"
-                    : darkMode
-                      ? "text-white"
-                      : "text-[#0f0c1c]"
-                } hover:text-blue-400`
-              }
-            >
-              Home
-              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
-            </NavLink>
-
-            {/* Menu */}
-            <NavLink
-              to="/admin/menu"
-              className={({ isActive }) =>
-                `group font-poppins relative font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-blue-500"
-                    : darkMode
-                      ? "text-white"
-                      : "text-[#0f0c1c]"
-                } hover:text-blue-400`
-              }
-            >
-              Menu
-              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
-            </NavLink>
-
-            {/* ALL PG */}
-            <NavLink
-              to="/admin/allpg"
-              className={({ isActive }) =>
-                `group font-poppins relative font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-blue-500"
-                    : darkMode
-                      ? "text-white"
-                      : "text-[#0f0c1c]"
-                } hover:text-blue-400`
-              }
-            >
-              All PG
-              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span>
-            </NavLink>
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={getDesktopLinkClass}
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-indigo-500 transition-all duration-300 group-hover:w-full" />
+              </NavLink>
+            ))}
           </div>
         </div>
 
-        {/* Right */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Dark Mode */}
           <button
+            type="button"
             onClick={toggleTheme}
-            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"} `}
+            aria-label={
+              darkMode
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+            }
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 ${
+              darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"
+            }`}
           >
             {darkMode ? <SunIcon /> : <MoonIcon />}
           </button>
 
-          {/* Buttons */}
           {user ? (
-            /* Logout Button */
             <button
+              type="button"
               onClick={handleLogout}
               className="font-poppins hidden h-9 items-center justify-center rounded-xl bg-red-600 px-4 text-sm font-medium text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-red-700 active:scale-95 sm:h-10 lg:flex"
             >
@@ -125,20 +114,20 @@ const PrivateNavbar = () => {
             </button>
           ) : (
             <>
-              {/* Login */}
               <button
+                type="button"
                 onClick={() => navigate("/login")}
                 className={`font-poppins flex h-9 items-center justify-center rounded-lg px-3 text-xs font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95 sm:h-10 sm:rounded-xl sm:px-4 sm:text-sm ${
                   darkMode
                     ? "bg-gray-800 text-white hover:bg-gray-700"
                     : "bg-gray-200 text-[#0f0c1c] hover:bg-gray-300"
-                } `}
+                }`}
               >
                 Login
               </button>
 
-              {/* Signup */}
               <button
+                type="button"
                 onClick={() => navigate("/register")}
                 className="font-poppins flex h-9 items-center justify-center rounded-lg bg-indigo-600 px-3 text-xs font-medium text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-700 active:scale-95 sm:h-10 sm:rounded-xl sm:px-5 sm:text-sm"
               >
@@ -147,10 +136,14 @@ const PrivateNavbar = () => {
             </>
           )}
 
-          {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 lg:hidden ${darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"} `}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            className={`flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 lg:hidden ${
+              darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"
+            }`}
           >
             <MobileMenu />
           </button>
@@ -163,74 +156,33 @@ const PrivateNavbar = () => {
             darkMode
               ? "bg-[#0f0c1c]/95 text-white"
               : "border-b border-gray-200 bg-white/95 text-gray-900"
-          } `}
+          }`}
         >
           <div className="flex flex-col items-center gap-6 px-5 py-6 text-base sm:text-lg">
-            {/* Home */}
-            <NavLink
-              to="/admin/dashboard"
-              className={({ isActive }) =>
-                `font-poppins font-medium ${
-                  isActive
-                    ? "text-blue-800"
-                    : darkMode
-                      ? "text-white"
-                      : "text-gray-900"
-                } transition-colors duration-200 hover:text-blue-400`
-              }
-            >
-              Home
-            </NavLink>
-            {/* Menu */}
-            <NavLink
-              to="/admin/menu"
-              className={({ isActive }) =>
-                `font-poppins font-medium ${
-                  isActive
-                    ? "text-blue-800"
-                    : darkMode
-                      ? "text-white"
-                      : "text-gray-900"
-                } transition-colors duration-200 hover:text-blue-400`
-              }
-            >
-              Menu
-            </NavLink>
-            {/* allpg */}
-            <NavLink
-              to="/admin/allpg"
-              className={({ isActive }) =>
-                `font-poppins font-medium ${
-                  isActive
-                    ? "text-blue-800"
-                    : darkMode
-                      ? "text-white"
-                      : "text-gray-900"
-                } transition-colors duration-200 hover:text-blue-400`
-              }
-            >
-              All PG
-            </NavLink>
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={getMobileLinkClass}
+              >
+                {link.label}
+              </NavLink>
+            ))}
 
-            {/* Buttons */}
-            <div className="flex w-full max-w-xs flex-col gap-3">
-              {/* Logout Button Only */}
-              {user && (
-                <div className="flex w-full max-w-xs">
-                  <button
-                    onClick={handleLogout}
-                    className="h-10 w-full rounded-md bg-red-600 text-white"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
+            {user && (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="h-10 w-full max-w-xs rounded-md bg-red-600 text-white transition hover:bg-red-700"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       )}
 
-      <div className="h-14 sm:h-16"></div>
+      <div className="h-14 sm:h-16" />
     </>
   );
 };

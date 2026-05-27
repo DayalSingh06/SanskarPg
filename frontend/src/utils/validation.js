@@ -1,4 +1,5 @@
-export const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+export const emailRegex =
+  /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 export const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
 export const indiaMobileRegex = /^[6-9]\d{9}$/;
 export const strongPasswordRegex =
@@ -8,13 +9,16 @@ export const validateField = (name, value, formData) => {
   switch (name) {
     case "name":
       if (!value.trim()) return "Please enter your name";
-      if (value.length < 3) return "Name must be at least 3 characters";
-      if (!nameRegex.test(value.trim())) return "Please enter a correct name";
+      if (value.length < 3)
+        return "Name must be at least 3 characters";
+      if (!nameRegex.test(value.trim()))
+        return "Please enter a correct name";
       return "";
 
     case "email":
       if (!value.trim()) return "Please enter your email";
-      if (!emailRegex.test(value.trim())) return "Please enter a valid email";
+      if (!emailRegex.test(value.trim()))
+        return "Please enter a valid email";
       return "";
 
     case "mobile":
@@ -62,9 +66,13 @@ export const getPasswordStrength = (password) => {
   const number = /\d/.test(password);
   const symbol = /[@$!%*?&]/.test(password);
 
-  const score = [lengthScore, upperCase, lowerCase, number, symbol].filter(
-    Boolean,
-  ).length;
+  const score = [
+    lengthScore,
+    upperCase,
+    lowerCase,
+    number,
+    symbol,
+  ].filter(Boolean).length;
 
   if (score <= 2) return "Weak";
   if (score === 3 || score === 4) return "Medium";

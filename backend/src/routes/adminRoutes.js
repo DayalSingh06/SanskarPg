@@ -23,7 +23,6 @@ import upload from "../middleware/upload.js";
 const router = express.Router();
 
 // GET USERS
-
 router.get("/pending", getPendingUsers);
 router.get("/registered", getRegisteredUsers);
 router.get("/rejected", getRejectedUsers);
@@ -35,8 +34,6 @@ router.put("/update/menu", updateMenu);
 
 router.put("/approve/:id", approveUser);
 router.put("/reject/:id", rejectUser);
-
-// DASHBOARD COUNTS
 
 router.get("/dashboard-counts", getDashboardCounts);
 
@@ -68,7 +65,7 @@ router.post(
   },
   createPg,
 );
-// GET ALL PGS
+
 router.get("/allpg", getAllPgs);
 
 router.get("/singlepg/:id", getSinglePg);

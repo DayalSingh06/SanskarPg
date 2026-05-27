@@ -3,14 +3,17 @@ import Logo from "../common/logos/Logo";
 import { useTheme } from "../../context/ThemeContext";
 import ContactButton from "../common/buttons/ContactButton";
 
+const quickLinks = [
+  { path: "/", label: "Home" },
+  { path: "/facilities", label: "Facilities" },
+  { path: "/rules", label: "Rules & Regulations" },
+];
+
+const PHONE = "916350028407";
+const EMAIL = "sanskarboyspg@gmail.com";
+
 const PublicFooter = () => {
   const { darkMode } = useTheme();
-
-  const quickLinks = [
-    { path: "/", label: "Home" },
-    { path: "/facilities", label: "Facilities" },
-    { path: "/rules", label: "Rules & Regulations" },
-  ];
 
   return (
     <footer
@@ -18,32 +21,33 @@ const PublicFooter = () => {
         darkMode
           ? "border-gray-800 bg-[#0f0c1c] text-gray-300"
           : "border-gray-300 bg-gray-100 text-gray-700"
-      } `}
+      }`}
     >
-      {/* MAIN FOOTER */}
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 text-center sm:px-8 md:grid-cols-2 md:text-left lg:grid-cols-3">
-        {/* ABOUT */}
         <div className="flex flex-col items-center md:items-start">
           <Logo redirectPath="/" />
 
           <p className="mt-5 max-w-xs text-sm leading-7 sm:text-[15px]">
-            Providing affordable, safe & comfortable PG accommodation in Jaipur
-            for students and working professionals ✨
+            Providing affordable, safe and comfortable PG
+            accommodation in Jaipur for students and working
+            professionals.
           </p>
 
-          {/* CTA BUTTONS */}
           <div className="mt-6 flex w-full max-w-xs flex-col gap-3 sm:w-auto sm:flex-row">
             <div className="w-full sm:w-auto">
-              <ContactButton type="call" phone="916350028407" />
+              <ContactButton type="call" phone={PHONE} />
             </div>
 
             <div className="w-full sm:w-auto">
-              <ContactButton type="whatsapp" phone="916350028407" />
+              <ContactButton
+                type="whatsapp"
+                phone={PHONE}
+                message="Hi, I want to know more about Sanskar Boys PG."
+              />
             </div>
           </div>
         </div>
 
-        {/* QUICK LINKS */}
         <div>
           <h3 className="mb-5 text-xl font-semibold">Quick Links</h3>
 
@@ -55,51 +59,58 @@ const PublicFooter = () => {
                   className="group relative inline-block transition-all duration-300 hover:text-blue-500"
                 >
                   {link.label}
-
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* CONTACT */}
         <div>
           <h3 className="mb-5 text-xl font-semibold">Contact</h3>
 
           <ul className="space-y-4 text-sm sm:text-[15px]">
             <li>
               <a
-                href="mailto:sanskarboyspg@gmail.com"
+                href={`mailto:${EMAIL}`}
                 className="break-all transition hover:text-blue-500"
               >
-                sanskarboyspg@gmail.com
+                {EMAIL}
               </a>
             </li>
 
             <li>
               <a
-                href="tel:+916350028407"
+                href={`tel:+${PHONE}`}
                 className="transition hover:text-blue-500"
               >
                 +91 63500 28407
               </a>
             </li>
 
-            <li>📍 Jaipur, Rajasthan</li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Jaipur%2C%20Rajasthan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-blue-500"
+              >
+                Jaipur, Rajasthan
+              </a>
+            </li>
           </ul>
         </div>
       </div>
 
-      {/* BOTTOM */}
       <div
         className={`border-t px-4 py-5 text-center text-xs sm:text-sm ${
           darkMode
             ? "border-gray-800 text-gray-500"
             : "border-gray-300 text-gray-500"
-        } `}
+        }`}
       >
-        © {new Date().getFullYear()} Sanskar Boy's PG. All rights reserved.
+        © {new Date().getFullYear()} Sanskar Boys PG. All rights
+        reserved.
       </div>
     </footer>
   );

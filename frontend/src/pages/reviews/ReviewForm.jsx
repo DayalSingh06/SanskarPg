@@ -57,7 +57,9 @@ const ReviewForm = () => {
         } `}
       >
         <h2
-          className={`mb-4 text-xl font-semibold sm:text-2xl ${darkMode ? "text-white" : "text-gray-900"} `}
+          className={`mb-4 text-xl font-semibold sm:text-2xl ${
+            darkMode ? "text-white" : "text-gray-900"
+          } `}
         >
           Write a Review
         </h2>

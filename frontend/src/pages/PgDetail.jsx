@@ -57,10 +57,7 @@ const PgDetail = () => {
     );
   }
 
-  // =========================
   // NO PG
-  // =========================
-
   if (!pg) {
     return (
       <div className="flex h-screen items-center justify-center text-2xl font-bold text-red-500">
@@ -69,10 +66,7 @@ const PgDetail = () => {
     );
   }
 
-  // =========================
   // MAIN IMAGE
-  // =========================
-
   const imageUrl = getImageUrl(pg.mainImage);
 
   return (
