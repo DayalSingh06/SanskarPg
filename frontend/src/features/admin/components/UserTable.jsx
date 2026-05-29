@@ -75,7 +75,7 @@ const UserTable = ({
 
       {/* DESKTOP TABLE */}
       <div className="hidden md:block">
-        <div className="scrollbar-hide max-h-162.5 overflow-y-auto rounded-t-xl">
+        <div className="scrollbar-hide max-h-110 overflow-y-auto rounded-t-xl">
           <table className="w-full border-collapse">
             {/* TABLE HEAD */}
             <thead className="sticky top-0 z-10">
