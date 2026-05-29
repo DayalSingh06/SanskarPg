@@ -23,6 +23,10 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
+
 app.use("/api/users", userRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/admin", adminRoutes);
