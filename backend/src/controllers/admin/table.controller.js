@@ -1,5 +1,22 @@
 import Users from "../../models/user.model.js";
 
+// GET ALL USERS
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await Users.find();
+
+    res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};
+
 // GET PENDING USERS
 export const getPendingUsers = async (req, res) => {
   try {

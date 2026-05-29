@@ -6,6 +6,7 @@ const PublicLayout = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <PublicNavbar />
+
       <main className="grow">
         <Outlet />
       </main>

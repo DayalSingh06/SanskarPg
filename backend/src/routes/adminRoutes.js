@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  getAllUsers,
   getPendingUsers,
   getRegisteredUsers,
   getRejectedUsers,
@@ -23,6 +24,7 @@ import upload from "../middleware/upload.js";
 const router = express.Router();
 
 // GET USERS
+router.get("/all-users", getAllUsers);
 router.get("/pending", getPendingUsers);
 router.get("/registered", getRegisteredUsers);
 router.get("/rejected", getRejectedUsers);

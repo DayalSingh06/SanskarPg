@@ -128,6 +128,8 @@ export default function Register() {
       } else {
         setGlobalError(backendMessage);
       }
+    } finally {
+      setIsRegistering(false);
     }
   };
 

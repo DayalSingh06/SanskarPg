@@ -74,112 +74,139 @@ const UserTable = ({
       </h2>
 
       {/* DESKTOP TABLE */}
-      <div className="hidden overflow-x-auto rounded-t-xl md:block">
-        <table className="w-full border-collapse">
-          {/* TABLE HEAD */}
-          <thead>
-            <tr
-              className={`text-sm ${darkMode ? "bg-gray-800 text-gray-200" : "bg-sky-100 text-sky-800"} `}
-            >
-              <th className="p-3 text-center">#</th>
-              <th className="p-3 text-center">Name</th>
-              <th className="p-3 text-center">Email</th>
-              <th className="p-3 text-center">Mobile</th>
-              <th className="p-3 text-center">State</th>
-              <th className="p-3 text-center">Time / Date</th>
-              <th className="p-3 text-center">Action</th>
-            </tr>
-          </thead>
+      <div className="hidden md:block">
+        <div className="scrollbar-hide max-h-162.5 overflow-y-auto rounded-t-xl">
+          <table className="w-full border-collapse">
+            {/* TABLE HEAD */}
+            <thead className="sticky top-0 z-10">
+              <tr
+                className={`text-sm ${
+                  darkMode
+                    ? "bg-gray-800 text-gray-200"
+                    : "bg-sky-100 text-sky-800"
+                }`}
+              >
+                <th className="p-3 text-center">#</th>
+                <th className="p-3 text-center">Name</th>
+                <th className="p-3 text-center">Email</th>
+                <th className="p-3 text-center">Mobile</th>
+                <th className="p-3 text-center">State</th>
+                <th className="p-3 text-center">Time / Date</th>
+                <th className="p-3 text-center">Action</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {users?.map((user, index) => {
-              const rowBg =
-                index % 2 === 0
-                  ? darkMode
-                    ? "bg-gray-900"
-                    : "bg-slate-50"
-                  : darkMode
-                    ? "bg-gray-800/70"
-                    : "bg-sky-50/60";
+            <tbody>
+              {users?.map((user, index) => {
+                const rowBg =
+                  index % 2 === 0
+                    ? darkMode
+                      ? "bg-gray-900"
+                      : "bg-slate-50"
+                    : darkMode
+                      ? "bg-gray-800/70"
+                      : "bg-sky-50/60";
 
-              return (
-                <tr
-                  key={user._id}
-                  className={`border-b transition-all duration-200 ${
-                    darkMode
-                      ? "border-gray-700 hover:bg-gray-800"
-                      : "border-gray-200 hover:bg-sky-100/70"
-                  } ${rowBg} `}
-                >
-                  <td className="p-3 text-center">{index + 1}</td>
-
-                  <td className="p-3 text-center font-medium">
-                    {user.name}
-                  </td>
-
-                  <td className="p-3 text-center">{user.email}</td>
-
-                  <td className="p-3 text-center">{user.mobile}</td>
-
-                  <td className="p-3 text-center">
-                    <span
-                      className={`inline-block rounded-full px-3 py-1 text-xs capitalize ${colors.state} `}
-                    >
-                      {user.state}
-                    </span>
-                  </td>
-
-                  <td
-                    className={`p-3 text-center text-sm ${colors.date}`}
+                return (
+                  <tr
+                    key={user._id}
+                    className={`border-b transition-all duration-200 ${
+                      darkMode
+                        ? "border-gray-700 hover:bg-gray-800"
+                        : "border-gray-200 hover:bg-sky-100/70"
+                    } ${rowBg}`}
                   >
-                    {type === "pending" &&
-                      new Date(user.createdAt).toLocaleString()}
+                    <td className="p-3 text-center">{index + 1}</td>
 
-                    {type === "registered" &&
-                      user.registeredAt &&
-                      new Date(user.registeredAt).toLocaleString()}
+                    <td className="p-3 text-center font-medium">
+                      {user.name}
+                    </td>
 
-                    {type === "rejected" &&
-                      user.rejectedAt &&
-                      new Date(user.rejectedAt).toLocaleString()}
-                  </td>
+                    <td className="p-3 text-center">{user.email}</td>
 
-                  <td className="p-3">
-                    <div className="flex flex-wrap items-center justify-center gap-2">
-                      <ContactButtonIcon
-                        type="call"
-                        phone={`91${user.mobile}`}
-                      />
+                    <td className="p-3 text-center">{user.mobile}</td>
 
-                      <ContactButtonIcon
-                        type="whatsapp"
-                        phone={`91${user.mobile}`}
-                      />
+                    <td className="p-3 text-center">
+                      <span
+                        className={`inline-block rounded-full px-3 py-1 text-xs capitalize ${colors.state}`}
+                      >
+                        {user.state}
+                      </span>
+                    </td>
 
-                      {type === "pending" && (
-                        <>
-                          <button
-                            onClick={() => approveUser(user._id)}
-                            className="rounded-md bg-green-500 p-1.5 text-white hover:bg-green-600"
-                          >
-                            <Check size={15} />
-                          </button>
+                    <td
+                      className={`p-3 text-center text-sm ${colors.date}`}
+                    >
+                      {type === "pending" &&
+                        new Date(user.createdAt).toLocaleString()}
 
+                      {type === "registered" &&
+                        user.registeredAt &&
+                        new Date(user.registeredAt).toLocaleString()}
+
+                      {type === "rejected" &&
+                        user.rejectedAt &&
+                        new Date(user.rejectedAt).toLocaleString()}
+                    </td>
+
+                    <td className="p-3">
+                      <div className="flex flex-wrap items-center justify-center gap-2">
+                        <ContactButtonIcon
+                          type="call"
+                          phone={`91${user.mobile}`}
+                        />
+
+                        <ContactButtonIcon
+                          type="whatsapp"
+                          phone={`91${user.mobile}`}
+                        />
+
+                        {/* PENDING */}
+                        {type === "pending" && (
+                          <>
+                            <button
+                              onClick={() => approveUser(user._id)}
+                              className="rounded-lg bg-green-500 p-2 text-white transition-all hover:bg-green-600"
+                            >
+                              <Check size={16} />
+                            </button>
+
+                            <button
+                              onClick={() => rejectUser(user._id)}
+                              className="rounded-lg bg-red-500 p-2 text-white transition-all hover:bg-red-600"
+                            >
+                              <X size={16} />
+                            </button>
+                          </>
+                        )}
+
+                        {/* REGISTERED */}
+                        {type === "registered" && (
                           <button
                             onClick={() => rejectUser(user._id)}
-                            className="rounded-md bg-red-500 p-1.5 text-white hover:bg-red-600"
+                            className="rounded-lg bg-red-500 p-2 text-white transition-all hover:bg-red-600"
                           >
-                            <X size={15} />
+                            <X size={16} />
                           </button>
-                        </>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                        )}
+
+                        {/* REJECTED */}
+                        {type === "rejected" && (
+                          <button
+                            onClick={() => approveUser(user._id)}
+                            className="rounded-lg bg-green-500 p-2 text-white transition-all hover:bg-green-600"
+                          >
+                            <Check size={16} />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* MOBILE CARD VIEW */}

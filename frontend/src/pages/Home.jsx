@@ -22,14 +22,12 @@ const images = [img1, img2, img3, img4];
 const Home = () => {
   const { darkMode } = useTheme();
   const navigate = useNavigate();
+
   const [current, setCurrent] = useState(0);
-
   const [pgs, setPgs] = useState([]);
-
   const [loading, setLoading] = useState(true);
 
   const user = localStorage.getItem("user");
-
   const role = localStorage.getItem("role");
 
   useEffect(() => {
@@ -74,7 +72,7 @@ const Home = () => {
           >
             <img
               src={img}
-              alt="Hostel"
+              alt="PG Images"
               className="h-full w-full scale-100 object-cover object-center blur-[1px] sm:scale-105 sm:blur-[2px]"
             />
           </div>
@@ -222,7 +220,7 @@ const Home = () => {
           {/* PARKING */}
           <div className="rounded-2xl border border-white/10 bg-white/10 p-6 shadow-xl backdrop-blur-lg transition hover:scale-105">
             <h3 className="mb-2 text-lg font-semibold text-yellow-400">
-              🚗 Parking Area
+              🏍️ Parking Area
             </h3>
             <p
               className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}

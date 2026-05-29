@@ -48,7 +48,8 @@ export const register = async (req, res) => {
         mobile,
         password: hashedPassword,
         role,
-        isVerified: false,
+        // isVerified: false,
+        isVerified: true,
       });
     }
 
