@@ -202,3 +202,23 @@ export const deleteReview = async (req, res) => {
     });
   }
 };
+
+export const getUserReviews = async (req, res) => {
+  try {
+    const reviews = await Review.find({
+      userId: req.user.id,
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      reviews,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+};

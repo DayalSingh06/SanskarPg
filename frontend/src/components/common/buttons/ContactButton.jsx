@@ -1,6 +1,5 @@
 import callIcon from "../../../assets/icons/call.png";
 import whatsappIcon from "../../../assets/icons/whatsapp.svg";
-
 import { useTheme } from "../../../context/ThemeContext";
 
 const ContactButton = ({
@@ -20,9 +19,7 @@ const ContactButton = ({
       }`;
 
   const bgColor = isCall
-    ? darkMode
-      ? "bg-blue-600 hover:bg-blue-700"
-      : "bg-blue-500 hover:bg-blue-600"
+    ? "bg-blue-600 hover:bg-blue-700"
     : "bg-green-500 hover:bg-green-600";
 
   const text = isCall ? "Call Now" : "WhatsApp";
@@ -40,7 +37,7 @@ const ContactButton = ({
         src={icon}
         alt=""
         aria-hidden="true"
-        className="h-5 w-5 object-contain sm:h-6 sm:w-6"
+        className="h-5 w-5 rounded-full object-contain sm:h-6 sm:w-6"
       />
       <span>{text}</span>
     </a>

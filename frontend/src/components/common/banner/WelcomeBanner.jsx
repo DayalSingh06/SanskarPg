@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTheme } from "../../../context/ThemeContext";
-import { RefreshIcon, EditIcon } from "../icons/SvgIcons";
+import { RefreshIcon } from "../icons/SvgIcons";
 
 const WelcomeBanner = ({ onEdit }) => {
   const { darkMode } = useTheme();
@@ -34,10 +34,8 @@ const WelcomeBanner = ({ onEdit }) => {
 
   return (
     <div
-      className={`relative min-h-35 w-full overflow-hidden rounded-2xl px-3 py-4 transition-all duration-300 select-none sm:px-5 md:px-7 md:py-5 ${
-        darkMode
-          ? "bg-[#202c4a]"
-          : "border border-gray-200 bg-white shadow-sm"
+      className={`relative min-h-25 w-full overflow-hidden rounded-2xl px-3 py-4 transition-all duration-300 select-none sm:px-5 md:px-7 md:py-5 ${
+        darkMode ? "bg-[#202c4a]" : "border border-gray-200 bg-white shadow-sm"
       }`}
     >
       <img
@@ -73,20 +71,6 @@ const WelcomeBanner = ({ onEdit }) => {
             }`}
           >
             Welcome Back, {firstName}
-            {onEdit && (
-              <button
-                type="button"
-                onClick={onEdit}
-                aria-label="Edit profile"
-                className={`cursor-pointer rounded-lg p-2 transition-all duration-300 ${
-                  darkMode
-                    ? "bg-[#39435e] hover:bg-[#3d5de0]"
-                    : "bg-gray-200 hover:bg-blue-500 hover:text-white"
-                }`}
-              >
-                <EditIcon />
-              </button>
-            )}
           </h1>
 
           <p

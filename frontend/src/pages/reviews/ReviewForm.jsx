@@ -6,11 +6,8 @@ import { useTheme } from "../../context/ThemeContext";
 const ReviewForm = () => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
-
   const navigate = useNavigate();
-
   const { darkMode } = useTheme();
-
   const token = localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
@@ -33,15 +30,14 @@ const ReviewForm = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
-
-      alert(res.data.message);
 
       setReview("");
       setRating(0);
     } catch (error) {
-      console.log(error);
+      console.error("Review Create Error:", error);
+
       alert(error.response?.data?.message || "Something went wrong");
     }
   };

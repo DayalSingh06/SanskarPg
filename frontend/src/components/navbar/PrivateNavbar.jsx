@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
-import { useTheme } from "../../context/ThemeContext";
-import {
-  SunIcon,
-  MoonIcon,
-  MobileMenu,
-} from "../common/icons/SvgIcons";
-import Logo from "../common/logos/Logo";
+import { useEffect, useState } from 'react';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
+import { useTheme } from '../../context/ThemeContext';
+import { SunIcon, MoonIcon, MobileMenu } from '../common/icons/SvgIcons';
+import Logo from '../common/logos/Logo';
 
 const navLinks = [
-  { to: "/admin/dashboard", label: "Home" },
-  { to: "/admin/menu", label: "Menu" },
-  { to: "/admin/allpg", label: "All PG" },
+  { to: '/admin/dashboard', label: 'Home' },
+  { to: '/admin/menu', label: 'Menu' },
+  { to: '/admin/allpg', label: 'All PG' },
 ];
 
 const PrivateNavbar = () => {
@@ -28,7 +24,7 @@ const PrivateNavbar = () => {
 
   useEffect(() => {
     try {
-      const storedUser = localStorage.getItem("user");
+      const storedUser = localStorage.getItem('user');
       setUser(storedUser ? JSON.parse(storedUser) : null);
     } catch {
       setUser(null);
@@ -36,39 +32,31 @@ const PrivateNavbar = () => {
   }, [location.pathname]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("role");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('role');
 
     setUser(null);
-    navigate("/");
+    navigate('/');
   };
 
   const getDesktopLinkClass = ({ isActive }) =>
     `group font-poppins relative font-medium transition-all duration-300 ${
-      isActive
-        ? "text-blue-500"
-        : darkMode
-          ? "text-white"
-          : "text-[#0f0c1c]"
+      isActive ? 'text-blue-500' : darkMode ? 'text-white' : 'text-[#0f0c1c]'
     } hover:text-blue-400`;
 
   const getMobileLinkClass = ({ isActive }) =>
     `font-poppins font-medium transition-colors duration-200 ${
-      isActive
-        ? "text-blue-500"
-        : darkMode
-          ? "text-white"
-          : "text-gray-900"
+      isActive ? 'text-blue-500' : darkMode ? 'text-white' : 'text-gray-900'
     } hover:text-blue-400`;
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 z-50 flex h-14 w-full items-center justify-between border-b px-3 backdrop-blur-md transition-all duration-300 select-none sm:h-16 sm:px-4 md:px-5 lg:px-6 ${
+        className={`fixed top-0 left-0 z-50 flex h-13 w-full items-center justify-between border-b px-3 backdrop-blur-md transition-all duration-300 select-none sm:h-15 sm:px-4 md:px-5 lg:px-6 ${
           darkMode
-            ? "border-gray-900 bg-[#0f0c1c]/95 text-white"
-            : "border-gray-200 bg-white/95 text-[#0f0c1c]"
+            ? 'border-gray-900 bg-[#0f0c1c]/95 text-white'
+            : 'border-gray-200 bg-white/95 text-[#0f0c1c]'
         }`}
       >
         <div className="flex items-center gap-3 sm:gap-5 lg:gap-6">
@@ -93,12 +81,10 @@ const PrivateNavbar = () => {
             type="button"
             onClick={toggleTheme}
             aria-label={
-              darkMode
-                ? "Switch to light mode"
-                : "Switch to dark mode"
+              darkMode ? 'Switch to light mode' : 'Switch to dark mode'
             }
             className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 ${
-              darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"
+              darkMode ? 'hover:bg-white/10' : 'hover:bg-gray-200'
             }`}
           >
             {darkMode ? <SunIcon /> : <MoonIcon />}
@@ -116,11 +102,11 @@ const PrivateNavbar = () => {
             <>
               <button
                 type="button"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate('/login')}
                 className={`font-poppins flex h-9 items-center justify-center rounded-lg px-3 text-xs font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95 sm:h-10 sm:rounded-xl sm:px-4 sm:text-sm ${
                   darkMode
-                    ? "bg-gray-800 text-white hover:bg-gray-700"
-                    : "bg-gray-200 text-[#0f0c1c] hover:bg-gray-300"
+                    ? 'bg-gray-800 text-white hover:bg-gray-700'
+                    : 'bg-gray-200 text-[#0f0c1c] hover:bg-gray-300'
                 }`}
               >
                 Login
@@ -128,7 +114,7 @@ const PrivateNavbar = () => {
 
               <button
                 type="button"
-                onClick={() => navigate("/register")}
+                onClick={() => navigate('/register')}
                 className="font-poppins flex h-9 items-center justify-center rounded-lg bg-indigo-600 px-3 text-xs font-medium text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-700 active:scale-95 sm:h-10 sm:rounded-xl sm:px-5 sm:text-sm"
               >
                 Sign Up
@@ -139,10 +125,10 @@ const PrivateNavbar = () => {
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             className={`flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 sm:h-10 sm:w-10 lg:hidden ${
-              darkMode ? "hover:bg-white/10" : "hover:bg-gray-200"
+              darkMode ? 'hover:bg-white/10' : 'hover:bg-gray-200'
             }`}
           >
             <MobileMenu />
@@ -154,8 +140,8 @@ const PrivateNavbar = () => {
         <div
           className={`fixed top-14 left-0 z-40 w-full shadow-lg backdrop-blur-md transition-all duration-300 sm:top-16 lg:hidden ${
             darkMode
-              ? "bg-[#0f0c1c]/95 text-white"
-              : "border-b border-gray-200 bg-white/95 text-gray-900"
+              ? 'bg-[#0f0c1c]/95 text-white'
+              : 'border-b border-gray-200 bg-white/95 text-gray-900'
           }`}
         >
           <div className="flex flex-col items-center gap-6 px-5 py-6 text-base sm:text-lg">

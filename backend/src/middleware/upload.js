@@ -21,8 +21,8 @@ const storage = new CloudinaryStorage({
 
     public_id: (req, file) => {
       const ts = Date.now();
-      const rand = Math.round(Math.random() * 1e9);
-      return `${file.fieldname}-${ts}-${rand}`;
+      const random = Math.round(Math.random() * 1e9);
+      return `${file.fieldname}-${ts}-${random}`;
     },
   },
 });

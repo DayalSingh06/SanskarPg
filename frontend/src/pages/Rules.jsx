@@ -93,39 +93,39 @@ const Rules = () => {
 
   return (
     <div
-      className={`min-h-screen p-6 ${
+      className={`min-h-screen px-4 py-6 select-none sm:p-6 ${
         darkMode
           ? "bg-[#0f0f1a] text-white"
           : "bg-gray-50 text-gray-800"
       }`}
     >
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto w-full max-w-4xl">
         {/* HEADING */}
-        <h1 className="mb-8 text-center text-3xl font-bold">
+        <h1 className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl">
           Rules & Regulations
         </h1>
-
         {/* RULE LIST */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {rulesData.map((rule, index) => (
             <div
               key={index}
-              className={`rounded-xl border p-4 ${
+              className={`rounded-xl border p-3 sm:p-4 ${
                 darkMode
                   ? "border-gray-700 bg-[#1a1625]"
                   : "border-gray-200 bg-white"
               } shadow-sm transition hover:shadow-md`}
             >
-              <p className="font-medium">
+              <p className="text-sm leading-relaxed font-medium sm:text-base">
                 {index + 1}. {rule.en}
               </p>
-              <p className="mt-1 text-sm opacity-80">{rule.hi}</p>
+              <p className="mt-1.5 pl-5 text-xs leading-relaxed opacity-80 sm:pl-5 sm:text-sm">
+                {rule.hi}
+              </p>
             </div>
           ))}
         </div>
-
         {/* FOOT NOTE */}
-        <div className="mt-10 text-center text-sm opacity-70">
+        <div className="mt-8 text-center text-xs opacity-70 sm:mt-10 sm:text-sm">
           <p>
             By staying in the hostel, you agree to follow all the
             above rules.

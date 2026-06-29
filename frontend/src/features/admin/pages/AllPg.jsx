@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import PgCard from "../components/PgCard";
-import { getAllPgs } from "../../../services/pgService";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import PgCard from '../components/PgCard';
+import { getAllPgs } from '../../../services/pgService';
 
 const AllPg = () => {
   const [pgs, setPgs] = useState([]);

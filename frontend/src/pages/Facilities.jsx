@@ -6,7 +6,7 @@ const Facilities = () => {
 
   return (
     <div
-      className={`min-h-screen overflow-x-hidden px-4 py-10 transition-all duration-300 sm:px-6 sm:py-14 lg:px-8 lg:py-16 ${
+      className={`min-h-screen overflow-x-hidden px-4 py-10 transition-all duration-300 select-none sm:px-6 sm:py-14 lg:px-8 lg:py-16 ${
         darkMode
           ? "bg-linear-to-br from-[#0f0c1c] via-[#1a1630] to-[#0f0c1c] text-white"
           : "bg-linear-to-br from-blue-50 via-white to-purple-50 text-gray-900"
@@ -20,9 +20,9 @@ const Facilities = () => {
         <p
           className={`text-sm leading-relaxed sm:text-base ${darkMode ? "text-gray-400" : "text-gray-600"} `}
         >
-          Hum sirf PG nahi dete, balki ek comfortable, safe aur
-          premium living experience provide karte hain — jahan aap
-          bina kisi tension ke reh sakte hain 😊
+          More than just a PG, we provide a comfortable, safe, and
+          premium living experience where you can enjoy peace of mind
+          every day.
         </p>
       </div>
 
@@ -30,23 +30,24 @@ const Facilities = () => {
       <div className="mx-auto mb-16 max-w-5xl">
         <div className="rounded-2xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl sm:rounded-3xl sm:p-8">
           <h2 className="mb-4 text-xl font-bold text-yellow-400 sm:text-2xl">
-            🍽️ Best Quality Food (Our Highlight)
+            🍽️ Best Quality Food
           </h2>
 
           <p className="mb-4 text-sm leading-relaxed sm:text-base">
-            Hamare PG ki sabse badi khasiyat hai hamara khana 🍛 — jo
-            taste, quality aur hygiene ke mamle me dusre PG se kaafi
-            better hai. Aap khud aake khana taste karke check kar
-            sakte ho 👍
+            One of the biggest highlights of our PG is our food. We
+            take pride in serving delicious, high-quality, and
+            hygienic meals that stand out from typical PG offerings.
+            You're welcome to visit and taste the food yourself before
+            making a decision.
           </p>
 
           <p className="mb-4 text-sm leading-relaxed sm:text-base">
-            Jahan baaki PG sirf week me 1 baar special khana dete
-            hain, hum aapko{" "}
+            While most PGs offer special meals only once a week, we
+            serve a{" "}
             <span className="font-semibold text-green-400">
-              week me 2 din (Thursday & Sunday)
-            </span>{" "}
-            special dinner provide karte hain 🎉
+              special dinner twice a week (Thursday & Sunday){" "}
+            </span>
+            to make your dining experience even more enjoyable.
           </p>
 
           <div className="grid gap-4 text-sm sm:grid-cols-2 sm:gap-5 sm:text-base">
@@ -61,21 +62,26 @@ const Facilities = () => {
               <h3 className="mb-2 font-semibold text-green-400">
                 🍱 Lunch
               </h3>
-              <p>2 Sabji (1 sabji + 1 dal) + Rice + Chach 🥛</p>
+              <p>
+                Seasonal Vegetable + Dal + Chapati + Rice + Buttermilk
+              </p>
             </div>
 
             <div>
               <h3 className="mb-2 font-semibold text-purple-400">
                 🍽️ Dinner
               </h3>
-              <p>1 Sabji + Dal / Chutney + Roti</p>
+              <p>
+                Freshly Prepared Vegetable Dish + (Chutney / mirchi
+                taporiye) + Chapati
+              </p>
             </div>
 
             <div>
               <h3 className="mb-2 font-semibold text-pink-400">
                 🎉 Special Days
               </h3>
-              <p>Suji Halwa / Kheer + Paneer / Chole + Roti / Puri</p>
+              <p>Suji Halwa / Kheer + Paneer / Chole + Chapati</p>
             </div>
           </div>
         </div>
@@ -89,10 +95,10 @@ const Facilities = () => {
             🛏️ Room & Furniture
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Single, Double aur Triple sharing rooms available hain.
-            Har room me comfortable bed, study table, chair, cupboard
-            aur fan/cooler diya jata hai taki aap comfortable feel
-            karein.
+            We offer Single, Double, and Triple Sharing Rooms to suit
+            different preferences and budgets. Each room is furnished
+            with a comfortable bed, study table, chair, cupboard, and
+            fan/cooler to ensure a comfortable living experience.
           </p>
         </div>
 
@@ -102,9 +108,10 @@ const Facilities = () => {
             🚿 Bathroom & Water
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Attached ya common bathroom options available hain. 24x7
-            pani aur geyser facility ke saath clean aur maintained
-            washrooms provide kiye jate hain.
+            Choose between attached or shared bathroom options. Clean
+            and well-maintained washrooms are provided, along with
+            24/7 water supply and geyser facilities for your
+            convenience.
           </p>
         </div>
 
@@ -114,9 +121,8 @@ const Facilities = () => {
             🌐 Internet & Electricity
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            High-speed WiFi aur 24/7 electricity available hai taki
-            aap study, work aur entertainment bina interruption ke kar
-            sakein ⚡
+            High-speed Wi-Fi and 24/7 electricity ensure uninterrupted
+            study, work, and entertainment whenever you need it.
           </p>
         </div>
 
@@ -126,9 +132,9 @@ const Facilities = () => {
             🧹 Cleaning & Maintenance
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Regular housekeeping, room cleaning, washroom cleaning aur
-            garbage collection — hamesha clean aur hygienic
-            environment maintain kiya jata hai ✨
+            Regular housekeeping, room cleaning, washroom maintenance,
+            and garbage collection ensure a clean, hygienic, and
+            well-maintained living environment at all times.
           </p>
         </div>
 
@@ -138,8 +144,8 @@ const Facilities = () => {
             👕 Laundry Service
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Laundry service available hai (paid) — aapko kapde dhone
-            ki tension lene ki zarurat nahi 👍
+            Paid laundry service is available, so you can enjoy a
+            hassle-free stay without worrying about washing clothes.
           </p>
         </div>
 
@@ -149,20 +155,8 @@ const Facilities = () => {
             🔐 Security
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            CCTV cameras aur safe environment — aapki safety hamari
-            priority hai 🛡️
-          </p>
-        </div>
-
-        {/* COMMON AREA */}
-        <div className="rounded-2xl border border-white/10 bg-white/10 p-5 shadow-xl backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] sm:p-6">
-          <h3 className="mb-3 text-lg font-semibold text-yellow-400 sm:text-xl">
-            🛋️ Common Area
-          </h3>
-          <p className="text-sm leading-relaxed sm:text-base">
-            Dining hall, refrigerator aur basic facilities available
-            hain jahan aap relax kar sakte hain aur meals enjoy kar
-            sakte hain 😊
+            24/7 CCTV surveillance and a secure living environment
+            ensure your safety and peace of mind.
           </p>
         </div>
 
@@ -172,8 +166,8 @@ const Facilities = () => {
             🚗 Parking Area
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Safe aur spacious parking available hai — bike aur car
-            dono ke liye suitable 🚘
+            Safe and spacious parking facilities are available
+            exclusively for bikes.
           </p>
         </div>
 
@@ -183,10 +177,10 @@ const Facilities = () => {
             📍 Location & Nearby
           </h3>
           <p className="text-sm leading-relaxed sm:text-base">
-            Hamara PG prime location par hai jahan market, D-Mart,
-            Super Mart aur local shops easily available hain 🛒.
-            Transport bhi easily mil jata hai, isliye aapko daily
-            travel me koi problem nahi hogi 🚶‍♂️
+            Our PG is conveniently located in a prime area, with
+            markets, D-Mart, supermarkets, and local shops just a
+            short distance away. 🛒 Easy access to public
+            transportation ensures a hassle-free daily commute.
           </p>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import axios from "../utils/axios";
+import axios from '../utils/axios';
 
 export const createPg = async (formData) => {
-  const response = await axios.post("/api/admin/create", formData, {
+  const response = await axios.post('/api/admin/create', formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     },
   });
 
@@ -11,8 +11,7 @@ export const createPg = async (formData) => {
 };
 
 export const getAllPgs = async () => {
-  const response = await axios.get("/api/admin/allpg");
-
+  const response = await axios.get('/api/admin/allpg');
   return response.data;
 };
 
@@ -23,10 +22,7 @@ export const getSinglePg = async (id) => {
 };
 
 export const updatePg = async (id, formData) => {
-  const response = await axios.put(
-    `/api/admin/update/${id}`,
-    formData,
-  );
+  const response = await axios.put(`/api/admin/update/${id}`, formData);
 
   return response.data;
 };

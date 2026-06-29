@@ -9,13 +9,13 @@ const Logo = ({ redirectPath = "/", showImage = true }) => {
     <Link
       to={redirectPath}
       aria-label="Go to home"
-      className="flex w-fit cursor-pointer items-end gap-2 transition-all duration-300 select-none hover:scale-[1.02] active:scale-[0.98] sm:gap-2.5"
+      className="flex w-fit cursor-pointer items-end gap-1 transition-all duration-300 select-none hover:scale-[1.02] active:scale-[0.98] sm:gap-2.5"
     >
       {showImage && (
         <img
           src={namskar}
           alt="Sanskar Logo"
-          className="h-10 w-10 rounded-full object-cover shadow-md md:h-11 md:w-11"
+          className="h-9 w-9 rounded-full object-cover shadow-md md:h-10 md:w-10"
         />
       )}
 

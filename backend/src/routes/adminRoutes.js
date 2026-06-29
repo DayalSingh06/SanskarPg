@@ -11,7 +11,8 @@ import {
 } from "../controllers/admin/table.controller.js";
 
 import { getMenu, updateMenu } from "../controllers/admin/menu.controller.js";
-
+import { verifyToken } from "../middleware/auth.middleware.js";
+import { isAdmin } from "../middleware/admin.middleware.js";
 import {
   createPg,
   getAllPgs,
@@ -24,20 +25,20 @@ import upload from "../middleware/upload.js";
 const router = express.Router();
 
 // GET USERS
-router.get("/all-users", getAllUsers);
-router.get("/pending", getPendingUsers);
-router.get("/registered", getRegisteredUsers);
-router.get("/rejected", getRejectedUsers);
+router.get("/all-users", verifyToken, isAdmin, getAllUsers);
+router.get("/pending", verifyToken, isAdmin, getPendingUsers);
+router.get("/registered", verifyToken, isAdmin, getRegisteredUsers);
+router.get("/rejected", verifyToken, isAdmin, getRejectedUsers);
 
 router.get("/get/menu", getMenu);
-router.put("/update/menu", updateMenu);
+router.put("/update/menu", verifyToken, isAdmin, updateMenu);
 
 // UPDATE USER STATE
 
-router.put("/approve/:id", approveUser);
-router.put("/reject/:id", rejectUser);
+router.put("/approve/:id", verifyToken, isAdmin, approveUser);
+router.put("/reject/:id", verifyToken, isAdmin, rejectUser);
 
-router.get("/dashboard-counts", getDashboardCounts);
+router.get("/dashboard-counts", verifyToken, isAdmin, getDashboardCounts);
 
 const pgUpload = upload.fields([
   { name: "mainImage", maxCount: 1 },
@@ -65,11 +66,12 @@ router.post(
       next();
     });
   },
+  verifyToken,
+  isAdmin,
   createPg,
 );
 
 router.get("/allpg", getAllPgs);
-
 router.get("/singlepg/:id", getSinglePg);
 
 router.put(
@@ -88,9 +90,11 @@ router.put(
       next();
     });
   },
+  verifyToken,
+  isAdmin,
   updatePg,
 );
 
-router.delete("/delete/:id", deletePg);
+router.delete("/delete/:id", verifyToken, isAdmin, deletePg);
 
 export default router;

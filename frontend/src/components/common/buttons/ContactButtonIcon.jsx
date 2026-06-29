@@ -19,9 +19,7 @@ const ContactButtonIcon = ({
       }`;
 
   const bgColor = isCall
-    ? darkMode
-      ? "bg-blue-600 hover:bg-blue-700"
-      : "bg-blue-500 hover:bg-blue-600"
+    ? "bg-blue-600 hover:bg-blue-700"
     : "bg-green-500 hover:bg-green-600";
 
   const icon = isCall ? callIcon : whatsappIcon;

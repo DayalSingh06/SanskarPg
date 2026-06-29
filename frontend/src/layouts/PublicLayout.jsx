@@ -1,17 +1,27 @@
-import { Outlet } from "react-router-dom";
-import PublicNavbar from "../components/navbar/PublicNavbar.jsx";
-import PublicFooter from "../components/footer/PublicFooter.jsx";
+import { Outlet } from 'react-router-dom';
+import PublicNavbar from '../components/navbar/PublicNavbar';
+import { useTheme } from '../context/ThemeContext';
 
 const PublicLayout = () => {
+  const { darkMode } = useTheme();
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <PublicNavbar />
+    <div
+      className={`flex min-h-screen w-full flex-col overflow-x-hidden transition-colors duration-300 ${
+        darkMode ? 'bg-[#0f0c1c] text-white' : 'bg-[#f5f7fb] text-[#0f0c1c]'
+      }`}
+    >
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 w-full">
+        <PublicNavbar />
+      </header>
 
-      <main className="grow">
-        <Outlet />
+      {/* Main Content */}
+      <main className="flex-1">
+        <div className="mx-auto w-full max-w-400 px-1 sm:px-1 md:px-1 lg:px-1">
+          <Outlet />
+        </div>
       </main>
-
-      <PublicFooter />
     </div>
   );
 };

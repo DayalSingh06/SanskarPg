@@ -17,20 +17,19 @@ const PublicFooter = () => {
 
   return (
     <footer
-      className={`w-full border-t transition-all duration-300 ${
+      className={`w-full border-t transition-all duration-300 select-none ${
         darkMode
           ? "border-gray-800 bg-[#0f0c1c] text-gray-300"
           : "border-gray-300 bg-gray-100 text-gray-700"
       }`}
     >
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 text-center sm:px-8 md:grid-cols-2 md:text-left lg:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-5 text-center sm:px-8 md:grid-cols-2 md:text-left lg:grid-cols-3">
         <div className="flex flex-col items-center md:items-start">
           <Logo redirectPath="/" />
 
           <p className="mt-5 max-w-xs text-sm leading-7 sm:text-[15px]">
-            Providing affordable, safe and comfortable PG
-            accommodation in Jaipur for students and working
-            professionals.
+            Providing affordable, safe and comfortable PG accommodation in
+            Jaipur for students and working professionals.
           </p>
 
           <div className="mt-6 flex w-full max-w-xs flex-col gap-3 sm:w-auto sm:flex-row">
@@ -109,8 +108,7 @@ const PublicFooter = () => {
             : "border-gray-300 text-gray-500"
         }`}
       >
-        © {new Date().getFullYear()} Sanskar Boys PG. All rights
-        reserved.
+        © {new Date().getFullYear()} Sanskar Boys PG. All rights reserved.
       </div>
     </footer>
   );

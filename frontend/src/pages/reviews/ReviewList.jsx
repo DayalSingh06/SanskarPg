@@ -11,9 +11,46 @@ const ReviewList = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get("/api/review/verified");
+        const token =
+          localStorage.getItem("token");
 
-        setReviews(res.data.reviews);
+        // Verified reviews
+        const verifiedRes = await axios.get(
+          "/api/review/verified"
+        );
+
+        let allReviews = [
+          ...verifiedRes.data.reviews,
+        ];
+
+        // Agar user login hai to uske reviews bhi lao
+        if (token) {
+          const userRes = await axios.get(
+            "/api/review/user",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          allReviews = [
+            ...userRes.data.reviews,
+            ...verifiedRes.data.reviews,
+          ];
+
+          // Duplicate remove
+          allReviews = [
+            ...new Map(
+              allReviews.map((review) => [
+                review._id,
+                review,
+              ])
+            ).values(),
+          ];
+        }
+
+        setReviews(allReviews);
       } catch (error) {
         console.log(error);
       } finally {
@@ -70,7 +107,9 @@ const ReviewList = () => {
               {/* User Info */}
               <div className="mb-3 flex flex-wrap items-center gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-base font-bold text-white sm:h-12 sm:w-12 sm:text-lg">
-                  {item.name?.charAt(0).toUpperCase()}
+                  {item.name
+                    ?.charAt(0)
+                    .toUpperCase()}
                 </div>
 
                 <div>
@@ -83,14 +122,16 @@ const ReviewList = () => {
 
                 {/* Rating */}
                 <div className="flex flex-wrap items-center gap-0.5 sm:gap-1">
-                  {[...Array(item.rating)].map((_, index) => (
-                    <span
-                      key={index}
-                      className="text-lg text-yellow-400"
-                    >
-                      ⭐
-                    </span>
-                  ))}
+                  {[...Array(item.rating)].map(
+                    (_, index) => (
+                      <span
+                        key={index}
+                        className="text-lg text-yellow-400"
+                      >
+                        ⭐
+                      </span>
+                    )
+                  )}
                 </div>
               </div>
 

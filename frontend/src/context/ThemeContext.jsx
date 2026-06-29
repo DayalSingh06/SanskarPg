@@ -1,23 +1,18 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext(null);
 
 const getInitialTheme = () => {
-  if (typeof window === "undefined") return false;
+  if (typeof window === 'undefined') return false;
 
   try {
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem('theme');
 
     if (savedTheme) {
-      return savedTheme === "dark";
+      return savedTheme === 'dark';
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   } catch {
     return false;
   }
@@ -31,29 +26,27 @@ export const ThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
+    if (typeof document === 'undefined') return;
 
     const root = document.documentElement;
 
-    root.classList.toggle("dark", darkMode);
+    root.classList.toggle('dark', darkMode);
 
     try {
-      localStorage.setItem("theme", darkMode ? "dark" : "light");
+      localStorage.setItem('theme', darkMode ? 'dark' : 'light');
     } catch {
       // ignore storage errors
     }
   }, [darkMode]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
-    const mediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    );
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const handleChange = (event) => {
       try {
-        const savedTheme = localStorage.getItem("theme");
+        const savedTheme = localStorage.getItem('theme');
 
         if (!savedTheme) {
           setDarkMode(event.matches);
@@ -63,10 +56,10 @@ export const ThemeProvider = ({ children }) => {
       }
     };
 
-    mediaQuery.addEventListener("change", handleChange);
+    mediaQuery.addEventListener('change', handleChange);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleChange);
+      mediaQuery.removeEventListener('change', handleChange);
     };
   }, []);
 
@@ -81,7 +74,7 @@ export const useTheme = () => {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error("useTheme must be used inside ThemeProvider");
+    throw new Error('useTheme must be used inside ThemeProvider');
   }
 
   return context;

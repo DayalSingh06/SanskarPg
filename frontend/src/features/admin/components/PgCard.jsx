@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useTheme } from "../../../context/ThemeContext";
-import ContactButtonIcon from "../../../components/common/buttons/ContactButtonIcon";
-import { getImageUrl } from "../../../utils/imageUrl";
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useTheme } from '../../../context/ThemeContext';
+import ContactButtonIcon from '../../../components/common/buttons/ContactButtonIcon';
+import { getImageUrl } from '../../../utils/imageUrl';
 
 const PgCard = ({ pg }) => {
   const { darkMode } = useTheme();
@@ -45,7 +45,7 @@ const PgCard = ({ pg }) => {
 
         {/* RENT */}
         <div className="absolute top-4 left-4 rounded-full bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white">
-          ₹{lowestRent.toLocaleString("en-IN")} / month
+          ₹{lowestRent.toLocaleString('en-IN')} / month
         </div>
       </div>
 
@@ -53,7 +53,7 @@ const PgCard = ({ pg }) => {
       <div className="p-5">
         {/* NAME */}
         <h2
-          className={`line-clamp-1 text-[21px] font-bold ${darkMode ? "text-white" : "text-gray-900"} `}
+          className={`line-clamp-1 text-[21px] font-bold ${darkMode ? 'text-white' : 'text-gray-900'} `}
         >
           {livePg?.name}
         </h2>
@@ -61,14 +61,14 @@ const PgCard = ({ pg }) => {
         {/* LOCATION */}
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-            livePg?.location,
+            livePg?.location
           )}`}
           target="_blank"
           rel="noopener noreferrer"
           className={`mt-3 line-clamp-2 flex gap-2 text-[15px] leading-7 transition-all duration-300 hover:text-blue-500 ${
             darkMode
-              ? "text-gray-400 hover:text-blue-400"
-              : "text-gray-600 hover:text-blue-600"
+              ? 'text-gray-400 hover:text-blue-400'
+              : 'text-gray-600 hover:text-blue-600'
           } `}
         >
           <span>📍</span>
@@ -81,7 +81,7 @@ const PgCard = ({ pg }) => {
           <div className="flex flex-col gap-3">
             {/* VIEW DETAILS */}
             <Link
-              to={`/pg/${livePg?._id}`}
+              to={`/admin/pg/${livePg?._id}`}
               className="rounded-full bg-linear-to-r from-blue-500 to-blue-600 px-6 py-3 text-center text-white transition hover:scale-105"
             >
               View Details →
@@ -89,7 +89,7 @@ const PgCard = ({ pg }) => {
 
             {/* UPDATE BUTTON */}
             <Link
-              to={`/update/${livePg?._id}`}
+              to={`/admin/update/${livePg?._id}`}
               className={`flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 ${
                 darkMode
                   ? `bg-linear-to-r from-yellow-500 to-orange-500 text-white shadow-yellow-500/20`
@@ -104,10 +104,7 @@ const PgCard = ({ pg }) => {
           <div className="flex flex-col gap-3">
             <ContactButtonIcon type="call" phone={livePg?.phone} />
 
-            <ContactButtonIcon
-              type="whatsapp"
-              phone={livePg?.phone}
-            />
+            <ContactButtonIcon type="whatsapp" phone={livePg?.phone} />
           </div>
         </div>
       </div>

@@ -1,23 +1,23 @@
-import { useState } from "react";
-import axios from "../../../utils/axios.js";
-import { useTheme } from "../../../context/ThemeContext.jsx";
-import PasswordField from "../components/form-fields/PasswordField.jsx";
+import { useState } from 'react';
+import axios from '../../../utils/axios.js';
+import { useTheme } from '../../../context/ThemeContext.jsx';
+import PasswordField from '../components/form-fields/PasswordField.jsx';
 import {
   validateField,
   getPasswordStrength,
-} from "../../../utils/validation.js";
+} from '../../../utils/validation.js';
 
 export default function UpdatePassword({ userId, isOpen, onClose }) {
   const { darkMode } = useTheme();
 
   const [formData, setFormData] = useState({
-    password: "",
-    confirmPassword: "",
+    password: '',
+    confirmPassword: '',
   });
 
   const [errors, setErrors] = useState({
-    password: "",
-    confirmPassword: "",
+    password: '',
+    confirmPassword: '',
   });
 
   const [touched, setTouched] = useState({
@@ -26,7 +26,7 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
   });
 
   const [loading, setLoading] = useState(false);
-  const [serverError, setServerError] = useState("");
+  const [serverError, setServerError] = useState('');
 
   if (!isOpen) return null;
 
@@ -65,18 +65,14 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
   // submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setServerError("");
+    setServerError('');
 
     const newErrors = {
-      password: validateField(
-        "password",
-        formData.password,
-        formData,
-      ),
+      password: validateField('password', formData.password, formData),
       confirmPassword: validateField(
-        "confirmPassword",
+        'confirmPassword',
         formData.confirmPassword,
-        formData,
+        formData
       ),
     };
 
@@ -91,7 +87,7 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
     try {
       setLoading(true);
 
-      await axios.post("/api/users/forgot-password/reset", {
+      await axios.post('/api/users/forgot-password/reset', {
         userId,
         password: formData.password.trim(),
         confirmPassword: formData.confirmPassword.trim(),
@@ -99,10 +95,10 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
 
       onClose();
     } catch (error) {
-      let message = "Server error";
+      let message = 'Server error';
 
       if (!error.response) {
-        message = "Network error";
+        message = 'Network error';
       } else {
         message = error.response.data?.message || message;
       }
@@ -118,11 +114,9 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div
-        className={`w-full max-w-sm rounded-lg p-6 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-[#0f0c1c]"} `}
+        className={`w-full max-w-sm rounded-lg p-6 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-[#0f0c1c]'} `}
       >
-        <h2 className="mb-4 text-lg font-semibold">
-          Update Password
-        </h2>
+        <h2 className="mb-4 text-lg font-semibold">Update Password</h2>
 
         {/* FORM */}
         <form onSubmit={handleSubmit}>
@@ -143,11 +137,11 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
           {formData.password && (
             <p
               className={`mt-1 text-xs ${
-                strength === "Weak"
-                  ? "text-red-500"
-                  : strength === "Medium"
-                    ? "text-yellow-500"
-                    : "text-green-500"
+                strength === 'Weak'
+                  ? 'text-red-500'
+                  : strength === 'Medium'
+                    ? 'text-yellow-500'
+                    : 'text-green-500'
               }`}
             >
               Strength: {strength}
@@ -179,11 +173,11 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
               disabled={loading}
               className={`flex-1 rounded py-2 text-white ${
                 darkMode
-                  ? "bg-indigo-600 hover:bg-indigo-500"
-                  : "bg-indigo-600 hover:bg-indigo-700"
+                  ? 'bg-indigo-600 hover:bg-indigo-500'
+                  : 'bg-indigo-600 hover:bg-indigo-700'
               } disabled:cursor-not-allowed disabled:bg-indigo-300`}
             >
-              {loading ? "Updating..." : "Update"}
+              {loading ? 'Updating...' : 'Update'}
             </button>
 
             <button
@@ -191,8 +185,8 @@ export default function UpdatePassword({ userId, isOpen, onClose }) {
               onClick={onClose}
               className={`flex-1 rounded border py-2 ${
                 darkMode
-                  ? "border-gray-700 text-white hover:bg-gray-800"
-                  : "border-gray-300 text-[#0f0c1c] hover:bg-gray-100"
+                  ? 'border-gray-700 text-white hover:bg-gray-800'
+                  : 'border-gray-300 text-[#0f0c1c] hover:bg-gray-100'
               } `}
             >
               Cancel

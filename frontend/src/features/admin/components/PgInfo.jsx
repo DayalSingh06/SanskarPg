@@ -1,18 +1,18 @@
-import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
-import { useTheme } from "../../../context/ThemeContext";
-import ContactButtonIcon from "../../../components/common/buttons/ContactButtonIcon";
-import PgGallery from "../../../components/pg/PgGallery";
-import { getSinglePg } from "../../../services/pgService";
-import { getImageUrl } from "../../../utils/imageUrl";
+import { useEffect, useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import { useTheme } from '../../../context/ThemeContext';
+import ContactButtonIcon from '../../../components/common/buttons/ContactButtonIcon';
+import PgGallery from '../../../components/pg/PgGallery';
+import { getSinglePg } from '../../../services/pgService';
+import { getImageUrl } from '../../../utils/imageUrl';
 
 const facilities = [
-  { icon: "🍽️", title: "Best Quality Food" },
-  { icon: "📶", title: "High-speed WiFi" },
-  { icon: "🧹", title: "Regular Housekeeping" },
-  { icon: "🚗", title: "Parking Area" },
-  { icon: "🧺", title: "Laundry Service (Paid)" },
-  { icon: "🚌", title: "Easy Transport Access" },
+  { icon: '🍽️', title: 'Best Quality Food' },
+  { icon: '📶', title: 'High-speed WiFi' },
+  { icon: '🧹', title: 'Regular Housekeeping' },
+  { icon: '🚗', title: 'Parking Area' },
+  { icon: '🧺', title: 'Laundry Service (Paid)' },
+  { icon: '🚌', title: 'Easy Transport Access' },
 ];
 
 const PgInfo = () => {
@@ -76,21 +76,21 @@ const PgInfo = () => {
       {/* DETAILS */}
       <div className="mt-6">
         <h1
-          className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"} `}
+          className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'} `}
         >
           {pg?.name}
         </h1>
 
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-            pg?.location,
+            pg?.location
           )}`}
           target="_blank"
           rel="noopener noreferrer"
           className={`mt-3 inline-flex items-center gap-2 text-lg leading-8 transition-all duration-300 hover:text-blue-500 ${
             darkMode
-              ? "text-gray-300 hover:text-blue-400"
-              : "text-gray-700 hover:text-blue-600"
+              ? 'text-gray-300 hover:text-blue-400'
+              : 'text-gray-700 hover:text-blue-600'
           } `}
         >
           <span>📍</span>
@@ -101,7 +101,7 @@ const PgInfo = () => {
       {/* FACILITIES */}
       <div className="mt-12">
         <h2
-          className={`text-2xl font-bold ${darkMode ? "text-white" : "text-black"} `}
+          className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'} `}
         >
           What We Offer
         </h2>
@@ -119,7 +119,7 @@ const PgInfo = () => {
               <div className="text-3xl">{item.icon}</div>
 
               <p
-                className={`text-base font-medium ${darkMode ? "text-gray-200" : "text-gray-700"} `}
+                className={`text-base font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'} `}
               >
                 {item.title}
               </p>
@@ -130,7 +130,7 @@ const PgInfo = () => {
       {/* ROOMS */}
       <div className="mt-12">
         <h2
-          className={`text-2xl font-bold ${darkMode ? "text-white" : "text-black"} `}
+          className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-black'} `}
         >
           Room Availability
         </h2>
@@ -146,15 +146,15 @@ const PgInfo = () => {
               } `}
             >
               <h3
-                className={`text-xl font-bold ${room.available ? "text-green-500" : "text-red-500"} `}
+                className={`text-xl font-bold ${room.available ? 'text-green-500' : 'text-red-500'} `}
               >
                 {room.type}
               </h3>
 
               <p
-                className={`mt-2 text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} `}
+                className={`mt-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'} `}
               >
-                {room.available ? "Available" : "Not Available"}
+                {room.available ? 'Available' : 'Not Available'}
               </p>
 
               {room.available && (
@@ -170,7 +170,7 @@ const PgInfo = () => {
       <div className="mt-12">
         <h2
           className={`text-2xl font-bold ${
-            darkMode ? "text-white" : "text-black"
+            darkMode ? 'text-white' : 'text-black'
           }`}
         >
           Location
@@ -188,8 +188,8 @@ const PgInfo = () => {
           <div
             className={`mt-5 rounded-2xl border p-6 text-center text-base font-medium ${
               darkMode
-                ? "border-white/10 bg-white/5 text-gray-300"
-                : "border-gray-200 bg-gray-50 text-gray-600"
+                ? 'border-white/10 bg-white/5 text-gray-300'
+                : 'border-gray-200 bg-gray-50 text-gray-600'
             }`}
           >
             Location not found

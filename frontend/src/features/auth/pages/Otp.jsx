@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import axios from "../../../utils/axios";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import axios from '../../../utils/axios';
 
 export default function Otp({
   isOpen,
@@ -10,26 +10,26 @@ export default function Otp({
   darkMode,
   isVerifying,
 }) {
-  const [otp, setOtp] = useState(Array(6).fill(""));
+  const [otp, setOtp] = useState(Array(6).fill(''));
   const inputsRef = useRef([]);
   const verifyingRef = useRef(false);
-  const lastSubmittedOtpRef = useRef("");
+  const lastSubmittedOtpRef = useRef('');
 
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [resending, setResending] = useState(false);
   const [timer, setTimer] = useState(30);
 
-  const otpString = otp.join("");
+  const otpString = otp.join('');
 
   useEffect(() => {
     if (isOpen) {
-      setOtp(Array(6).fill(""));
-      setError("");
-      setMessage("");
+      setOtp(Array(6).fill(''));
+      setError('');
+      setMessage('');
       setTimer(30);
       verifyingRef.current = false;
-      lastSubmittedOtpRef.current = "";
+      lastSubmittedOtpRef.current = '';
       setTimeout(() => inputsRef.current[0]?.focus(), 100);
     }
   }, [isOpen]);
@@ -51,9 +51,9 @@ export default function Otp({
     newOtp[index] = value;
 
     setOtp(newOtp);
-    setError("");
-    setMessage("");
-    lastSubmittedOtpRef.current = "";
+    setError('');
+    setMessage('');
+    lastSubmittedOtpRef.current = '';
 
     if (value && index < 5) {
       inputsRef.current[index + 1]?.focus();
@@ -61,7 +61,7 @@ export default function Otp({
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === "Backspace" && !otp[index] && index > 0) {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
       inputsRef.current[index - 1]?.focus();
     }
   };
@@ -70,28 +70,28 @@ export default function Otp({
     e.preventDefault();
 
     const paste = e.clipboardData
-      .getData("text")
-      .replace(/\D/g, "")
+      .getData('text')
+      .replace(/\D/g, '')
       .slice(0, 6);
 
-    const newOtp = paste.split("");
+    const newOtp = paste.split('');
 
-    setOtp([...newOtp, ...Array(6 - newOtp.length).fill("")]);
-    setError("");
-    setMessage("");
-    lastSubmittedOtpRef.current = "";
+    setOtp([...newOtp, ...Array(6 - newOtp.length).fill('')]);
+    setError('');
+    setMessage('');
+    lastSubmittedOtpRef.current = '';
   };
 
   const handleVerify = useCallback(async () => {
     if (isVerifying || verifyingRef.current) return;
 
     if (!userId) {
-      setError("User not found");
+      setError('User not found');
       return;
     }
 
-    if (otpString.length !== 6 || otp.includes("")) {
-      setError("Enter valid OTP");
+    if (otpString.length !== 6 || otp.includes('')) {
+      setError('Enter valid OTP');
       return;
     }
 
@@ -100,18 +100,18 @@ export default function Otp({
     try {
       verifyingRef.current = true;
       lastSubmittedOtpRef.current = otpString;
-      setError("");
+      setError('');
 
       await onVerify(otpString, userId);
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid OTP");
+      setError(err.response?.data?.message || 'Invalid OTP');
     } finally {
       verifyingRef.current = false;
     }
   }, [isVerifying, onVerify, otp, otpString, userId]);
 
   useEffect(() => {
-    if (otpString.length === 6 && !otp.includes("")) {
+    if (otpString.length === 6 && !otp.includes('')) {
       handleVerify();
     }
   }, [otpString, otp, handleVerify]);
@@ -121,18 +121,18 @@ export default function Otp({
 
     try {
       setResending(true);
-      setError("");
-      setMessage("");
-      lastSubmittedOtpRef.current = "";
+      setError('');
+      setMessage('');
+      lastSubmittedOtpRef.current = '';
 
-      await axios.post("/api/users/resend-otp", { userId });
+      await axios.post('/api/users/resend-otp', { userId });
 
-      setMessage("OTP sent again");
-      setOtp(Array(6).fill(""));
+      setMessage('OTP sent again');
+      setOtp(Array(6).fill(''));
       setTimer(30);
       setTimeout(() => inputsRef.current[0]?.focus(), 100);
     } catch (err) {
-      setError(err.response?.data?.message || "Error");
+      setError(err.response?.data?.message || 'Error');
     } finally {
       setResending(false);
     }
@@ -145,13 +145,11 @@ export default function Otp({
       <div
         className={`w-full max-w-sm rounded-xl p-6 shadow-xl transition ${
           darkMode
-            ? "bg-linear-to-br from-[#0f0c1c] to-[#1a1633] text-white"
-            : "bg-white"
+            ? 'bg-linear-to-br from-[#0f0c1c] to-[#1a1633] text-white'
+            : 'bg-white'
         }`}
       >
-        <h2 className="mb-4 text-center text-xl font-semibold">
-          Verify OTP
-        </h2>
+        <h2 className="mb-4 text-center text-xl font-semibold">Verify OTP</h2>
 
         <div className="mb-4 flex justify-between gap-2">
           {otp.map((digit, index) => (
@@ -170,16 +168,14 @@ export default function Otp({
               disabled={isVerifying || verifyingRef.current}
               className={`h-12 w-10 rounded-lg text-center text-lg font-semibold transition-all duration-200 outline-none ${
                 darkMode
-                  ? "border border-gray-700 bg-[#16132b] focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  : "border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  ? 'border border-gray-700 bg-[#16132b] focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500'
+                  : 'border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500'
               }`}
             />
           ))}
         </div>
 
-        {message && (
-          <p className="text-sm text-green-500">{message}</p>
-        )}
+        {message && <p className="text-sm text-green-500">{message}</p>}
 
         {(error || apiError) && (
           <p className="text-sm text-red-500">{error || apiError}</p>
@@ -197,9 +193,7 @@ export default function Otp({
             }
             className="w-full rounded-lg bg-indigo-600 py-2 text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isVerifying || verifyingRef.current
-              ? "Verifying..."
-              : "Verify"}
+            {isVerifying || verifyingRef.current ? 'Verifying...' : 'Verify'}
           </button>
 
           <button
@@ -209,10 +203,10 @@ export default function Otp({
             className="w-full rounded-lg bg-gray-300 py-2 transition hover:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {resending
-              ? "Sending..."
+              ? 'Sending...'
               : timer > 0
                 ? `Resend (${timer}s)`
-                : "Resend"}
+                : 'Resend'}
           </button>
         </div>
 

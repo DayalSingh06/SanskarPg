@@ -1,34 +1,34 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "../../../utils/axios.js";
-import { useTheme } from "../../../context/ThemeContext.jsx";
-import Otp from "./Otp.jsx";
-import FormField from "../components/form-fields/FormField.jsx";
-import PasswordField from "../components/form-fields/PasswordField.jsx";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from '../../../utils/axios.js';
+import { useTheme } from '../../../context/ThemeContext.jsx';
+import Otp from './Otp.jsx';
+import FormField from '../components/form-fields/FormField.jsx';
+import PasswordField from '../components/form-fields/PasswordField.jsx';
 import {
   MailIcon,
   RegisterUser,
   MobileIcon,
   SunIcon,
   MoonIcon,
-} from "../../../components/common/icons/SvgIcons.jsx";
+} from '../../../components/common/icons/SvgIcons.jsx';
 import {
   validateField,
   validateForm,
   getPasswordStrength,
-} from "../../../utils/validation.js";
+} from '../../../utils/validation.js';
 
 export default function Register() {
   const navigate = useNavigate();
   const { darkMode, toggleTheme } = useTheme();
 
   const initialState = {
-    name: "",
-    email: "",
-    mobile: "",
-    password: "",
-    confirmPassword: "",
-    role: "admission",
+    name: '',
+    email: '',
+    mobile: '',
+    password: '',
+    confirmPassword: '',
+    role: 'admission',
   };
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
@@ -37,7 +37,7 @@ export default function Register() {
   const [otpState, setOtpState] = useState({
     isOpen: false,
     userId: null,
-    error: "",
+    error: '',
   });
 
   const [isRegistering, setIsRegistering] = useState(false);
@@ -49,7 +49,7 @@ export default function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "mobile" && !/^\d{0,10}$/.test(value)) return;
+    if (name === 'mobile' && !/^\d{0,10}$/.test(value)) return;
 
     setFormData((prev) => ({
       ...prev,
@@ -86,7 +86,7 @@ export default function Register() {
       Object.keys(formData).reduce((acc, key) => {
         acc[key] = true;
         return acc;
-      }, {}),
+      }, {})
     );
 
     if (Object.keys(newErrors).length !== 0) return;
@@ -97,25 +97,22 @@ export default function Register() {
 
       const { confirmPassword, ...payload } = formData;
 
-      const response = await axios.post(
-        "/api/users/register",
-        payload,
-      );
+      const response = await axios.post('/api/users/register', payload);
 
       if (response?.data?.success && response?.data?.showOtpModal) {
         setOtpState({
           isOpen: true,
           userId: response.data.userId,
-          error: "",
+          error: '',
         });
       }
     } catch (err) {
       const data = err.response?.data;
 
-      const backendMessage = data?.message || "Something went wrong";
+      const backendMessage = data?.message || 'Something went wrong';
 
       // Email field error
-      if (data?.field === "email") {
+      if (data?.field === 'email') {
         setErrors((prev) => ({
           ...prev,
           email: backendMessage,
@@ -136,21 +133,20 @@ export default function Register() {
   const handleOtpVerify = async (otp) => {
     try {
       setIsVerifyingOtp(true);
-      await axios.post("/api/users/verify-otp", {
+      await axios.post('/api/users/verify-otp', {
         otp,
         userId: otpState.userId,
       });
       setOtpState({
         isOpen: false,
         userId: null,
-        error: "",
+        error: '',
       });
       setFormData(initialState);
 
-      navigate("/login");
+      navigate('/login');
     } catch (err) {
-      const msg =
-        err.response?.data?.message || "OTP verification failed";
+      const msg = err.response?.data?.message || 'OTP verification failed';
       setOtpState((prev) => ({
         ...prev,
         error: msg,
@@ -163,15 +159,15 @@ export default function Register() {
   return (
     <>
       <div
-        className={`flex min-h-screen items-center justify-center px-4 py-6 select-none ${darkMode ? "bg-[#0f0c1c] text-white" : "bg-[#f8fafc] text-[#0f0c1c]"} `}
+        className={`flex min-h-screen items-center justify-center px-4 py-6 select-none ${darkMode ? 'bg-[#0f0c1c] text-white' : 'bg-[#f8fafc] text-[#0f0c1c]'} `}
       >
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
           className={`absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full transition ${
             darkMode
-              ? "bg-gray-800 hover:bg-gray-700"
-              : "bg-gray-300 hover:bg-gray-400"
+              ? 'bg-gray-800 hover:bg-gray-700'
+              : 'bg-gray-300 hover:bg-gray-400'
           } `}
         >
           {darkMode ? <SunIcon /> : <MoonIcon />}
@@ -179,26 +175,22 @@ export default function Register() {
         <div
           className={`flex w-full max-w-md flex-col items-center rounded-2xl p-5 shadow-xl backdrop-blur-md sm:p-6 ${
             darkMode
-              ? "border border-gray-800 bg-[#181525] text-gray-200"
-              : "border border-gray-200 bg-white text-[#0f0c1c]"
+              ? 'border border-gray-800 bg-[#181525] text-gray-200'
+              : 'border border-gray-200 bg-white text-[#0f0c1c]'
           } `}
         >
           <form
             onSubmit={handleSubmit}
             className={`mt-2 mb-3 w-full rounded-md p-4 sm:mt-3 sm:p-5 md:mt-4 md:p-6 ${
               darkMode
-                ? "border border-gray-800 text-gray-200"
-                : "border border-gray-200 text-[#0f0c1c]"
+                ? 'border border-gray-800 text-gray-200'
+                : 'border border-gray-200 text-[#0f0c1c]'
             } `}
           >
-            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">
-              Register
-            </h2>
+            <h2 className="mb-1 text-xl font-semibold sm:text-2xl">Register</h2>
 
             {globalError && (
-              <p className="mb-2 text-xs text-red-500">
-                {globalError}
-              </p>
+              <p className="mb-2 text-xs text-red-500">{globalError}</p>
             )}
 
             <p className="md:text-md mb-4 text-xs sm:mb-6 sm:text-sm">
@@ -270,11 +262,11 @@ export default function Register() {
             {formData.password && (
               <p
                 className={`text-xs ${
-                  strength === "Weak"
-                    ? "text-red-500"
-                    : strength === "Medium"
-                      ? "text-yellow-500"
-                      : "text-green-500"
+                  strength === 'Weak'
+                    ? 'text-red-500'
+                    : strength === 'Medium'
+                      ? 'text-yellow-500'
+                      : 'text-green-500'
                 } `}
               >
                 Strength: {strength}
@@ -301,11 +293,11 @@ export default function Register() {
               disabled={isRegistering}
               className="mt-4 w-full rounded-md bg-indigo-600 py-2 text-white transition hover:bg-indigo-700 disabled:bg-indigo-300"
             >
-              {isRegistering ? "Sending OTP..." : "Register"}
+              {isRegistering ? 'Sending OTP...' : 'Register'}
             </button>
 
             <p className="text-md sm:text-md mt-6 cursor-pointer text-center">
-              Already have an account?{" "}
+              Already have an account?{' '}
               <Link
                 to="/login"
                 className="relative font-medium text-[#3d5de0] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#3d5de0] after:transition-all after:duration-300 hover:after:w-full"
@@ -316,8 +308,8 @@ export default function Register() {
           </form>
           <footer className="mt-auto py-2 text-center">
             <span className="text-xs text-[#6b7387]">
-              © {new Date().getFullYear()} Sanskar Boy's PG. All
-              rights reserved.{" "}
+              © {new Date().getFullYear()} Sanskar Boy's PG. All rights
+              reserved.{' '}
             </span>
           </footer>
         </div>
@@ -333,7 +325,7 @@ export default function Register() {
           setOtpState({
             isOpen: false,
             userId: null,
-            error: "",
+            error: '',
           });
           setGlobalError(null);
           setIsVerifyingOtp(false);

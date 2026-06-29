@@ -22,10 +22,10 @@ const PgCard = ({ pg }) => {
       : null;
 
   const handleViewDetails = () => {
-    if (!isLoggedIn) {
-      navigate("/login");
-      return;
-    }
+    // if (!isLoggedIn) {
+    //   navigate("/login");
+    //   return;
+    // }
 
     if (pg?._id) {
       navigate(`/pg/${pg._id}`);
